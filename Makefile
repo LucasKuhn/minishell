@@ -2,7 +2,7 @@ NAME	=	minishell
 LDFLAGS	=	-lreadline
 OBJ_DIR	=	obj
 OBJS	=	$(SRCS:%.c=$(OBJ_DIR)/%.o)
-SRCS	=	main.c
+SRCS	=	main.c get_prompt.c
 LIBFT_A	=	./libft/libft.a
 
 all: $(NAME)
@@ -15,7 +15,7 @@ $(LIBFT_A):
 	make --directory=./libft
 
 $(NAME): $(OBJ_DIR) $(OBJS) $(LIBFT_A)
-	$(CC) $(LDFLAGS) $(OBJS) -o $(NAME)
+	$(CC) $(LDFLAGS) $(OBJS) -o $(NAME) -L./libft -lft
 
 $(OBJ_DIR)/%.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@ -I ./
