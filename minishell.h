@@ -1,10 +1,10 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# define GRN "\e[0;32m"
-# define MAG "\e[0;35m"
-# define WHT "\e[0;37m"
-# define CRESET "\e[0m"
+# define GRN "\001\e[0;32m\002"
+# define MAG "\001\e[0;35m\002"
+# define WHT "\001\e[0;37m\002"
+# define CRESET "\001\e[0m\002"
 
 # include "libft/libft.h" // libft
 #include <readline/readline.h> // readline 

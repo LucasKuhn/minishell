@@ -7,10 +7,11 @@ char *get_prompt()
 	char *cwd; 
 	char *directory;
 
-	getcwd(cwd, 1024);
-	user = getenv("USER");
+	user = getenv("USER"); 
+	cwd = getenv("PWD"); 
 	directory = ft_strrchr(cwd, '/') + 1; 
 
+	prompt = malloc(sizeof(char) * 256);
 	ft_strlcat(prompt, GRN, 99);
 	ft_strlcat(prompt, user, 99);
 	ft_strlcat(prompt, WHT, 99);
@@ -18,5 +19,6 @@ char *get_prompt()
 	ft_strlcat(prompt, MAG, 99);
 	ft_strlcat(prompt, directory, 99);
 	ft_strlcat(prompt, CRESET, 99);
+	ft_strlcat(prompt, " > ", 99);
 	return(prompt);
 }
