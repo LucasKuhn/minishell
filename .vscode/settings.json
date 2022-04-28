@@ -1,6 +1,8 @@
 {
 	"files.associations": {
 		"readline.h": "c",
-		"libft.h": "c"
+		"libft.h": "c",
+		"limits.h": "c",
+		"syslimits.h": "c"
 	}
 }

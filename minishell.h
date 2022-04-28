@@ -6,10 +6,13 @@
 # define WHT "\001\e[0;37m\002"
 # define CRESET "\001\e[0m\002"
 
+# define PATH_MAX	1024
+
 # include "libft/libft.h" // libft
 #include <readline/readline.h> // readline 
 #include <stdlib.h> // getenv
 #include <unistd.h> // getwd ttyname
+
 
 char *get_prompt();
 

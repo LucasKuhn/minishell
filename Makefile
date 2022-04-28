@@ -1,6 +1,6 @@
 NAME	=	minishell
 CFLAGS	=	-g
-LDFLAGS	=	-lreadline
+LDFLAGS	=	-ledit -L/opt/homebrew/opt/libedit/lib 
 OBJ_DIR	=	obj
 OBJS	=	$(SRCS:%.c=$(OBJ_DIR)/%.o)
 SRCS	=	main.c get_prompt.c
@@ -32,4 +32,4 @@ $(OBJ_DIR)/%.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@ -I ./
 
 $(OBJ_DIR):
-	mkdir -p obj
+	mkdir -p $@

@@ -1,60 +1,7 @@
-[] Makefile
+[x] Makefile
 [] Read about functions 
-[] readline
-[] rl_clear_history
-[] rl_on_new_line
-[] rl_replace_line
-[] rl_redisplay
-[] add_history
-[] printf
-[] malloc
-[] free
-[] write
-[] access
-[] open
-[] read
-[] close
-[] fork
-[] wait
-[] waitpid
-[] wait3
-[] wait4
-[] signal
-[] sigaction
-[] sigemptyset
-[] sigaddset
-[] kill
-[] exit
-[] getcwd
-[] chdir
-[] stat
-[] lstat
-[] fstat
-[] unlink
-[] execve
-[] dup
-[] dup2
-[] pipe
-[] opendir
-[] readdir
-[] closedir
-[] strerror
-[] perror
-[] isatty
-[] ttyname
-[] ttyslot
-[] ioctl
-[] getenv
-[] tcsetattr
-[] tcgetattr
-[] tgetent
-[] tgetflag
-[] tgetnum
-[] tgetstr
-[] tgoto
-[] tputs
-[] Display a prompt when waiting for a new command.
-[] Have a working history. 
+[x] Display a prompt when waiting for a new command.
+[x] Have a working history. 
 [] Search and launch the right executable (based on the PATH variable or using a  relative or an absolute path).
 [] Not use more than one global variable. Think about it. You will have to explain  its purpose.
 [] Not interpret unclosed quotes or special characters which are not required by the subject such as \ (backslash) or ; (semicolon).
