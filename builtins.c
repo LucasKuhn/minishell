@@ -13,3 +13,20 @@ void cd(char *str)
 	if (chdir(str) != 0)
 		perror("cd");
 }
+
+void echo(str)
+{
+	write(STDOUT, str, ft_strlen(str));
+}
+
+void pwd()
+{
+	char *cwd;
+	cwd = getenv("PWD"); 
+	echo(cwd);
+}
+
+void export()
+{
+	// TODO
+}
