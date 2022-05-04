@@ -3,7 +3,7 @@ CFLAGS	=	-g
 LDFLAGS	=	-ledit -L/opt/homebrew/opt/libedit/lib 
 OBJ_DIR	=	obj
 OBJS	=	$(SRCS:%.c=$(OBJ_DIR)/%.o)
-SRCS	=	main.c get_prompt.c
+SRCS	=	main.c get_prompt.c builtins.c
 LIBFT_A	=	./libft/libft.a
 
 all: $(NAME)

@@ -1,3 +1,5 @@
+[] builtins
+[] cd 
 [x] Makefile
 [] Read about functions 
 [x] Display a prompt when waiting for a new command.
@@ -7,3 +9,14 @@
 [] Not interpret unclosed quotes or special characters which are not required by the subject such as \ (backslash) or ; (semicolon).
 [] Handle ’ (single quote) which should prevent the shell from interpreting the metacharacters in the quoted sequence. 
 [] Handle " (double quote) which should prevent the shell from interpreting the metacharacters in the quoted sequence  except for $ (dollar sign)
+
+Minishell
+- Parsing e Tokenizer
+- Built-ins 
+	- Ls, pwd, cd, echo 
+- Primeiro separa todos os blocos 
+- FAUSTO
+    - Tokenização -> Separar os comandos 
+    - Análise Léxica -> Dizer o que é 
+    - Análise Sintática -> Dizer se é válido o comando 
+    - Expandir as variáveis 
