@@ -51,21 +51,20 @@ void pwd(char **args)
 	ft_putstr_fd("\n", 1);
 }
 
-void env(char **args, char **envp)
+void env(char **args, t_env *envp)
 {
-	int i;
-	
-	i = 0;
-	while(envp[i])
+	t_env *aux = envp;
+
+	while (aux)
 	{
-		ft_putstr_fd(envp[i], 1);
-		ft_putstr_fd("\n", 1);
-		i++;
+		ft_putstr_fd(aux->str,1);
+		ft_putstr_fd("\n",1);
+		aux = aux->next;
 	}
 }
 
 // TODO: Conferir o que o export deve fazer quando não recebe nada
-void export(char **args, char **envp)
+void export(char **args, t_env *envp)
 {
 	// char *key_pair;
 	// char *name;
