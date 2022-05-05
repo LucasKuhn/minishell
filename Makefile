@@ -1,16 +1,15 @@
 NAME	=	minishell
 CFLAGS	=	-g
-LDFLAGS	=	-ledit
 ifeq ($(shell uname),Darwin) # MacOS
 LDFLAGS	=	-ledit -L/opt/homebrew/opt/libedit/lib
-else
-LDFLAGS	=	-lreadline # linux
+else # Linux
+LDFLAGS	=	-lreadline 
 endif
 OBJ_DIR	=	obj
 OBJS	=	$(SRCS:%.c=$(OBJ_DIR)/%.o)
 SRCS	=	main.c get_prompt.c builtins.c
 LIBFT_A	=	./libft/libft.a
-HEADER =	minishell.h
+HEADER	=	minishell.h
 
 all: $(NAME)
 
