@@ -10,12 +10,14 @@
 # define PATH_MAX	1024
 
 # include "libft/libft.h" // libft
-# include <readline/readline.h> // readline 
+# include <readline/readline.h> // readline
+#include <readline/history.h> // history
 # include <stdlib.h> // getenv
 # include <unistd.h> // getwd ttyname
 # include <stdio.h> // perror
 
 char	*get_prompt();
 void	cd(char *str);
+void	echo(char **strs);
 
 #endif
