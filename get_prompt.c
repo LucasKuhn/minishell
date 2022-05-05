@@ -9,7 +9,8 @@ char *get_prompt()
 
 	user = getenv("USER"); 
 	cwd = getenv("PWD"); 
-	directory = ft_strrchr(cwd, '/') + 1; 
+	// directory = ft_strrchr(cwd, '/') + 1; 
+	directory = cwd; 
 
 	prompt = malloc(sizeof(char) * PATH_MAX);
 	ft_strlcat(prompt, GRN, PATH_MAX);

@@ -17,7 +17,10 @@
 # include <stdio.h> // perror
 
 char	*get_prompt();
-void	cd(char *str);
+void	cd(char **args);
 void	echo(char **strs);
+void	pwd(char **args);
+void	env(char **args, char **envp);
+void	export(char **args, char **envp);
 
 #endif
