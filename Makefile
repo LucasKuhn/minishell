@@ -26,13 +26,11 @@ fclean: clean
 
 re: fclean all
 
-$(LIBFT_A): libft/.git
+$(LIBFT_A):
+	git submodule update --init --recursive
 	make --directory=./libft
 
-libft/.git:
-	git submodule update --init --recursive
-
-$(NAME): $(OBJ_DIR) $(OBJS) $(LIBFT_A)
+$(NAME): $(LIBFT_A) $(OBJ_DIR) $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) -L./libft -lft $(LDFLAGS)
 
 $(OBJ_DIR)/%.o: %.c $(HEADER)
