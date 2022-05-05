@@ -2,7 +2,9 @@ NAME	=	minishell
 CFLAGS	=	-g
 LDFLAGS	=	-ledit 
 ifeq ($(shell uname),Darwin) # MacOS
-LDFLAGS	+=	-L/opt/homebrew/opt/libedit/lib  
+LDFLAGS	+=	-ledit -L/opt/homebrew/opt/libedit/lib  
+else
+LDFLAGS	+=	-lreadline  
 endif
 OBJ_DIR	=	obj
 OBJS	=	$(SRCS:%.c=$(OBJ_DIR)/%.o)
