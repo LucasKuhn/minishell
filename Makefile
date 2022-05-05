@@ -1,15 +1,16 @@
 NAME	=	minishell
 CFLAGS	=	-g
-LDFLAGS	=	-ledit 
+LDFLAGS	=	-ledit
 ifeq ($(shell uname),Darwin) # MacOS
-LDFLAGS	+=	-ledit -L/opt/homebrew/opt/libedit/lib  
+LDFLAGS	=	-ledit -L/opt/homebrew/opt/libedit/lib
 else
-LDFLAGS	+=	-lreadline  
+LDFLAGS	=	-lreadline # linux
 endif
 OBJ_DIR	=	obj
 OBJS	=	$(SRCS:%.c=$(OBJ_DIR)/%.o)
 SRCS	=	main.c get_prompt.c builtins.c
 LIBFT_A	=	./libft/libft.a
+HEADER =	minishell.h
 
 all: $(NAME)
 
@@ -31,9 +32,9 @@ $(LIBFT_A):
 	make --directory=./libft
 
 $(NAME): $(OBJ_DIR) $(OBJS) $(LIBFT_A)
-	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJS) -o $(NAME) -L./libft -lft
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) -L./libft -lft $(LDFLAGS)
 
-$(OBJ_DIR)/%.o: %.c
+$(OBJ_DIR)/%.o: %.c $(HEADER)
 	$(CC) $(CFLAGS) -c $< -o $@ -I ./
 
 $(OBJ_DIR):

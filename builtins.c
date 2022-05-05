@@ -6,12 +6,20 @@
 // // ◦ env with no options or arguments
 // // ◦ exit with no options
 
-// #include "minishell.h"
+#include "minishell.h"
 
-// void echo(str)
-// {
-// 	write(1, str, ft_strlen(str));
-// }
+void echo(char **strs)
+{
+	int	i;
+
+	i = -1;
+	while (strs[++i])
+	{
+		ft_putstr_fd(strs[i], 1);
+		ft_putstr_fd(" ", 1);
+	}
+	ft_putstr_fd("\n", 1);
+}
 
 // void cd(char *str)
 // {
@@ -22,11 +30,11 @@
 // void pwd()
 // {
 // 	char *cwd;
-// 	cwd = getenv("PWD"); 
+// 	cwd = getenv("PWD");
 // 	echo(cwd);
 // }
 
 // void export()
 // {
-// 	// TODO
+// 	TODO
 // }
