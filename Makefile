@@ -1,6 +1,9 @@
 NAME	=	minishell
 CFLAGS	=	-g
-LDFLAGS	=	-ledit -L/opt/homebrew/opt/libedit/lib 
+LDFLAGS	=	-ledit 
+ifeq ($(shell uname),Darwin) # MacOS
+LDFLAGS	+=	-L/opt/homebrew/opt/libedit/lib  
+endif
 OBJ_DIR	=	obj
 OBJS	=	$(SRCS:%.c=$(OBJ_DIR)/%.o)
 SRCS	=	main.c get_prompt.c builtins.c
