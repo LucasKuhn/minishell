@@ -16,8 +16,18 @@
 # include <unistd.h> // getwd ttyname
 # include <stdio.h> // perror
 
+typedef struct s_env
+{
+	char			*str;
+	struct s_env	*next;
+}				t_env;
+
 char	*get_prompt();
-void	cd(char *str);
+void	cd(char **args);
 void	echo(char **strs);
+void	pwd(char **args);
+void	env(char **args, t_env *envp);
+void	export(char **args, t_env *envp);
+t_env	*get_env(char **envp);
 
 #endif
