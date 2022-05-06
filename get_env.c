@@ -1,12 +1,13 @@
 #include "minishell.h"
+#include <stdio.h>
 
-void	list_append(t_env **list, char *str)
+void	list_append(char *key_pair, t_env **list)
 {
 	struct s_env	*new_node;
 	struct s_env	*aux_node;
 
 	new_node = malloc(sizeof(struct s_env));
-	new_node->str = ft_strdup(str);
+	new_node->key_pair = ft_strdup(key_pair);
 	new_node->next = NULL;
 	if (!*list)
 	{
@@ -24,12 +25,43 @@ t_env *get_env(char **envp)
 	t_env *list;
 	int i;
 
-	list = malloc(sizeof(struct s_env));
+	//list = malloc(sizeof(struct s_env));
+	list = NULL;
 	i = 0;
 	while (envp[i])
 	{
-		list_append(&list, envp[i]);
+		list_append(envp[i], &list);
 		i++;
 	}
 	return (list);
 }
+
+char	*var_name(char *key_pair)
+{
+	int i;
+
+	i = 0;
+	while (key_pair[i] != '=' && key_pair[i])
+		i++;
+	if (!key_pair[i])
+		return (NULL);
+	return (ft_substr(key_pair, 0, i));
+}
+
+char	*var_value(char *key_pair)
+{
+	int i;
+
+	i = 0;
+	while (key_pair[i] != '=' && key_pair[i])
+		i++;
+	if (!key_pair[i])
+		return (NULL);
+	return (ft_substr(key_pair, i+1, ft_strlen(key_pair)));
+}
+
+// TODO:
+/* char	*get_minienv()
+{
+
+} */

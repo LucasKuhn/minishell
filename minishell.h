@@ -18,16 +18,24 @@
 
 typedef struct s_env
 {
-	char			*str;
+	char			*key_pair;
 	struct s_env	*next;
 }				t_env;
 
 char	*get_prompt();
+
+// builtins functions
 void	cd(char **args);
 void	echo(char **strs);
 void	pwd(char **args);
+void	export(char **args, t_env **minienv);
 void	env(char **args, t_env *envp);
-void	export(char **args, t_env *envp);
+
+// env functions
 t_env	*get_env(char **envp);
+char	*var_name(char *key_pair);
+char	*var_value(char *key_pair);
+void	var_update(char *key_pair, t_env **minienv);
+void	list_append(char *key_pair, t_env **list);
 
 #endif
