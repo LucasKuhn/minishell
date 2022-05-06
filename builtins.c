@@ -33,7 +33,7 @@ void echo(char **args)
 void cd(char **args)
 {
 	if (!args[1] || ft_strncmp(args[1],"~",2) == 0)
-		chdir(getenv("HOME"));
+		chdir(getenv("HOME")); // TODO: Pegar do minienv
 	else if (chdir(args[1]) != 0)
 	{
 		ft_putstr_fd("minishell: cd: ", 1);
@@ -51,9 +51,9 @@ void pwd(char **args)
 	ft_putstr_fd("\n", 1);
 }
 
-void env(char **args, t_env *envp)
+void env(char **args, t_env *minienv)
 {
-	t_env *aux = envp;
+	t_env *aux = minienv;
 
 	while (aux)
 	{
