@@ -7,7 +7,7 @@
 # define WHT	"\001\e[0;37m\002"
 # define CRESET	"\001\e[0m\002"
 
-# define PATH_MAX	1024
+# define PATH_MAX	4096
 
 # include "libft/libft.h" // libft
 # include <readline/readline.h> // readline
@@ -25,7 +25,7 @@ typedef struct s_env
 char	*get_prompt();
 
 // builtins functions
-void	cd(char **args);
+void	cd(char **args, t_env *minienv);
 void	echo(char **strs);
 void	pwd(char **args);
 void	export(char **args, t_env **minienv);
@@ -37,5 +37,6 @@ char	*var_name(char *key_pair);
 char	*var_value(char *key_pair);
 void	var_update(char *key_pair, t_env **minienv);
 void	list_append(char *key_pair, t_env **list);
+t_env	*get_minienv(char *name, t_env *minienv);
 
 #endif

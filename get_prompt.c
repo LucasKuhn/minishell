@@ -1,17 +1,17 @@
 #include "minishell.h"
 
-char *get_prompt()
+char *get_prompt(t_env *minienv)
 {
 	char *prompt;
-	char *user; 
-	char *cwd; 
+	char *user;
+	char *cwd;
 	char *directory;
 
-	user = getenv("USER"); 
-	cwd = getenv("PWD"); 
-	// directory = ft_strrchr(cwd, '/') + 1; 
-	directory = cwd; 
-
+	user = var_value(get_minienv("USER", minienv)->key_pair);
+	cwd = var_value(get_minienv("PWD", minienv)->key_pair);
+	// directory = ft_strrchr(cwd, '/') + 1;
+	directory = cwd;
+	// TODO: acho que não precisa alocar
 	prompt = malloc(sizeof(char) * PATH_MAX);
 	ft_strlcat(prompt, GRN, PATH_MAX);
 	ft_strlcat(prompt, user, PATH_MAX);

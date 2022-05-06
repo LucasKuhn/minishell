@@ -57,11 +57,25 @@ char	*var_value(char *key_pair)
 		i++;
 	if (!key_pair[i])
 		return (NULL);
-	return (ft_substr(key_pair, i+1, ft_strlen(key_pair)));
+	return (&key_pair[i+1]);
 }
 
 // TODO:
-/* char	*get_minienv()
+t_env	*get_minienv(char *name, t_env *minienv)
 {
+	t_env	*aux;
+	int		size;
 
-} */
+	aux = minienv;
+	size = ft_strlen(name);
+	while (aux)
+	{
+		if (ft_strncmp(name, aux->key_pair, size) == 0)
+		{
+			if (aux->key_pair[size] == '=')
+				return (aux);
+		}
+		aux = aux->next;
+	}
+	return (NULL);
+}
