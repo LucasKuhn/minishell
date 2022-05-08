@@ -9,12 +9,12 @@
 
 void echo(char **args)
 {
-	int	i;
+	int i;
 	int new_line;
 
 	new_line = 1;
 	i = 1;
-	if (ft_strncmp(args[i],"-n",3) == 0)
+	if (ft_strncmp(args[i], "-n", 3) == 0)
 	{
 		new_line = 0;
 		i++;
@@ -30,15 +30,33 @@ void echo(char **args)
 		ft_putstr_fd("\n", 1);
 }
 
-void cd(char **args)
+void cd(char **args, t_env *minienv)
 {
-	if (!args[1] || ft_strncmp(args[1],"~",2) == 0)
-		chdir(getenv("HOME")); // TODO: Pegar do minienv
-	else if (chdir(args[1]) != 0)
+	char	*path;
+	t_env	*aux;
+	char	*value;
+	char	cwd[PATH_MAX];
+
+	if (args[1] && ft_strncmp(args[1], "~", 2) != 0)
+		path = args[1];
+	else
+		path = var_value(get_minienv("HOME", minienv)->key_pair);
+	if (chdir(path) == 0)
+	{
+		value = var_value(get_minienv("PWD", minienv)->key_pair);
+		aux = get_minienv("OLDPWD", minienv);
+		free(aux->key_pair);
+		aux->key_pair = ft_strjoin("OLDPWD=", value);
+		aux = get_minienv("PWD", minienv);
+		free(aux->key_pair);
+		getcwd(cwd, PATH_MAX);
+		aux->key_pair = ft_strjoin("PWD=", cwd);
+	}
+	else
 	{
 		ft_putstr_fd("minishell: cd: ", 1);
 		ft_putstr_fd(args[1], 1);
-		ft_putstr_fd(": ",1);
+		ft_putstr_fd(": ", 1);
 		perror("");
 	}
 }
@@ -47,34 +65,48 @@ void pwd(char **args)
 {
 	char cwd[100];
 	getcwd(cwd, 100);
-	ft_putstr_fd(cwd,1);
+	ft_putstr_fd(cwd, 1);
 	ft_putstr_fd("\n", 1);
 }
 
 void env(char **args, t_env *minienv)
 {
-	t_env *aux = minienv;
+	t_env *aux;
 
+	aux = minienv;
 	while (aux)
 	{
-		ft_putstr_fd(aux->str,1);
-		ft_putstr_fd("\n",1);
+		ft_putstr_fd(aux->key_pair, 1);
+		ft_putstr_fd("\n", 1);
 		aux = aux->next;
 	}
 }
 
 // TODO: Conferir o que o export deve fazer quando não recebe nada
-void export(char **args, t_env *envp)
+void export(char **args, t_env **minienv)
 {
-	// char *key_pair;
-	// char *name;
-	// char *value;
-	// int i;
+	char *key_pair;
+	char *name;
+	t_env	*aux;
+	int		size;
 
-	// key_pair = args[1];
-	// i = 0;
-	// while (key_pair[i] != '=')
-	// 	i++;
-	// name = ft_substr(key_pair, 0, i);
-	// value = ft_substr(key_pair, i+1, ft_strlen(key_pair));
+	key_pair = args[1];
+	if (!key_pair)
+		return ;
+	name = var_name(key_pair);
+	if (name == NULL)
+		return ;
+	aux = *minienv;
+	size = ft_strlen(var_name(key_pair)) + 1;
+	while (aux)
+	{
+		if (ft_strncmp(key_pair, aux->key_pair, size) == 0)
+		{
+			free(aux->key_pair);
+			aux->key_pair = ft_strdup(key_pair);
+			return ;
+		}
+		aux = aux->next;
+	}
+	list_append(key_pair, minienv);
 }

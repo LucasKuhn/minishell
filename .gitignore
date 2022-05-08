@@ -1,2 +1,10 @@
 obj
-.vscode
+.vscode/
+*.o
+*.json
+
+#libraries
+*.a
+
+#exec
+minishell
