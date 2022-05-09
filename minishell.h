@@ -11,11 +11,12 @@
 
 # include "42-libraries/libft/libft.h" // libft
 # include <readline/readline.h> // readline
-#include <readline/history.h> // history
+# include <readline/history.h> // history
 # include <stdlib.h> // getenv
 # include <unistd.h> // getwd ttyname
 # include <stdio.h> // perror
-#include <stdarg.h> // va_arg
+# include <stdarg.h> // va_arg
+# include <sys/wait.h> // waitpid
 
 typedef struct s_env
 {
@@ -50,6 +51,6 @@ char	*name_only(char *key_pair);
 char	*value_only(char *key_pair);
 int		str_equal(const char* str1, const char* str2);
 char	*ft_strsjoin(int n, char *str1, ...);
-void	strs_cat(char **base, char *str1, char *str2, char *str3);
+void	strs_cat(char *base, char *str1, char *str2, char *str3);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:39:20 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/05/09 17:04:39 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/05/09 17:39:39 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,21 +36,20 @@ char *get_executable(char *cmd, t_env *minienv)
 {
 	char *path_env;
 	char **paths;
-	char *current_path;
+	char current_path[PATH_MAX];
 	int	i;
 	
 	path_env = minienv_value("PATH", minienv);
 	paths = ft_split(path_env, ':');
-	current_path = malloc(sizeof(char) * PATH_MAX);
 	i = 0;
 	while (paths[i])
 	{
 		current_path[0] = 0;
-		strs_cat(&current_path, paths[i], "/", cmd);
+		strs_cat(current_path, paths[i], "/", cmd);
 		if (access(current_path, X_OK) == 0)
 		{
 			ft_free_arr(paths);
-			return (current_path);
+			return (ft_strdup(current_path));
 		}
 		i++;
 	}
@@ -61,7 +60,21 @@ char *get_executable(char *cmd, t_env *minienv)
 void execute_command(char **args, t_env *minienv)
 {
 	char *path;
+	int child_pid;
+	int result;
 	
-	path = get_executable(args[0], minienv);
-	execve(path, args, minienv_to_envp(minienv));
+	child_pid = fork();
+	if (child_pid == -1) // problema no fork
+		ft_putstr_fd("minishell: fork creating error\n", STDERR_FILENO);
+	else if (child_pid == 0) // se for o filho 
+	{
+		path = get_executable(args[0], minienv);
+		result = execve(path, args, minienv_to_envp(minienv));
+		ft_putstr_fd("minishell: ", STDERR_FILENO); // TODO: Colocar em uma aux (ex: exit_with_message)
+		ft_putstr_fd(args[0], STDERR_FILENO);
+		ft_putstr_fd(": command not found\n", STDERR_FILENO);
+		exit(EXIT_FAILURE);
+	}
+	else 
+		wait(0);
 }

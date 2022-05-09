@@ -66,15 +66,18 @@ char **minienv_to_envp(t_env *minienv)
 {
 	char	**envp;
 	t_env	*aux;
+	int		i;
 
 	envp = malloc(sizeof(char *) * minienv_size(minienv) + 1);
 	aux = minienv;
+	i = 0;
 	while (aux)
 	{
-		*envp = ft_strdup(aux->key_pair);
-		envp++;
+		envp[i] = ft_strdup(aux->key_pair);
+		i++;
 		aux = aux->next;
 	}
+	envp[i] = NULL;
 	return(envp);
 }
 
