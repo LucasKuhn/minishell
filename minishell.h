@@ -22,9 +22,10 @@ typedef struct s_env
 	struct s_env	*next;
 }				t_env;
 
-char	*get_prompt();
+// prompt functions
+char *prompt_input(t_env *minienv);
 
-// builtins functions
+// builtin functions
 void	cd(char **args, t_env *minienv);
 void	echo(char **strs);
 void	pwd(char **args);
@@ -32,11 +33,15 @@ void	export(char **args, t_env **minienv);
 void	env(char **args, t_env *envp);
 
 // env functions
-t_env	*get_env(char **envp);
-char	*var_name(char *key_pair);
-char	*var_value(char *key_pair);
-void	var_update(char *key_pair, t_env **minienv);
+t_env	*init_minienv(char **envp);
+char	*minienv_value(char *name, t_env *minienv);
+t_env	*minienv_node(char *name, t_env *minienv);
+void	minienv_update(char *name, char *value, t_env *minienv);
 void	list_append(char *key_pair, t_env **list);
-t_env	*get_minienv(char *name, t_env *minienv);
+
+// str functions
+char	*name_only(char *key_pair);
+char	*value_only(char *key_pair);
+int		str_equal(const char* str1, const char* str2);
 
 #endif

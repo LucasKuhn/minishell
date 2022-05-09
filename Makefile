@@ -4,7 +4,7 @@ LDLIBS	=	-lreadline -lft
 LDFLAGS	+= 	-L./libft
 OBJ_DIR	=	obj
 OBJS	=	$(SRCS:%.c=$(OBJ_DIR)/%.o)
-SRCS	=	main.c get_prompt.c get_env.c builtins.c
+SRCS	=	main.c prompt.c env.c env_utils.c str_utils.c builtins.c
 LIBFT_A	=	./libft/libft.a
 HEADER	=	minishell.h
 
