@@ -1,29 +1,5 @@
 #include "minishell.h"
 
-char	*name_only(char *key_pair)
-{
-	int i;
-
-	i = 0;
-	while (key_pair[i] != '=' && key_pair[i])
-		i++;
-	if (!key_pair[i])
-		return (NULL);
-	return (ft_substr(key_pair, 0, i));
-}
-
-char	*value_only(char *key_pair)
-{
-	int i;
-
-	i = 0;
-	while (key_pair[i] != '=' && key_pair[i])
-		i++;
-	if (!key_pair[i])
-		return (NULL);
-	return (&key_pair[i+1]);
-}
-
 char	*minienv_value(char *name, t_env *minienv)
 {
 	t_env *aux;

@@ -34,11 +34,14 @@ void	env(char **args, t_env *envp);
 
 // env functions
 t_env	*init_minienv(char **envp);
-char	*name_only(char *key_pair);
-char	*value_only(char *key_pair);
 char	*minienv_value(char *name, t_env *minienv);
 t_env	*minienv_node(char *name, t_env *minienv);
 void	minienv_update(char *name, char *value, t_env *minienv);
 void	list_append(char *key_pair, t_env **list);
+
+// str functions
+char	*name_only(char *key_pair);
+char	*value_only(char *key_pair);
+int		str_equal(const char* str1, const char* str2);
 
 #endif
