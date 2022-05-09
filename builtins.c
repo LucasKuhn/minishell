@@ -21,13 +21,13 @@ void echo(char **args)
 	}
 	while (args[i])
 	{
-		ft_putstr_fd(args[i], 1);
+		ft_putstr_fd(args[i], STDOUT_FILENO);
 		if (args[i + 1])
-			ft_putstr_fd(" ", 1);
+			ft_putstr_fd(" ", STDOUT_FILENO);
 		i++;
 	}
 	if (new_line)
-		ft_putstr_fd("\n", 1);
+		ft_putstr_fd("\n", STDOUT_FILENO);
 }
 
 void cd(char **args, t_env *minienv)
@@ -48,9 +48,9 @@ void cd(char **args, t_env *minienv)
 	else
 	{
 		// Good place where we may way want to use printf("%s")
-		ft_putstr_fd("minishell: cd: ", 1);
-		ft_putstr_fd(args[1], 1);
-		ft_putstr_fd(": ", 1);
+		ft_putstr_fd("minishell: cd: ", STDERR_FILENO);
+		ft_putstr_fd(args[1], STDERR_FILENO);
+		ft_putstr_fd(": ", STDERR_FILENO);
 		perror("");
 	}
 }
@@ -70,8 +70,8 @@ void env(char **args, t_env *minienv)
 	aux = minienv;
 	while (aux)
 	{
-		ft_putstr_fd(aux->key_pair, 1);
-		ft_putstr_fd("\n", 1);
+		ft_putstr_fd(aux->key_pair, STDOUT_FILENO);
+		ft_putstr_fd("\n", STDOUT_FILENO);
 		aux = aux->next;
 	}
 }
@@ -83,9 +83,9 @@ void declare_env(char **args, t_env *minienv)
 	aux = minienv;
 	while (aux)
 	{
-		ft_putstr_fd("declare -x ", 1);
-		ft_putstr_fd(aux->key_pair, 1);
-		ft_putstr_fd("\n", 1);
+		ft_putstr_fd("declare -x ", STDOUT_FILENO);
+		ft_putstr_fd(aux->key_pair, STDOUT_FILENO);
+		ft_putstr_fd("\n", STDOUT_FILENO);
 		aux = aux->next;
 	}
 }
@@ -128,7 +128,7 @@ void unset(char **args, t_env **minienv)
 	if (!name)
 		return ;
 	if (ft_strrchr(name, '=') != 0)
-		return(ft_putstr_fd("invalid parameter name\n", 2)); // TODO: Aqui da pra usar o printffd
+		return(ft_putstr_fd("invalid parameter name\n", STDERR_FILENO)); // TODO: Aqui da pra usar o printffd
 	aux = *minienv;
 	while (aux && aux->next)
 	{

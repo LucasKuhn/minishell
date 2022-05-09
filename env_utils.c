@@ -45,3 +45,36 @@ void	minienv_update(char *name, char *value, t_env *minienv)
 		new_keypair[i++] = *value++;
 	aux->key_pair = ft_strdup(new_keypair);
 }
+
+
+size_t	minienv_size(t_env *minienv)
+{
+	size_t	size;
+	t_env	*aux;
+
+	size = 0;
+	aux = minienv;
+	while (aux)
+	{
+		size++;
+		aux = aux->next;
+	}
+	return (size);
+}
+
+char **minienv_to_envp(t_env *minienv)
+{
+	char	**envp;
+	t_env	*aux;
+
+	envp = malloc(sizeof(char *) * minienv_size(minienv) + 1);
+	aux = minienv;
+	while (aux)
+	{
+		*envp = ft_strdup(aux->key_pair);
+		envp++;
+		aux = aux->next;
+	}
+	return(envp);
+}
+
