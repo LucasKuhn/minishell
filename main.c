@@ -3,39 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 14:51:36 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/05/06 18:20:22 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/05/08 23:22:19 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// ⚔️ 🤺
+int str_equal(const char* str1, const char* str2)
+{
+	int size;
+	size = ft_strlen(str1);
+	if (size != ft_strlen(str2))
+		return 0;
+	return (ft_strncmp(str1, str2, size) == 0);
+}
+
 int	main(int argc, char **argv, char **envp)
 {
-	char *line;
+	char *input;
 	char **args;
-	t_env *mini_env;
+	char *command;
+	t_env *minienv;
 
-	mini_env = get_env(envp);
+	minienv = init_minienv(envp);
 	while (1)
 	{
-		line = readline(get_prompt(mini_env));
-		add_history(line);
-		args = ft_split(line, ' ');
-		if (!args[0])
+		input = prompt_input(minienv);
+		args = ft_split(input, ' ');
+		command = args[0];
+		if (!command)
 			continue; // TODO: verificar se pode usar
-		if (ft_strncmp("echo", args[0], 5) == 0)
+		if (str_equal(command, "echo"))
 			echo(args);
-		else if (ft_strncmp("pwd", args[0], 4) == 0)
+		else if (str_equal(command, "pwd"))
 			pwd(args);
-		else if (ft_strncmp("env", args[0], 4) == 0)
-			env(args, mini_env);
-		else if (ft_strncmp("export", args[0], 7) == 0)
-			export(args, &mini_env);
-		else if (ft_strncmp("cd", args[0], 3) == 0)
-			cd(args, mini_env);
+		else if (str_equal(command, "env"))
+			env(args, minienv);
+		else if (str_equal(command, "export"))
+			export(args, &minienv);
+		else if (str_equal(command, "cd"))
+			cd(args, minienv);
 	}
 }
