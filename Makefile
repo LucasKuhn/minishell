@@ -1,11 +1,11 @@
 NAME	=	minishell
 CFLAGS	=	-g
 LDLIBS	=	-lreadline -lft
-LDFLAGS	+= 	-L./libft
+LDFLAGS	+= 	-L./42-libraries/libft
 OBJ_DIR	=	obj
 OBJS	=	$(SRCS:%.c=$(OBJ_DIR)/%.o)
 SRCS	=	main.c prompt.c env.c env_utils.c str_utils.c builtins.c
-LIBFT_A	=	./libft/libft.a
+LIBFT_A	=	./42-libraries/libft/libft.a
 HEADER	=	minishell.h
 
 all: $(NAME)

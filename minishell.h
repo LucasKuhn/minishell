@@ -9,7 +9,7 @@
 
 # define PATH_MAX	4096
 
-# include "libft/libft.h" // libft
+# include "42-libraries/libft/libft.h" // libft
 # include <readline/readline.h> // readline
 #include <readline/history.h> // history
 # include <stdlib.h> // getenv
@@ -31,6 +31,7 @@ void	echo(char **strs);
 void	pwd(char **args);
 void	export(char **args, t_env **minienv);
 void	env(char **args, t_env *envp);
+void	unset(char **args, t_env **minienv);
 
 // env functions
 t_env	*init_minienv(char **envp);

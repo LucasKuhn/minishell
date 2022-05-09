@@ -35,7 +35,7 @@ void cd(char **args, t_env *minienv)
 	char	*path;
 	char	cwd[PATH_MAX];
 
-	if (args[1] && ft_strncmp(args[1], "~", 2) != 0)
+	if (args[1] && !str_equal(args[1], "~"))
 		path = args[1];
 	else
 		path = minienv_value("HOME", minienv);
@@ -76,17 +76,30 @@ void env(char **args, t_env *minienv)
 	}
 }
 
+void declare_env(char **args, t_env *minienv)
+{
+	t_env *aux;
+
+	aux = minienv;
+	while (aux)
+	{
+		ft_putstr_fd("declare -x ", 1);
+		ft_putstr_fd(aux->key_pair, 1);
+		ft_putstr_fd("\n", 1);
+		aux = aux->next;
+	}
+}
 // TODO: Conferir o que o export deve fazer quando não recebe nada
 void export(char **args, t_env **minienv)
 {
 	char *key_pair;
 	char *name;
+	int	size;
 	t_env	*aux;
-	int		size;
 
 	key_pair = args[1];
 	if (!key_pair)
-		return ;
+		return(declare_env(args, *minienv));
 	name = name_only(key_pair);
 	if (name == NULL)
 		return ;
@@ -94,7 +107,7 @@ void export(char **args, t_env **minienv)
 	size = ft_strlen(name) + 1;
 	while (aux)
 	{
-		if (ft_strncmp(key_pair, aux->key_pair, size) == 0)
+		if (ft_strncmp(aux->key_pair, key_pair, size) == 0)
 		{
 			free(aux->key_pair);
 			aux->key_pair = ft_strdup(key_pair);
@@ -104,3 +117,33 @@ void export(char **args, t_env **minienv)
 	}
 	list_append(key_pair, minienv);
 }
+
+void unset(char **args, t_env **minienv)
+{
+	char *name;
+	t_env *aux;
+	t_env *temp;
+
+	name = args[1];
+	if (!name)
+		return ;
+	if (ft_strrchr(name, '=') != 0)
+		return(ft_putstr_fd("invalid parameter name\n", 2)); // TODO: Aqui da pra usar o printffd
+	aux = *minienv;
+	while (aux && aux->next)
+	{
+		if (ft_strncmp((aux->next)->key_pair, name, ft_strlen(name)) == 0)
+		{
+			if ((aux->next)->key_pair[ft_strlen(name)] == '=')
+			{
+				temp = aux->next;
+				aux->next = (aux->next)->next;
+				free((temp)->key_pair);
+				free((temp));
+				return;
+			}
+		}
+		aux = aux->next;
+	}
+}
+
