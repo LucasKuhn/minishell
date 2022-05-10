@@ -6,7 +6,7 @@
 /*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 14:51:36 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/05/09 11:05:22 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/05/09 15:38:33 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,13 @@ int	main(int argc, char **argv, char **envp)
 			env(args, minienv);
 		else if (str_equal(command, "export"))
 			export(args, &minienv);
+		else if (str_equal(command, "unset"))
+			unset(args, &minienv);
 		else if (str_equal(command, "cd"))
 			cd(args, minienv);
+		else if (str_equal(command, "exit"))
+			exit(0);
+		else
+			execute_command(args, minienv);
 	}
 }
