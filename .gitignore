@@ -8,3 +8,4 @@ obj
 
 #exec
 minishell
+*.out

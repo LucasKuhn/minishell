@@ -25,7 +25,7 @@ re: fclean all
 
 $(LIBFT_A):
 	git submodule update --init --recursive
-	make --directory=./libft
+	make --directory=./42-libraries/libft
 
 $(NAME): $(LIBFT_A) $(OBJ_DIR) $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LDLIBS) $(LDFLAGS)
