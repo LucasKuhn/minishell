@@ -9,7 +9,7 @@
 
 # define PATH_MAX	4096
 
-# define KILL	128
+# define INTERRUPT	128
 
 # include "42-libraries/libft/libft.h" // libft
 # include <readline/readline.h> // readline
@@ -36,6 +36,7 @@ void	pwd(char **args);
 void	export(char **args, t_env **minienv);
 void	env(char **args, t_env *envp);
 void	unset(char **args, t_env **minienv);
+void	builtin_exit();
 
 // env functions
 t_env	*init_minienv(char **envp);
@@ -46,7 +47,7 @@ void	list_append(char *key_pair, t_env **list);
 char	**minienv_to_envp(t_env *minienv);
 
 // generic execute function
-void	execute_command(char **args, t_env *minienv);
+int	execute_command(char **args, t_env *minienv);
 
 // str functions
 char	*name_only(char *key_pair);
@@ -56,7 +57,7 @@ char	*ft_strsjoin(int n, char *str1, ...);
 void	strs_cat(char *base, char *str1, char *str2, char *str3);
 
 // signals
-void	signals();
-void	child_signals();
+void	define_main_signals();
+void	define_execute_signals();
 
 #endif

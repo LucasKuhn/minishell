@@ -8,7 +8,7 @@ void handle_sigint(int sig)
     printf("Caught signal %d\n", sig);
 }
 
-/* int main()
+int main()
 {
     int i;
 
@@ -20,9 +20,9 @@ void handle_sigint(int sig)
 		i++;
     }
     exit(42);
-} */
+}
 
-int main()
+/* int main()
 {
     //signal(SIGINT, handle_sigint);
     while (1)
@@ -31,4 +31,4 @@ int main()
         sleep(1);
     }
     return 0;
-}
+} */
