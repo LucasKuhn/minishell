@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:39:20 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/05/10 19:11:19 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/05/11 01:02:15 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,9 @@ void execute_command(char **args, t_env *minienv)
 	else
 	{
 		ft_putstr_fd("Esperando o filho...\n", 1);
+		// sleep(3);
+		// kill(child_pid, SIGKILL); // o kill manda um SIGKILL (= 9) para o filho
+		// e o filho acaba sendo interrompido e envia o status = 9 (WIFEXITED também não retorna true)
 		if (waitpid(child_pid, &status, 0) < 0)
 		{
 			perror("minishell: waitpid error");
