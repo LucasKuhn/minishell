@@ -1,5 +1,10 @@
 #include "minishell.h"
 
+int	is_quote(char c)
+{
+	return (c == '\'' || c == '"');
+}
+
 int str_equal(const char* str1, const char* str2)
 {
 	int size;

@@ -19,6 +19,7 @@
 # include <stdio.h> // perror
 # include <stdarg.h> // va_arg
 # include <sys/wait.h> // waitpid
+# include <signal.h> // sigaction
 
 typedef struct s_env
 {
@@ -55,9 +56,13 @@ char	*value_only(char *key_pair);
 int		str_equal(const char* str1, const char* str2);
 char	*ft_strsjoin(int n, char *str1, ...);
 void	strs_cat(char *base, char *str1, char *str2, char *str3);
+int		is_quote(char c);
 
 // signals
 void	define_main_signals();
 void	define_execute_signals();
+
+// tokenizer
+char	**split_args(char *command);
 
 #endif

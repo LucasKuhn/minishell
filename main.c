@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 14:51:36 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/05/11 15:34:43 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/05/11 17:27:49 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	main(int argc, char **argv, char **envp)
 		input = prompt_input(minienv);
 		if (!input)
 			builtin_exit();
-		args = ft_split(input, ' ');
+		args = split_args(input);
 		command = args[0];
 		if (!command)
 			continue;
