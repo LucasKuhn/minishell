@@ -1,11 +1,22 @@
-// // ◦ cd with only a relative or absolute path
-// // ◦ pwd with no options
-// // ◦ export with no options
-// // ◦ unset with no options
-// // ◦ env with no options or arguments
-// // ◦ exit with no options
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builtins.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/11 15:23:16 by sguilher          #+#    #+#             */
+/*   Updated: 2022/05/11 15:23:19 by sguilher         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
+
+void	builtin_exit()
+{
+	ft_putstr_fd("exit\n", STDOUT_FILENO);
+	exit(0);
+}
 
 void echo(char **args)
 {
