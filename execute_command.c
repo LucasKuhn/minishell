@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:39:20 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/05/11 15:39:19 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/05/11 15:44:25 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,9 @@ int	execute_command(char **args, t_env *minienv)
 	child_pid = fork();
 	define_execute_signals(child_pid);
 	rl_replace_line("", 0);
-	if (child_pid == -1) // problema no fork
+	if (child_pid == -1)
 		ft_putstr_fd("minishell: fork creating error\n", STDERR_FILENO);
-	else if (child_pid == 0) // se for o filho
+	else if (child_pid == 0)
 	{
 		path = get_executable(args[0], minienv);
 		result = execve(path, args, minienv_to_envp(minienv));
@@ -89,7 +89,6 @@ int	execute_command(char **args, t_env *minienv)
 			perror("minishell: waitpid error");
 			exit(EXIT_FAILURE);
 		}
-		//define_main_signals();
 		if (WIFEXITED(status))
 			return (WEXITSTATUS(status));
 		else
