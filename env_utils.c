@@ -30,7 +30,7 @@ t_env	*minienv_node(char *name, t_env *minienv)
 void	minienv_update(char *name, char *value, t_env *minienv)
 {
 	t_env	*aux;
-	char	*new_keypair; 
+	char	*new_keypair;
 	int		size;
 
 	aux	= minienv_node(name, minienv);
@@ -43,6 +43,7 @@ void	minienv_update(char *name, char *value, t_env *minienv)
 	new_keypair[i++] = '=';
 	while (*value)
 		new_keypair[i++] = *value++;
+	new_keypair[i] = '\0';
 	aux->key_pair = ft_strdup(new_keypair);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 14:51:36 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/05/09 15:38:33 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/05/10 19:04:02 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	main(int argc, char **argv, char **envp)
 	char *command;
 	t_env *minienv;
 
+	signals();
 	minienv = init_minienv(envp);
 	while (1)
 	{
@@ -40,7 +41,12 @@ int	main(int argc, char **argv, char **envp)
 		else if (str_equal(command, "cd"))
 			cd(args, minienv);
 		else if (str_equal(command, "exit"))
+		{
+			ft_putstr_fd("exit\n", STDOUT_FILENO); // TODO: caso especial depois de Ctrl+C imprime uma linha em branco
+			// rl_on_new_line();
+			// rl_replace_line("", 0);
 			exit(0);
+		}
 		else
 			execute_command(args, minienv);
 	}

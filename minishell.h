@@ -9,6 +9,8 @@
 
 # define PATH_MAX	4096
 
+# define KILL	128
+
 # include "42-libraries/libft/libft.h" // libft
 # include <readline/readline.h> // readline
 # include <readline/history.h> // history
@@ -52,5 +54,9 @@ char	*value_only(char *key_pair);
 int		str_equal(const char* str1, const char* str2);
 char	*ft_strsjoin(int n, char *str1, ...);
 void	strs_cat(char *base, char *str1, char *str2, char *str3);
+
+// signals
+void	signals();
+void	child_signals();
 
 #endif
