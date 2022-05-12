@@ -70,4 +70,6 @@ char	**split_args(char *command);
 // pipes
 char	**split_commands(char *input);
 
+// error checker 
+int		has_unclosed_quotes(char *str);
 #endif
