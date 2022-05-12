@@ -6,7 +6,7 @@
 /*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:39:20 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/05/11 15:53:00 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/05/12 15:24:37 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ int	execute_command(char **args, t_env *minienv)
 {
 	char *path;
 	int child_pid;
-	int result;
 	int	status;
 
 	child_pid = fork();
@@ -75,11 +74,13 @@ int	execute_command(char **args, t_env *minienv)
 	else if (child_pid == 0)
 	{
 		path = get_executable(args[0], minienv);
-		result = execve(path, args, minienv_to_envp(minienv));
-		ft_putstr_fd("minishell: ", STDERR_FILENO); // TODO: Colocar em uma aux (ex: exit_with_message)
-		ft_putstr_fd(args[0], STDERR_FILENO);
-		ft_putstr_fd(": command not found\n", STDERR_FILENO);
-		exit(EXIT_FAILURE);
+		if (execve(path, args, minienv_to_envp(minienv)) == -1)
+		{
+			ft_putstr_fd("minishell: ", STDERR_FILENO); // TODO: Colocar em uma aux (ex: exit_with_message)
+			ft_putstr_fd(args[0], STDERR_FILENO);
+			ft_putstr_fd(": command not found\n", STDERR_FILENO);
+			exit(EXIT_FAILURE);	
+		}
 	}
 	else
 	{

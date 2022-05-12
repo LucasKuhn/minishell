@@ -1,13 +1,15 @@
 NAME	=	minishell
-CFLAGS	=	-g
+CFLAGS	=	-Wall -Wextra -Werror -g
 LDLIBS	=	-lreadline -lft
 LDFLAGS	+= 	-L./42-libraries/libft
 OBJ_DIR	=	obj
 OBJS	=	$(SRCS:%.c=$(OBJ_DIR)/%.o)
-SRCS	=	main.c prompt.c env.c env_utils.c str_utils.c builtins.c \
-			execute_command.c list_utils.c signals.c split_args.c
+SRCS	=	main.c prompt.c minienv.c minienv_utils.c str_utils.c \
+			execute_command.c list_utils.c signals.c split_args.c $(BUILTINS)
+BUILTINS =	builtins.c echo.c cd.c pwd.c export.c unset.c env.c exit.c
 LIBFT_A	=	./42-libraries/libft/libft.a
 HEADER	=	minishell.h
+VPATH	=	builtins
 
 all: $(NAME)
 

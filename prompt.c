@@ -29,6 +29,7 @@ char *prompt_input(t_env *minienv)
 	char *input;
 
 	input = readline(get_prompt_str(minienv));
-	add_history(input);
+	if (input && *input)
+		add_history(input);
 	return (input);
 }
