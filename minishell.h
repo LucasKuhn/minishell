@@ -31,13 +31,15 @@ typedef struct s_env
 char *prompt_input(t_env *minienv);
 
 // builtin functions
-void	cd(char **args, t_env *minienv);
-void	echo(char **strs);
-void	pwd(char **args);
-void	export(char **args, t_env **minienv);
-void	env(char **args, t_env *envp);
-void	unset(char **args, t_env **minienv);
-void	builtin_exit();
+int		is_builtin(char *command);
+int		execute_builtin(char **args, t_env **minienv);
+int		cd(char **args, t_env *minienv);
+int		echo(char **args);
+int		pwd();
+int		export(char **args, t_env **minienv);
+int		env(t_env *envp);
+int		unset(char **args, t_env **minienv);
+int		builtin_exit();
 
 // env functions
 t_env	*init_minienv(char **envp);
