@@ -6,7 +6,7 @@
 /*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 14:51:36 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/05/12 15:31:08 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/05/12 16:59:11 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ int	main(int argc, char **argv, char **envp)
 	int		exit_status;
 	char	*input;
 	char	**args;
-	char	*command;
+	char	**commands;
+	char	*command_name;
 	t_env	*minienv;
 
 	(void) argc;
@@ -30,14 +31,19 @@ int	main(int argc, char **argv, char **envp)
 		input = prompt_input(minienv);
 		if (!input)
 			builtin_exit(args, &minienv);
-		args = split_args(input);
-		command = args[0];
-		if (!command)
-			continue;
-		if (is_builtin(command))
-			exit_status = execute_builtin(args, &minienv);
-		else
-			exit_status = execute_command(args, minienv);
+		commands = split_commands(input);
+		while (*commands)
+		{
+			args = split_args(*commands);
+			command_name = args[0];
+			if (!command_name)
+				continue;
+			if (is_builtin(command_name))
+				exit_status = execute_builtin(args, &minienv);
+			else
+				exit_status = execute_command(args, minienv);
+			commands++;
+		}
 	}
 	return (exit_status);
 }

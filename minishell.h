@@ -67,4 +67,7 @@ void	define_execute_signals();
 // tokenizer
 char	**split_args(char *command);
 
+// pipes
+char	**split_commands(char *input);
+
 #endif
