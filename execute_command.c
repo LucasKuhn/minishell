@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_command.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:39:20 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/05/12 15:24:37 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/05/13 18:49:39 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,16 +61,33 @@ char *get_executable(char *cmd, t_env *minienv)
 	return(NULL);
 }
 
+int	wait_for_child(int child_pid)
+{
+	int	status;
+
+	if (waitpid(child_pid, &status, 0) < 0)
+	{
+		perror("minishell: waitpid error");
+		exit(EXIT_FAILURE);
+	}
+	if (WIFEXITED(status))
+		return (WEXITSTATUS(status));
+	else
+	{
+		ft_putstr_fd("\n", STDOUT_FILENO);
+		return (INTERRUPT + status);
+	}
+}
+
 int	execute_command(char **args, t_env *minienv)
 {
 	char *path;
 	int child_pid;
-	int	status;
 
 	child_pid = fork();
 	define_execute_signals(child_pid);
 	if (child_pid == -1)
-		ft_putstr_fd("minishell: fork creating error\n", STDERR_FILENO);
+		perror("minishell : ");
 	else if (child_pid == 0)
 	{
 		path = get_executable(args[0], minienv);
@@ -79,23 +96,10 @@ int	execute_command(char **args, t_env *minienv)
 			ft_putstr_fd("minishell: ", STDERR_FILENO); // TODO: Colocar em uma aux (ex: exit_with_message)
 			ft_putstr_fd(args[0], STDERR_FILENO);
 			ft_putstr_fd(": command not found\n", STDERR_FILENO);
-			exit(EXIT_FAILURE);	
 		}
+		exit(EXIT_FAILURE);
 	}
 	else
-	{
-		if (waitpid(child_pid, &status, 0) < 0)
-		{
-			perror("minishell: waitpid error");
-			exit(EXIT_FAILURE);
-		}
-		if (WIFEXITED(status))
-			return (WEXITSTATUS(status));
-		else
-		{
-			ft_putstr_fd("\n", STDOUT_FILENO);
-			return (INTERRUPT + status);
-		}
-	}
-	return (0);
+		return (wait_for_child(child_pid));
+	return (0); // TODO: errno no fork = 11
 }

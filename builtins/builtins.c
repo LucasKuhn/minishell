@@ -3,35 +3,51 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 15:23:16 by sguilher          #+#    #+#             */
-/*   Updated: 2022/05/12 15:38:18 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/05/13 18:49:47 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	execute_builtin(char **args, t_env **minienv)
+int	execute_builtin(char **args, t_env **minienv, int should_fork)
 {
 	char *command;
+	int		child_pid;
+	int		exit_status;
 
+	child_pid = 0;
+	exit_status = 0;
 	command = args[0];
-	if (str_equal(command, "echo"))
-		return(echo(args));
-	if (str_equal(command, "pwd"))
-		return(pwd());
-	if (str_equal(command, "env"))
-		return(env(*minienv));
-	if (str_equal(command, "export"))
-		return(export(args, minienv));
-	if (str_equal(command, "unset"))
-		return(unset(args, minienv));
-	if (str_equal(command, "cd"))
-		return(cd(args, *minienv));
-	if (str_equal(command, "exit"))
-		return(builtin_exit());
-	return(0);
+	if (should_fork)
+		child_pid = fork();
+	if (child_pid == -1)
+		perror("minishell : ");
+	else if (child_pid == 0)
+	{
+		if (str_equal(command, "echo"))
+			exit_status = (echo(args));
+		if (str_equal(command, "pwd"))
+			exit_status = (pwd());
+		if (str_equal(command, "env"))
+			exit_status = (env(*minienv));
+		if (str_equal(command, "export"))
+			exit_status = (export(args, minienv));
+		if (str_equal(command, "unset"))
+			exit_status = (unset(args, minienv));
+		if (str_equal(command, "cd"))
+			exit_status = (cd(args, *minienv));
+		if (str_equal(command, "exit"))
+			exit_status = (builtin_exit());
+		if (should_fork)
+			exit (exit_status);
+		return (exit_status);
+	}
+	else
+		wait_for_child(child_pid);
+	return(exit_status);
 }
 
 int is_builtin(char *command)
