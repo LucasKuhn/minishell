@@ -11,6 +11,9 @@
 
 # define INTERRUPT	128
 
+# define TRUE 1
+# define FALSE 0
+
 # include "42-libraries/libft/libft.h" // libft
 # include <readline/readline.h> // readline
 # include <readline/history.h> // history
@@ -32,7 +35,7 @@ char *prompt_input(t_env *minienv);
 
 // builtin functions
 int		is_builtin(char *command);
-int		execute_builtin(char **args, t_env **minienv);
+int		execute_builtin(char **args, t_env **minienv, int should_fork);
 int		cd(char **args, t_env *minienv);
 int		echo(char **args);
 int		pwd();
@@ -51,6 +54,10 @@ char	**minienv_to_envp(t_env *minienv);
 
 // generic execute function
 int	execute_command(char **args, t_env *minienv);
+int	wait_for_child(int child_pid);
+
+// redirects
+void	redirect_fds(int fd_in, int fd_out);
 
 // str functions
 char	*name_only(char *key_pair);
@@ -70,6 +77,6 @@ char	**split_args(char *command);
 // pipes
 char	**split_commands(char *input);
 
-// error checker 
+// error checker
 int		has_unclosed_quotes(char *str);
 #endif

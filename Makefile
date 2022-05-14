@@ -6,7 +6,7 @@ OBJ_DIR	=	obj
 OBJS	=	$(SRCS:%.c=$(OBJ_DIR)/%.o)
 SRCS	=	main.c prompt.c minienv.c minienv_utils.c str_utils.c \
 			execute_command.c list_utils.c signals.c split_args.c \
-			split_commands.c quote_checker.c $(BUILTINS)
+			split_commands.c quote_checker.c $(BUILTINS) redirects.c
 BUILTINS =	builtins.c echo.c cd.c pwd.c export.c unset.c env.c exit.c
 LIBFT_A	=	./42-libraries/libft/libft.a
 HEADER	=	minishell.h
