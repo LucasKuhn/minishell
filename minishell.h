@@ -48,6 +48,10 @@ int		env(t_env *envp);
 int		unset(char **args, t_env **minienv);
 int		builtin_exit();
 
+// executes 
+int execute_one_command(char *command, t_env	**minienv);
+int execute_multiple_commands(char **commands, t_env **minienv);
+
 // env functions
 t_env	*init_minienv(char **envp);
 char	*minienv_value(char *name, t_env *minienv);
@@ -61,6 +65,7 @@ int	execute_command(char **args, t_env *minienv);
 int	wait_for_child(int child_pid);
 
 // redirects
+void	redirect_fd(int fd_to_redirect, int fd_location);
 void	redirect_fds(int fd_in, int fd_out);
 
 // str functions

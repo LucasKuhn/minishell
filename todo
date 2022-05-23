@@ -1,10 +1,10 @@
-[] builtins
-[] cd 
+[x] builtins
+[x] cd 
 [x] Makefile
 [] Read about functions 
 [x] Display a prompt when waiting for a new command.
 [x] Have a working history. 
-[] Search and launch the right executable (based on the PATH variable or using a  relative or an absolute path).
+[x] Search and launch the right executable (based on the PATH variable or using a  relative or an absolute path).
 [] Not use more than one global variable. Think about it. You will have to explain  its purpose.
 [] Not interpret unclosed quotes or special characters which are not required by the subject such as \ (backslash) or ; (semicolon).
 [] Handle ’ (single quote) which should prevent the shell from interpreting the metacharacters in the quoted sequence. 
@@ -16,7 +16,7 @@ Minishell
 	- Ls, pwd, cd, echo 
 - Primeiro separa todos os blocos 
 - FAUSTO
-    - Tokenização -> Separar os comandos 
+    - Tokenização -> Separar os comandos ✅
     - Análise Léxica -> Dizer o que é 
     - Análise Sintática -> Dizer se é válido o comando 
     - Expandir as variáveis 
