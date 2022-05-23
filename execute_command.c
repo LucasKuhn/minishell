@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_command.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:39:20 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/05/13 18:49:39 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/05/23 14:39:29 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,12 @@ char *get_executable(char *cmd, t_env *minienv)
 	int	i;
 
 	current_path[0] = 0;
-	strs_cat(current_path, minienv_value("PWD", minienv), "/", cmd);
-	if (access(current_path, X_OK) == 0)
-		return (ft_strdup(current_path));
+	if ( cmd[0] == '.' && cmd[1] == '/' )
+	{
+		strs_cat(current_path, minienv_value("PWD", minienv), "/", cmd);
+		if (access(current_path, X_OK) == 0)
+			return (ft_strdup(current_path));	
+	}
 	path_env = minienv_value("PATH", minienv);
 	paths = ft_split(path_env, ':');
 	i = 0;
