@@ -38,7 +38,7 @@ char *prompt_input(t_env *minienv);
 
 // builtin functions
 int		is_builtin(char *command);
-int		execute_forked_builtin(char **args, t_env **minienv, int should_fork);
+int		execute_forked_builtin(char **args, t_env **minienv);
 int		execute_builtin(char **args, t_env **minienv);
 int		cd(char **args, t_env *minienv);
 int		echo(char **args);

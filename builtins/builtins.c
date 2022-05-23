@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins_new.c                                     :+:      :+:    :+:   */
+/*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 15:23:16 by sguilher          #+#    #+#             */
-/*   Updated: 2022/05/23 15:05:17 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/05/23 15:33:38 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	execute_forked_builtin(char **args, t_env **minienv, int should_fork)
+int	execute_forked_builtin(char **args, t_env **minienv)
 {
 	int		child_pid;
 
-	child_pid = 0;
-	if (should_fork)
-		child_pid = fork();
+	child_pid = fork();
 	if (child_pid == -1)
 	{
 		perror("minishell : ");
