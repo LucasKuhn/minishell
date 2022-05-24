@@ -5,6 +5,8 @@ char	*minienv_value(char *name, t_env *minienv)
 	t_env *aux;
 
 	aux = minienv_node(name, minienv);
+	if (!aux)
+		return (NULL);
 	return(value_only(aux->key_pair));
 }
 

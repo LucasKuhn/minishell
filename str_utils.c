@@ -8,6 +8,9 @@ int	is_quote(char c)
 int str_equal(const char* str1, const char* str2)
 {
 	size_t size;
+
+	if (!str1 || !str2)
+		return (0);
 	size = ft_strlen(str1);
 	if (size != ft_strlen(str2))
 		return 0;
