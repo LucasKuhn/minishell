@@ -6,15 +6,14 @@
 /*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 14:02:34 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/05/12 15:34:47 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/05/23 15:30:05 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 int	builtin_exit()
 {
 	ft_putstr_fd("exit\n", STDOUT_FILENO);
-	exit(0);
-	return(0);
+	exit(EXIT_SUCCESS);
 }

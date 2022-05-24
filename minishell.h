@@ -30,12 +30,16 @@ typedef struct s_env
 	struct s_env	*next;
 }				t_env;
 
+// minishell
+int minishell(t_env	*minienv);
+
 // prompt functions
 char *prompt_input(t_env *minienv);
 
 // builtin functions
 int		is_builtin(char *command);
-int		execute_builtin(char **args, t_env **minienv, int should_fork);
+int		execute_forked_builtin(char **args, t_env **minienv);
+int		execute_builtin(char **args, t_env **minienv);
 int		cd(char **args, t_env *minienv);
 int		echo(char **args);
 int		pwd();
@@ -43,6 +47,10 @@ int		export(char **args, t_env **minienv);
 int		env(t_env *envp);
 int		unset(char **args, t_env **minienv);
 int		builtin_exit();
+
+// executes 
+int execute_one_command(char *command, t_env	**minienv);
+int execute_multiple_commands(char **commands, t_env **minienv);
 
 // env functions
 t_env	*init_minienv(char **envp);
@@ -57,6 +65,7 @@ int	execute_command(char **args, t_env *minienv);
 int	wait_for_child(int child_pid);
 
 // redirects
+void	redirect_fd(int fd_to_redirect, int fd_location);
 void	redirect_fds(int fd_in, int fd_out);
 
 // str functions

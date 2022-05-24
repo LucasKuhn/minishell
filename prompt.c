@@ -29,7 +29,12 @@ char *prompt_input(t_env *minienv)
 	char *input;
 
 	input = readline(get_prompt_str(minienv));
+	if (!input)
+		builtin_exit(); // TODO: limpar quando acionar a exit (Ctrl+D)
 	if (input && *input)
 		add_history(input);
+	// check if needs more input 
+	// if (input[ft_strlen(input) -1] == '|')
+	// 	readline(" > ");
 	return (input);
 }
