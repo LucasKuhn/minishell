@@ -6,7 +6,7 @@
 /*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 17:13:19 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/05/12 17:57:18 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/05/25 16:12:43 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	has_unclosed_quotes(char *str)
 		if (!last_opened)
 			return (0);
 		else
-			return (print_error());
+			return (print_error()); // TODO: Talvez dá pra tirar esse else
 	}
 	return (print_error());
 }

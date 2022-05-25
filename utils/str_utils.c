@@ -6,11 +6,24 @@
 /*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 13:28:39 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/05/25 13:28:40 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/05/25 14:52:15 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	is_empty(char *str)
+{
+	if (!str)
+		return (1);
+	while (*str)
+	{
+		if (*str != ' ')
+			return (0);
+		str++;
+	}
+	return (1);
+}
 
 int	is_quote(char c)
 {
@@ -27,30 +40,6 @@ int	str_equal(const char *str1, const char *str2)
 	if (size != ft_strlen(str2))
 		return (0);
 	return (ft_strncmp(str1, str2, size) == 0);
-}
-
-char	*name_only(char *key_pair)
-{
-	int	i;
-
-	i = 0;
-	while (key_pair[i] != '=' && key_pair[i])
-		i++;
-	if (!key_pair[i])
-		return (NULL);
-	return (ft_substr(key_pair, 0, i));
-}
-
-char	*value_only(char *key_pair)
-{
-	int	i;
-
-	i = 0;
-	while (key_pair[i] != '=' && key_pair[i])
-		i++;
-	if (!key_pair[i])
-		return (NULL);
-	return (&key_pair[i + 1]);
 }
 
 // Adds 3 strings to a base string that was previously allocated
