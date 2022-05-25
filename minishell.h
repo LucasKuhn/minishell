@@ -6,7 +6,7 @@
 /*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 13:36:50 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/05/25 15:07:00 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/05/25 18:23:56 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,5 +110,5 @@ char	**split_commands(char *input);
 int		has_unclosed_quotes(char *str);
 
 // utils 
-void	expand_variables(char **commands, t_env *minienv);
+void	expand_variables(char **commands, t_env *minienv, int exit_status);
 #endif
