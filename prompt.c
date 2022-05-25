@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   prompt.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/25 13:29:21 by lalex-ku          #+#    #+#             */
+/*   Updated: 2022/05/25 13:29:22 by lalex-ku         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-char *get_prompt_str(t_env *minienv)
+char	*get_prompt_str(t_env *minienv)
 {
-	char *user;
-	char *cwd;
-	char *directory;
-	static char prompt[PATH_MAX];
+	char		*user;
+	char		*cwd;
+	char		*directory;
+	static char	prompt[PATH_MAX];
 
 	user = minienv_value("USER", minienv);
 	cwd = minienv_value("PWD", minienv);
@@ -21,19 +33,19 @@ char *get_prompt_str(t_env *minienv)
 	ft_strlcat(prompt, directory, PATH_MAX);
 	ft_strlcat(prompt, CRESET, PATH_MAX);
 	ft_strlcat(prompt, " > ", PATH_MAX);
-	return(prompt);
+	return (prompt);
 }
 
-char *prompt_input(t_env *minienv)
+char	*prompt_input(t_env *minienv)
 {
-	char *input;
+	char	*input;
 
 	input = readline(get_prompt_str(minienv));
 	if (!input)
 		builtin_exit(); // TODO: limpar quando acionar a exit (Ctrl+D)
 	if (input && *input)
 		add_history(input);
-	// check if needs more input 
+	// check if needs more input
 	// if (input[ft_strlen(input) -1] == '|')
 	// 	readline(" > ");
 	return (input);

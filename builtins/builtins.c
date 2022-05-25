@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 15:23:16 by sguilher          #+#    #+#             */
-/*   Updated: 2022/05/24 18:27:19 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/05/25 13:14:24 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,58 +14,58 @@
 
 int	execute_forked_builtin(char **args, t_env **minienv)
 {
-	int		child_pid;
+	int	child_pid;
 
 	child_pid = fork();
 	if (child_pid == -1)
 	{
 		perror("minishell : ");
-		return(EXIT_FAILURE);
+		return (EXIT_FAILURE);
 	}
 	else if (child_pid == 0)
 		exit(execute_builtin(args, minienv));
 	else
-		return(wait_for_child(child_pid));
+		return (wait_for_child(child_pid));
 }
 
 int	execute_builtin(char **args, t_env **minienv)
 {
-	char *command;
+	char	*command;
 
 	command = args[0];
 	if (str_equal(command, "echo"))
-		return(echo(args));
+		return (echo(args));
 	if (str_equal(command, "pwd"))
-		return(pwd());
+		return (pwd());
 	if (str_equal(command, "env"))
-		return(env(*minienv));
+		return (env(*minienv));
 	if (str_equal(command, "export"))
-		return(export(args, minienv));
+		return (export(args, minienv));
 	if (str_equal(command, "unset"))
-		return(unset(args, minienv));
+		return (unset(args, minienv));
 	if (str_equal(command, "cd"))
-		return(cd(args, *minienv));
+		return (cd(args, *minienv));
 	if (str_equal(command, "exit"))
-		return(builtin_exit());
+		return (builtin_exit());
 	else
-		return(EXIT_FAILURE);
+		return (EXIT_FAILURE);
 }
 
-int is_builtin(char *command)
+int	is_builtin(char *command)
 {
 	if (str_equal(command, "echo"))
-		return(1);
+		return (1);
 	if (str_equal(command, "cd"))
-		return(1);
+		return (1);
 	if (str_equal(command, "pwd"))
-		return(1);
+		return (1);
 	if (str_equal(command, "export"))
-		return(1);
+		return (1);
 	if (str_equal(command, "unset"))
-		return(1);
+		return (1);
 	if (str_equal(command, "env"))
-		return(1);
+		return (1);
 	if (str_equal(command, "exit"))
-		return(1);
-	return(0);
+		return (1);
+	return (0);
 }

@@ -6,16 +6,16 @@
 /*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 14:03:53 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/05/12 15:33:36 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/05/25 13:15:54 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
-int echo(char **args)
+int	echo(char **args)
 {
-	int i;
-	int new_line;
+	int	i;
+	int	new_line;
 
 	new_line = 1;
 	i = 1;

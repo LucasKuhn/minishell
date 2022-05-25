@@ -1,10 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   executes.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/25 13:29:31 by lalex-ku          #+#    #+#             */
+/*   Updated: 2022/05/25 13:39:05 by lalex-ku         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-static void prepare_io(int fd_stdout, int is_first_command, int has_next_command)
+static void	prepare_io(int fd_stdout, int is_first_command,
+		int has_next_command)
 {
-	int fd_in;
-	int fd_out;
-	static int fds_pipe[2];
+	int			fd_in;
+	int			fd_out;
+	static int	fds_pipe[2];
 
 	fd_in = STDIN_FILENO;
 	if (!is_first_command)
@@ -20,18 +33,18 @@ static void prepare_io(int fd_stdout, int is_first_command, int has_next_command
 	redirect_fds(fd_in, fd_out);
 }
 
-int execute_one_command(char *command, t_env **minienv)
+int	execute_one_command(char *command, t_env **minienv)
 {
-	char **args;
+	char	**args;
 
 	args = split_args(command);
 	if (args[0] && is_builtin(args[0]))
-		return(execute_builtin(args, minienv));
+		return (execute_builtin(args, minienv));
 	else
-		return(execute_command(args, *minienv));
+		return (execute_command(args, *minienv));
 }
 
-int execute_multiple_commands(char **commands, t_env **minienv)
+int	execute_multiple_commands(char **commands, t_env **minienv)
 {
 	char	**args;
 	int		original_fds[2];
@@ -53,5 +66,5 @@ int execute_multiple_commands(char **commands, t_env **minienv)
 		commands++;
 	}
 	redirect_fd(original_fds[0], STDIN_FILENO);
-	return(exit_status);
+	return (exit_status);
 }

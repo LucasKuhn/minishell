@@ -14,17 +14,18 @@
 
 static void	replace_pipes(char *str, char delimeter);
 static void	restore_pipes(char **exec_args);
-static int contains_pipe(char *str);
+static int	contains_pipe(char *str);
 
-char **split_commands(char *input)
+char	**split_commands(char *input)
 {
 	char	**commands;
-	if(!contains_pipe(input))
+
+	if (!contains_pipe(input))
 	{
 		commands = malloc(2 * sizeof(char *));
 		commands[0] = ft_strdup(input);
 		commands[1] = NULL;
-		return(commands);
+		return (commands);
 	}
 	replace_pipes(input, '"');
 	replace_pipes(input, '\'');
@@ -33,11 +34,11 @@ char **split_commands(char *input)
 	return (commands);
 }
 
-static int contains_pipe(char *str)
+static int	contains_pipe(char *str)
 {
 	while (*str)
 	{
-		if (*str == '|') 
+		if (*str == '|')
 			return (1);
 		str++;
 	}

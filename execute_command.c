@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_command.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:39:20 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/05/24 18:29:10 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/05/25 13:39:04 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 // TODO: Adicionar um novo path e tentar executar um programa naquele path
 // ex: Adicionar o minishell no path, dar um cd, e tentar executar minishell
-void	ft_free_arr(char	**arr)
+void	ft_free_arr(char **arr)
 {
 	int	i;
 
@@ -32,15 +32,15 @@ void	ft_free_arr(char	**arr)
 	return ;
 }
 
-char *get_path(char *cmd, t_env *minienv)
+char	*get_path(char *cmd, t_env *minienv)
 {
-	char *path_env;
-	char **paths;
-	char current_path[PATH_MAX];
-	int	i;
+	char	*path_env;
+	char	**paths;
+	char	current_path[PATH_MAX];
+	int		i;
 
 	current_path[0] = 0;
-	if ( cmd[0] == '.' && cmd[1] == '/' )
+	if (cmd[0] == '.' && cmd[1] == '/')
 	{
 		strs_cat(current_path, minienv_value("PWD", minienv), "/", cmd);
 		if (access(current_path, F_OK) == 0)
@@ -61,7 +61,7 @@ char *get_path(char *cmd, t_env *minienv)
 		i++;
 	}
 	ft_free_arr(paths);
-	return(NULL);
+	return (NULL);
 }
 
 int	wait_for_child(int child_pid)
@@ -94,17 +94,17 @@ void	print_error_and_exit(char *command, char *msg, int error)
 
 int	is_folder(char *command)
 {
-	struct stat statbuf;
+	struct stat	statbuf;
 
 	if (stat(command, &statbuf) != 0)
-	return 0;
-	return S_ISDIR(statbuf.st_mode);
+		return (0);
+	return (S_ISDIR(statbuf.st_mode));
 }
 
 int	execute_command(char **args, t_env *minienv)
 {
-	char *path;
-	int child_pid;
+	char	*path;
+	int		child_pid;
 
 	if (is_empty(args[0]))
 		return (0);
@@ -124,7 +124,9 @@ int	execute_command(char **args, t_env *minienv)
 			ft_putstr_fd("minishell: execve", STDERR_FILENO);
 			perror(args[0]);
 		}
-		exit(EXIT_FAILURE); // TODO: precisa retornar o errno certo!! (caso do permission denied ./minishell.c)
+		exit(EXIT_FAILURE);
+			// TODO: precisa retornar o errno certo!! 
+			// (caso do permission denied ./minishell.c)
 	}
 	else
 		return (wait_for_child(child_pid));
