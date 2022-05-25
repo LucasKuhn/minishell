@@ -10,6 +10,12 @@
 # define PATH_MAX	4096
 
 # define INTERRUPT	128
+# define CMD_NOT_FOUND	127
+# define PERMISSION_DENIED 126
+# define NOT_EXECUTABLE 126
+
+# define CMD_NOT_FOUND_MSG	"command not found"
+# define NOT_EXECUTABLE_MSG "Is a directory"
 
 # define TRUE 1
 # define FALSE 0
@@ -22,6 +28,7 @@
 # include <stdio.h> // perror
 # include <stdarg.h> // va_arg
 # include <sys/wait.h> // waitpid
+# include <sys/stat.h> // stat
 # include <signal.h> // sigaction
 
 typedef struct s_env
@@ -48,7 +55,7 @@ int		env(t_env *envp);
 int		unset(char **args, t_env **minienv);
 int		builtin_exit();
 
-// executes 
+// executes
 int execute_one_command(char *command, t_env	**minienv);
 int execute_multiple_commands(char **commands, t_env **minienv);
 
@@ -75,6 +82,7 @@ int		str_equal(const char* str1, const char* str2);
 char	*ft_strsjoin(int n, char *str1, ...);
 void	strs_cat(char *base, char *str1, char *str2, char *str3);
 int		is_quote(char c);
+int		is_empty(char *str);
 
 // signals
 void	define_main_signals();

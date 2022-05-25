@@ -2,8 +2,8 @@
 
 static void prepare_io(int fd_stdout, int is_first_command, int has_next_command)
 {
-	int fd_in; 
-	int fd_out; 
+	int fd_in;
+	int fd_out;
 	static int fds_pipe[2];
 
 	fd_in = STDIN_FILENO;
@@ -23,9 +23,9 @@ static void prepare_io(int fd_stdout, int is_first_command, int has_next_command
 int execute_one_command(char *command, t_env **minienv)
 {
 	char **args;
-	
+
 	args = split_args(command);
-	if (is_builtin(args[0]))
+	if (args[0] && is_builtin(args[0]))
 		return(execute_builtin(args, minienv));
 	else
 		return(execute_command(args, *minienv));
@@ -45,7 +45,7 @@ int execute_multiple_commands(char **commands, t_env **minienv)
 	{
 		args = split_args(*commands); //TODO: limpar args
 		prepare_io(original_fds[1], is_first_command, (commands[1] != NULL));
-		if (is_builtin(args[0]))
+		if (args[0] && is_builtin(args[0]))
 			exit_status = execute_forked_builtin(args, minienv);
 		else
 			exit_status = execute_command(args, *minienv);
@@ -53,5 +53,5 @@ int execute_multiple_commands(char **commands, t_env **minienv)
 		commands++;
 	}
 	redirect_fd(original_fds[0], STDIN_FILENO);
-	return(exit_status);	
+	return(exit_status);
 }
