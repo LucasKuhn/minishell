@@ -6,13 +6,13 @@
 /*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 14:03:41 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/05/12 15:32:39 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/05/25 13:15:57 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
-int cd(char **args, t_env *minienv)
+int	cd(char **args, t_env *minienv)
 {
 	char	*path;
 	char	cwd[PATH_MAX];

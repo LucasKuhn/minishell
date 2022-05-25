@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void expand_variable(char **command, t_env *minienv)
+void	expand_variable(char **command, t_env *minienv)
 {
 	char	*position;
 	int		name_size;
@@ -44,7 +44,7 @@ void expand_variable(char **command, t_env *minienv)
 		expand_variable(&*command, minienv);
 }
 
-void expand_variables(char **commands, t_env *minienv)
+void	expand_variables(char **commands, t_env *minienv)
 {
 	while (*commands)
 	{
@@ -53,7 +53,7 @@ void expand_variables(char **commands, t_env *minienv)
 	}
 }
 
-int is_empty(char *str)
+int	is_empty(char *str)
 {
 	if (!str)
 		return (1);
@@ -66,7 +66,7 @@ int is_empty(char *str)
 	return (1);
 }
 
-int minishell(t_env	*minienv)
+int	minishell(t_env *minienv)
 {
 	int		exit_status;
 	char	*input;
@@ -78,7 +78,7 @@ int minishell(t_env	*minienv)
 		define_main_signals();
 		input = prompt_input(minienv);
 		if (!*input || has_unclosed_quotes(input) || is_empty(input))
-			continue;
+			continue ;
 		// TODO: check syntax before splitting
 		commands = split_commands(input); //TODO: limpar commands
 		expand_variables(commands, minienv);

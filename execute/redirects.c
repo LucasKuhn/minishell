@@ -6,13 +6,13 @@
 /*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 17:55:26 by sguilher          #+#    #+#             */
-/*   Updated: 2022/05/23 16:42:55 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/05/25 13:39:22 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void redirect_fd(int fd_to_redirect, int fd_location)
+void	redirect_fd(int fd_to_redirect, int fd_location)
 {
 	dup2(fd_to_redirect, fd_location);
 	close(fd_to_redirect);

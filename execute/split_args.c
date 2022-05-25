@@ -21,8 +21,8 @@ char	**split_args(char *command)
 {
 	char	**exec_args;
 
-	if(!contains_quote_mark(command))
-		return(ft_split(command, ' '));
+	if (!contains_quote_mark(command))
+		return (ft_split(command, ' '));
 	replace_spaces(command, '"');
 	replace_spaces(command, '\'');
 	remove_quotes(command);
