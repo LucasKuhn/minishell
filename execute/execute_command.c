@@ -6,11 +6,11 @@
 /*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:39:20 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/05/25 13:39:04 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/05/25 19:11:50 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 // TODO: Adicionar um novo path e tentar executar um programa naquele path
 // ex: Adicionar o minishell no path, dar um cd, e tentar executar minishell
@@ -68,6 +68,8 @@ int	wait_for_child(int child_pid)
 {
 	int	status;
 
+	if (child_pid == -1)
+		return (EXIT_FAILURE); // TODO: Check exit_status for fork error
 	if (waitpid(child_pid, &status, 0) < 0)
 	{
 		perror("minishell: waitpid error");
@@ -128,7 +130,5 @@ int	execute_command(char **args, t_env *minienv)
 			// TODO: precisa retornar o errno certo!! 
 			// (caso do permission denied ./minishell.c)
 	}
-	else
-		return (wait_for_child(child_pid));
-	return (0); // TODO: errno no fork = 11
+	return(child_pid);
 }

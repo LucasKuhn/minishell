@@ -6,7 +6,7 @@
 /*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 15:23:16 by sguilher          #+#    #+#             */
-/*   Updated: 2022/05/25 13:14:24 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/05/25 19:15:07 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	execute_forked_builtin(char **args, t_env **minienv)
 	else if (child_pid == 0)
 		exit(execute_builtin(args, minienv));
 	else
-		return (wait_for_child(child_pid));
+		return (child_pid);
 }
 
 int	execute_builtin(char **args, t_env **minienv)
@@ -53,6 +53,8 @@ int	execute_builtin(char **args, t_env **minienv)
 
 int	is_builtin(char *command)
 {
+	if (!command)
+		return(0);
 	if (str_equal(command, "echo"))
 		return (1);
 	if (str_equal(command, "cd"))
