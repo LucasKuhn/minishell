@@ -6,7 +6,7 @@
 /*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 13:36:50 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/05/25 13:39:06 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/05/25 13:45:03 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int		is_empty(char *str);
 
 // signals
 void	define_main_signals(void);
-void	define_execute_signals(void);
+void	define_execute_signals(int child_pid);
 
 // tokenizer
 char	**split_args(char *command);
