@@ -6,7 +6,7 @@
 /*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 16:19:32 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/05/11 17:42:39 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/05/25 16:13:13 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,29 @@ void	restore_spaces(char **exec_args)
 
 void	remove_quotes(char *str)
 {
-	while (*str)
+	char	last_opened;
+
+	last_opened = 0;
+	while (*str && !last_opened)
 	{
-		if (is_quote(*str))
+		if (*str == '\'' || *str == '"')
+		{
+			last_opened = *str;
 			ft_memmove(str, str + 1, ft_strlen(str + 1) + 1);
+		}
 		str++;
 	}
+	while (*str && last_opened)
+	{
+		if (*str && *str == last_opened)
+		{
+			ft_memmove(str, str + 1, ft_strlen(str + 1) + 1);
+			last_opened = 0;
+		}
+		str++;
+	}
+	if (*str)
+		return (remove_quotes(str));
 }
 
 void	replace_spaces(char *str, char delimeter)

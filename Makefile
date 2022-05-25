@@ -4,10 +4,12 @@ LDLIBS	=	-lreadline -lft
 LDFLAGS	+= 	-L./42-libraries/libft
 OBJ_DIR	=	obj
 OBJS	=	$(SRCS:%.c=$(OBJ_DIR)/%.o)
-SRCS	=	main.c prompt.c minienv.c minienv_utils.c str_utils.c \
+SRCS	=	main.c prompt.c str_utils.c \
 			execute_command.c signals.c split_args.c \
-			split_commands.c quote_checker.c $(BUILTINS) redirects.c \
-			minishell.c executes.c
+			split_commands.c quote_checker.c redirects.c \
+			minishell.c executes.c expand_variables.c \
+			$(MINIENV) $(BUILTINS) 
+MINIENV = minienv.c minienv_utils.c minienv_str_utils.c
 BUILTINS =	builtins.c echo.c cd.c pwd.c export.c unset.c env.c exit.c
 LIBFT_A	=	./42-libraries/libft/libft.a
 HEADER	=	minishell.h
