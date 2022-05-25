@@ -6,7 +6,7 @@
 /*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 14:18:39 by sguilher          #+#    #+#             */
-/*   Updated: 2022/05/25 13:39:05 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/05/25 14:22:01 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,17 @@ static void	handle_sigint(int sig)
 	rl_redisplay();
 }
 
-static void	handle_execute_signal(int sig)
-{
-	(void)sig;
-}
-
 void	define_main_signals(void)
 {
 	struct sigaction	sa;
 
 	sa.sa_handler = &handle_sigint;
 	sigaction(SIGINT, &sa, NULL); // ctrl+C
+}
+
+static void	handle_execute_signal(int sig)
+{
+	(void)sig;
 }
 
 void	define_execute_signals(int child_pid)
