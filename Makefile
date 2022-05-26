@@ -8,8 +8,8 @@ SRCS	=	main.c prompt.c str_utils.c \
 			execute_command.c signals.c split_args.c \
 			split_commands.c quote_checker.c redirects.c \
 			minishell.c executes.c expand_variables.c \
-			$(MINIENV) $(BUILTINS) 
-MINIENV = minienv.c minienv_utils.c minienv_str_utils.c
+			$(MINIENV) $(BUILTINS)
+MINIENV = minienv.c minienv_utils.c minienv_str_utils.c free_minienv.c
 BUILTINS =	builtins.c echo.c cd.c pwd.c export.c unset.c env.c exit.c
 LIBFT_A	=	./42-libraries/libft/libft.a
 HEADER	=	minishell.h
@@ -42,3 +42,7 @@ $(OBJ_DIR)/%.o: %.c $(HEADER)
 
 $(OBJ_DIR):
 	mkdir -p $@
+
+leak:
+	valgrind --suppressions=./local.supp --leak-check=full \
+	--show-leak-kinds=all ./$(NAME)
