@@ -25,6 +25,8 @@ void	define_main_signals(void)
 	struct sigaction	sa;
 
 	sa.sa_handler = &handle_sigint;
+	sa.sa_flags = 0;
+	sigemptyset(&sa.sa_mask);
 	sigaction(SIGINT, &sa, NULL); // ctrl+C
 }
 

@@ -123,7 +123,7 @@ int	execute_command(char **args, t_env *minienv)
 			print_error_and_exit(args[0], CMD_NOT_FOUND_MSG, CMD_NOT_FOUND);
 		else if (execve(path, args, minienv_to_envp(minienv)) == -1)
 		{
-			ft_putstr_fd("minishell: execve", STDERR_FILENO);
+			ft_putstr_fd("minishell: execve: ", STDERR_FILENO);
 			perror(args[0]);
 		}
 		exit(EXIT_FAILURE);
