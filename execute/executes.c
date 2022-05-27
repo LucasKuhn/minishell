@@ -37,17 +37,22 @@ int	execute_one_command(char *command, t_env **minienv)
 {
 	char	**args;
 	int		child_pid;
+	int		exit_status;
 
 	args = split_args(command);
 	free(command);
 	if (is_builtin(args[0]))
-		return (execute_builtin(args, minienv));
+	{
+		exit_status = execute_builtin(args, minienv);
+		free_array(args);
+		return (exit_status);
+	}
 	else
 	{
 		child_pid = execute_command(args, *minienv);
+		free_array(args);
 		return (wait_for_child(child_pid));
 	}
-	//free_array(args);
 }
 
 int	execute_multiple_commands(char **commands, t_env **minienv)
@@ -61,17 +66,19 @@ int	execute_multiple_commands(char **commands, t_env **minienv)
 	original_fds[0] = dup(STDIN_FILENO);
 	original_fds[1] = dup(STDOUT_FILENO);
 	is_first_command = TRUE;
-	while (*commands)
+
+	int i = 0;
+	while (commands[i])
 	{
-		args = split_args(*commands); //TODO: limpar args
-		prepare_io(original_fds[1], is_first_command, (commands[1] != NULL));
+		args = split_args(commands[i]);
+		prepare_io(original_fds[1], is_first_command, (commands[i + 1] != NULL));
 		if (is_builtin(args[0]))
-			child_pid = execute_forked_builtin(args, minienv);
+			child_pid = execute_forked_builtin(args, minienv, commands);
 		else
 			child_pid = execute_command(args, *minienv);
 		is_first_command = FALSE;
 		free_array(args);
-		commands++;
+		i++;
 	}
 	exit_status = wait_for_child(child_pid);
 	redirect_fd(original_fds[0], STDIN_FILENO);

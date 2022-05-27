@@ -25,5 +25,5 @@ void	free_minienv(t_env **minienv)
 		free(aux);
 		aux = next;
 	}
-	free(minienv);
+	minienv = NULL;
 }

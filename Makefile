@@ -43,6 +43,6 @@ $(OBJ_DIR)/%.o: %.c $(HEADER)
 $(OBJ_DIR):
 	mkdir -p $@
 
-leak:
+leak: all
 	valgrind --suppressions=./local.supp --leak-check=full \
 	--show-leak-kinds=all ./$(NAME)

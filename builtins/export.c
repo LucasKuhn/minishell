@@ -38,11 +38,13 @@ int	export(char **args, t_env **minienv)
 	key_pair = args[1];
 	if (!key_pair)
 		return (declare_env(*minienv));
-	name = name_only(key_pair);
+	// TODO: Daria pra fazer uma aux que recebe o tamanho do nome
+	name = name_only(key_pair); 
 	if (name == NULL)
 		return (0); // TODO: Checar esse retorno
 	aux = *minienv;
 	size = ft_strlen(name) + 1;
+	free(name);
 	while (aux)
 	{
 		if (ft_strncmp(aux->key_pair, key_pair, size) == 0)

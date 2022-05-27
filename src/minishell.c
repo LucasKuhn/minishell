@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "minishell.h"
 
 int	minishell(t_env *minienv)
 {
@@ -31,13 +31,15 @@ int	minishell(t_env *minienv)
 		expand_variables(commands, minienv, exit_status);
 		if (commands[1] == NULL)
 		{
-			command = commands[0];
+			command = ft_strdup(commands[0]);
 			free_array(commands);
 			exit_status = execute_one_command(command, &minienv);
 		}
 		else
+		{
 			exit_status = execute_multiple_commands(commands, &minienv);
-		free_array(commands);
+			free_array(commands);			
+		}
 	}
 	return (exit_status);
 }
