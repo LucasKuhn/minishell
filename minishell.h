@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 13:36:50 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/05/25 18:23:56 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/05/26 11:34:00 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int		pwd(void);
 int		export(char **args, t_env **minienv);
 int		env(t_env *envp);
 int		unset(char **args, t_env **minienv);
-int		builtin_exit(void);
+int		builtin_exit(t_env **minienv);
 
 // executes
 int		execute_one_command(char *command, t_env	**minienv);
@@ -78,6 +78,7 @@ t_env	*minienv_node(char *name, t_env *minienv);
 void	minienv_update(char *name, char *value, t_env *minienv);
 void	list_append(char *key_pair, t_env **list);
 char	**minienv_to_envp(t_env *minienv);
+void	free_minienv(t_env **minienv);
 
 // generic execute function
 int		execute_command(char **args, t_env *minienv);
@@ -95,6 +96,7 @@ char	*ft_strsjoin(int n, char *str1, ...);
 void	strs_cat(char *base, char *str1, char *str2, char *str3);
 int		is_quote(char c);
 int		is_empty(char *str);
+void	free_array(char **arr);
 
 // signals
 void	define_main_signals(void);
@@ -109,6 +111,6 @@ char	**split_commands(char *input);
 // error checker
 int		has_unclosed_quotes(char *str);
 
-// utils 
+// utils
 void	expand_variables(char **commands, t_env *minienv, int exit_status);
 #endif

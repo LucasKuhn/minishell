@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executes.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 13:29:31 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/05/25 19:15:18 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/05/26 11:55:23 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int	execute_one_command(char *command, t_env **minienv)
 	int		child_pid;
 
 	args = split_args(command);
+	free(command);
 	if (is_builtin(args[0]))
 		return (execute_builtin(args, minienv));
 	else
@@ -46,6 +47,7 @@ int	execute_one_command(char *command, t_env **minienv)
 		child_pid = execute_command(args, *minienv);
 		return (wait_for_child(child_pid));
 	}
+	//free_array(args);
 }
 
 int	execute_multiple_commands(char **commands, t_env **minienv)
@@ -68,6 +70,7 @@ int	execute_multiple_commands(char **commands, t_env **minienv)
 		else
 			child_pid = execute_command(args, *minienv);
 		is_first_command = FALSE;
+		free_array(args);
 		commands++;
 	}
 	exit_status = wait_for_child(child_pid);
