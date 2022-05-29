@@ -12,9 +12,10 @@
 
 #include "../minishell.h"
 
-int	execute_forked_builtin(char **args, t_env **minienv)
+int	execute_forked_builtin(char **args, t_env **minienv, char **commands)
 {
 	int	child_pid;
+	int exit_status;
 
 	child_pid = fork();
 	if (child_pid == -1)
@@ -23,7 +24,14 @@ int	execute_forked_builtin(char **args, t_env **minienv)
 		return (EXIT_FAILURE);
 	}
 	else if (child_pid == 0)
-		exit(execute_builtin(args, minienv));
+	{
+		free_array(commands);
+		exit_status = execute_builtin(args, minienv);
+		free_array(args);
+		free_minienv(minienv);
+		rl_clear_history();
+		exit(exit_status);
+	}
 	else
 		return (child_pid);
 }

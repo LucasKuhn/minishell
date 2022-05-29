@@ -41,6 +41,26 @@ t_env	*minienv_node(char *name, t_env *minienv)
 	return (NULL);
 }
 
+
+static char *create_keypair(char *name, char *value)
+{
+	char	*key_pair; 
+	int		key_pair_size;
+	int		i;
+
+	key_pair_size = ft_strlen(name) + ft_strlen(value) + 2;
+	key_pair = malloc(key_pair_size * sizeof(char));
+
+	i = 0;
+	while (*name)
+		key_pair[i++] = *name++;
+	key_pair[i++] = '=';
+	while (*value)
+		key_pair[i++] = *value++;
+	key_pair[i] = '\0';
+	return(key_pair);
+}
+
 void	minienv_update(char *name, char *value, t_env *minienv)
 {
 	t_env	*aux;
@@ -49,6 +69,13 @@ void	minienv_update(char *name, char *value, t_env *minienv)
 	int		i;
 
 	aux = minienv_node(name, minienv);
+	if (!aux)
+	{
+		new_keypair = create_keypair(name, value);
+		list_append(new_keypair, &minienv);
+		free(new_keypair);
+		return ;
+	}
 	free(aux->key_pair);
 	size = ft_strlen(name) + ft_strlen(value) + 2;
 	new_keypair = malloc(size * sizeof(char));
@@ -59,7 +86,7 @@ void	minienv_update(char *name, char *value, t_env *minienv)
 	while (*value)
 		new_keypair[i++] = *value++;
 	new_keypair[i] = '\0';
-	aux->key_pair = ft_strdup(new_keypair);
+	aux->key_pair = new_keypair;
 }
 
 size_t	minienv_size(t_env *minienv)
@@ -83,7 +110,7 @@ char	**minienv_to_envp(t_env *minienv)
 	t_env	*aux;
 	int		i;
 
-	envp = malloc(sizeof(char *) * minienv_size(minienv) + 1);
+	envp = malloc(sizeof(char *) * (minienv_size(minienv) + 1));
 	aux = minienv;
 	i = 0;
 	while (aux)

@@ -96,7 +96,9 @@ void	replace_spaces(char *str, char delimeter)
 
 int	contains_quote_mark(char *str)
 {
-	while (*str)
+	if (!str)
+		return (0);
+	while (str && *str)
 	{
 		if (is_quote(*str))
 			return (1);
