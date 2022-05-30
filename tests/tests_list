@@ -1,8 +1,16 @@
-echo oi
-echo tchau
+echo hello world
+echo "hello world"
+echo 'hello world'
 echo hello'world'
 echo "aspas ->'"
+echo "aspas -> ' "
+echo 'aspas ->"'
+echo 'aspas -> " '
+echo "> >> < * ? [ ] | ; [ ] || && ( ) & # $ \ <<"
+echo '> >> < * ? [ ] | ; [ ] || && ( ) & # $ \ <<'
 echo "last status code was ->$?\n user name is ->$USER"
-echo "'"
-echo "| ' |"
+echo 'last status code was ->$?\n user name is ->$USER'
+echo -n bonjour
+pwd
+pwd oi
 ./tests/test_files/invalid_permission
