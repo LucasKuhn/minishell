@@ -1,0 +1,8 @@
+echo oi
+echo tchau
+echo hello'world'
+echo "aspas ->'"
+echo "last status code was ->$?\n user name is ->$USER"
+echo "'"
+echo "| ' |"
+./tests/test_files/invalid_permission

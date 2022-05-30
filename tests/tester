@@ -1,0 +1,30 @@
+#!/bin/bash
+
+YELLOW="\033[0;33m"
+GREY="\033[38;5;244m"
+PURPLE="\033[1;35m"
+BLUE="\033[0;36m"
+END="\033[0m"
+FILENAME="tests_list"
+cd ..
+
+printf "\n"
+printf "$YELLOW"
+echo "****************** MINISHELL TESTER ******************"
+printf "\n"
+
+i=1
+cat tests/$FILENAME | while read teste
+do
+	printf "$BLUE"
+	printf "Test $i: $teste:$GREY\n"
+	MINI_OUTPUT=`echo -e "$teste\nexit" | ./minishell | tail -n 3 | grep -v exit | grep -v minishell`
+	echo mini output = $MINI_OUTPUT
+	BASH_OUTPUT=`echo -e "$teste\nexit" | bash | tail -n 3 | grep -v exit`
+	echo bash output = $BASH_OUTPUT
+	printf $END
+	echo -e "________________________________________________________________\n"
+	i=$(($i + 1))
+done
+
+printf $END
