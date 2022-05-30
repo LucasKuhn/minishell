@@ -1,0 +1,49 @@
+#!/bin/bash
+
+YELLOW="\033[0;33m"
+GREY="\033[38;5;244m"
+PURPLE="\033[1;35m"
+BLUE="\033[0;36m"
+RED="\e[0;31m"
+END="\033[0m"
+FILENAME="tests_list"
+cd ..
+
+printf "\n"
+printf "$YELLOW"
+echo "****************** MINISHELL TESTER ******************"
+printf "\n"
+
+i=1
+cat tests/$FILENAME | while read teste
+do
+	printf "$BLUE"
+	printf "Test $i: $GREY$teste: "
+	PROMPT=`echo -e "\nexit\n" | ./minishell | head -n 1 | sed "s,\x1B\[[0-9;]*[a-zA-Z],,g"`
+	MINI_OUTPUT=`echo -e "$teste\nexit\n" | ./minishell | tail -n 3 | sed "s,\x1B\[[0-9;]*[a-zA-Z],,g" | grep -v "$PROMPT" | grep -v ^"exit"`
+	MINI_EXIT_CODE=`echo -e "$teste\necho \$?\nexit\n" | ./minishell | sed "s,\x1B\[[0-9;]*[a-zA-Z],,g" | grep -v "$PROMPT" | tail -n 2 | grep -v ^"exit"`
+	BASH_OUTPUT=`echo -e "$teste\n" | bash`
+	BASH_EXIT_CODE=`echo -e "$teste\necho \$?\n" | bash | tail -n 1 `
+	if [[ "$MINI_OUTPUT" == "$BASH_OUTPUT" && "$MINI_EXIT_CODE" == "$BASH_EXIT_CODE" ]]; then
+		echo "✅ 😎 👍 👍 👍"
+	fi
+	if [ "$MINI_OUTPUT" != "$BASH_OUTPUT" ]; then
+		printf "$RED"
+		echo "output KO ❌ 😭"
+		printf "$GREY"
+		echo mini output = $MINI_OUTPUT
+		echo bash output = $BASH_OUTPUT
+	fi
+	if [ "$MINI_EXIT_CODE" != "$BASH_EXIT_CODE" ]; then
+		printf "$RED"
+		echo "exit code KO  ❌ 😭"
+		printf "$GREY"
+		echo mini exit_code = $MINI_EXIT_CODE
+		echo bash exit_code = $BASH_EXIT_CODE
+	fi 
+	printf $END
+	echo -e "________________________________________________________________\n"
+	i=$(($i + 1))
+done
+
+printf $END
