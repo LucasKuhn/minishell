@@ -6,7 +6,7 @@
 /*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 13:36:50 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/05/31 14:04:53 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/05/31 16:01:59 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # define CMD_NOT_FOUND	127
 # define PERMISSION_DENIED 126
 # define NOT_EXECUTABLE 126
+# define OUT_OF_RANGE 255
 
 # define CMD_NOT_FOUND_MSG	"command not found"
 # define NOT_EXECUTABLE_MSG "is a directory"
@@ -65,7 +66,7 @@ int		pwd(void);
 int		export(char **args, t_env **minienv);
 int		env(t_env *envp);
 int		unset(char **args, t_env **minienv);
-int		builtin_exit(t_env **minienv);
+int		builtin_exit(char **args, t_env **minienv);
 
 // executes
 int		execute_one_command(char *command, t_env	**minienv);

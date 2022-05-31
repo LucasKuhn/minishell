@@ -6,7 +6,7 @@
 /*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 14:03:41 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/05/25 13:15:57 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/05/31 15:26:14 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	cd(char **args, t_env *minienv)
 		minienv_update("OLDPWD", minienv_value("PWD", minienv), minienv);
 		getcwd(cwd, PATH_MAX);
 		minienv_update("PWD", cwd, minienv);
+		return (EXIT_SUCCESS);
 	}
 	else
 	{
@@ -34,6 +35,6 @@ int	cd(char **args, t_env *minienv)
 		ft_putstr_fd(args[1], STDERR_FILENO);
 		ft_putstr_fd(": ", STDERR_FILENO);
 		perror("");
+		return(EXIT_FAILURE);
 	}
-	return (0);
 }

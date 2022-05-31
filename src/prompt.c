@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 13:29:21 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/05/26 11:21:32 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/05/31 16:02:45 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char	*prompt_input(t_env *minienv)
 
 	input = readline(get_prompt_str(minienv));
 	if (!input)
-		builtin_exit(&minienv); // TODO: limpar quando acionar a exit (Ctrl+D)
+		builtin_exit(NULL, &minienv); // TODO: limpar quando acionar a exit (Ctrl+D)
 	if (input && *input)
 		add_history(input);
 	// check if needs more input

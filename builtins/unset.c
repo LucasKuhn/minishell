@@ -6,7 +6,7 @@
 /*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 14:04:17 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/05/25 13:26:52 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/05/31 15:21:33 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,8 @@ int	unset(char **args, t_env **minienv)
 		return (0);
 	if (ft_strrchr(name, '=') != 0)
 	{
-		ft_putstr_fd("invalid parameter name\n", STDERR_FILENO);
-		// TODO: Aqui da pra usar o printffd
-		return (0);
-		// TODO: Checar esse retorno
+		ft_putstr_fd("not a valid identifier\n", STDERR_FILENO);
+		return (EXIT_FAILURE);
 	}
 	aux = *minienv;
 	while (aux && aux->next)
@@ -39,7 +37,7 @@ int	unset(char **args, t_env **minienv)
 				aux->next = (aux->next)->next;
 				free((temp)->key_pair);
 				free((temp));
-				return (0); // TODO: Checar esse retorno
+				return (EXIT_SUCCESS);
 			}
 		}
 		aux = aux->next;
