@@ -2,17 +2,22 @@ echo hello world
 echo "hello world"
 echo 'hello world'
 echo hello'world'
+echo ''
+echo "$PWD"
+echo '$PWD'
 echo "aspas ->'"
 echo "aspas -> ' "
 echo 'aspas ->"'
 echo 'aspas -> " '
 echo "> >> < * ? [ ] | ; [ ] || && ( ) & # $ \ <<"
 echo '> >> < * ? [ ] | ; [ ] || && ( ) & # $ \ <<'
-echo "exit_code was ->$? user name is ->$USER"
-echo 'exit_code was ->$? user name is ->$USER'
+echo "exit_code ->$? user name ->$USER"
+echo 'exit_code ->$? user name ->$USER'
+$PWD
 pwd
 pwd oi
 exit 123
 exit hello
+exit 42 world
 ./tests/test_files/invalid_permission
 invalid_command

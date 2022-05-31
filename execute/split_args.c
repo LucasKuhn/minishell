@@ -6,7 +6,7 @@
 /*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 16:19:32 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/05/25 16:13:13 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/05/31 14:01:59 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ void	remove_quotes(char *str)
 			last_opened = *str;
 			ft_memmove(str, str + 1, ft_strlen(str + 1) + 1);
 		}
-		str++;
+		else 
+			str++;
 	}
 	while (*str && last_opened)
 	{

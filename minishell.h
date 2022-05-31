@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 13:36:50 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/05/26 11:34:00 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/05/31 14:04:53 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # define NOT_EXECUTABLE 126
 
 # define CMD_NOT_FOUND_MSG	"command not found"
-# define NOT_EXECUTABLE_MSG "Is a directory"
+# define NOT_EXECUTABLE_MSG "is a directory"
 
 # define TRUE 1
 # define FALSE 0
