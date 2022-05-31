@@ -6,7 +6,7 @@
 /*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 17:13:19 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/05/25 16:12:43 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/05/31 13:57:02 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	print_error(void)
 {
-	ft_putstr_fd("Tem aspa aberta aí queridão 🌝\n", STDERR_FILENO);
+	ft_putstr_fd("You forgot to close some quotes 🌝\n", STDERR_FILENO);
 	return (1);
 }
 

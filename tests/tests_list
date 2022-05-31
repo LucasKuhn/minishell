@@ -2,15 +2,33 @@ echo hello world
 echo "hello world"
 echo 'hello world'
 echo hello'world'
+echo hello""world
+echo ''
+echo "$PWD"
+echo '$PWD'
 echo "aspas ->'"
 echo "aspas -> ' "
 echo 'aspas ->"'
 echo 'aspas -> " '
 echo "> >> < * ? [ ] | ; [ ] || && ( ) & # $ \ <<"
 echo '> >> < * ? [ ] | ; [ ] || && ( ) & # $ \ <<'
-echo "last status code was ->$?\n user name is ->$USER"
-echo 'last status code was ->$?\n user name is ->$USER'
-echo -n bonjour
+echo "exit_code ->$? user name ->$USER"
+echo 'exit_code ->$? user name ->$USER'
+$PWD
 pwd
 pwd oi
+export hello
+export HELLO=123
+unset
+unset HELLO
+unset HELLO=
+cd $PWD
+cd 123123
+exit 123
+exit 298
+exit -1000
+exit hello
+exit 42 world
 ./tests/test_files/invalid_permission
+invalid_command
+export HELLO=123 | env | grep HELLO

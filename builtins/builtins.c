@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 15:23:16 by sguilher          #+#    #+#             */
-/*   Updated: 2022/05/26 11:34:12 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/05/31 16:18:49 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,7 @@ int	execute_builtin(char **args, t_env **minienv)
 	if (str_equal(command, "cd"))
 		return (cd(args, *minienv));
 	if (str_equal(command, "exit"))
-	{
-		free_array(args);
-		return (builtin_exit(minienv));
-	}
+		return (builtin_exit(args, minienv));
 	else
 		return (EXIT_FAILURE);
 }

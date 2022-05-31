@@ -1,0 +1,22 @@
+echo - "" "" "" "" - ❌
+echo -n hello ✅
+
+CTRL+C
+CTRL+D
+CTRL+\ 
+CTRL+C, CTRL+C, CTRL+C, exit ❌
+
+env
+env hello world # -> We need to implement "env with no options or arguments", the output here is optional
+
+export
+export hello
+export HELLO=123
+unset
+unset HELLO 
+unset HELLO=
+cd # Not mandatory, we need to imlement only "cd with only a relative or absolute path"
+cd obj, echo $PWD $OLDPWD 
+
+exit 9223372036854775807
+exit 9223372036854775808

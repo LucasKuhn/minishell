@@ -6,7 +6,7 @@
 /*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:39:20 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/05/25 19:11:50 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/05/31 14:16:05 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,13 +75,14 @@ int	wait_for_child(int child_pid)
 		perror("minishell: waitpid error");
 		exit(EXIT_FAILURE);
 	}
-	if (WIFEXITED(status))
-		return (WEXITSTATUS(status));
-	else
+	if (WIFSIGNALED(status))
 	{
 		ft_putstr_fd("\n", STDOUT_FILENO);
-		return (INTERRUPT + status);
+		return (INTERRUPT + WTERMSIG(status));
 	}
+	if (WIFEXITED(status))
+		return (WEXITSTATUS(status));
+	return (EXIT_FAILURE);
 }
 
 void	print_error_and_exit(char *command, char *msg, int error)
@@ -125,8 +126,8 @@ int	execute_command(char **args, t_env *minienv)
 		{
 			ft_putstr_fd("minishell: execve: ", STDERR_FILENO);
 			perror(args[0]);
+			exit(NOT_EXECUTABLE);
 		}
-		exit(EXIT_FAILURE);
 			// TODO: precisa retornar o errno certo!! 
 			// (caso do permission denied ./minishell.c)
 	}
