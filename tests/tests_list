@@ -10,7 +10,9 @@ echo "> >> < * ? [ ] | ; [ ] || && ( ) & # $ \ <<"
 echo '> >> < * ? [ ] | ; [ ] || && ( ) & # $ \ <<'
 echo "exit_code was ->$? user name is ->$USER"
 echo 'exit_code was ->$? user name is ->$USER'
-echo -n bonjour
 pwd
 pwd oi
+exit 123
+exit hello
 ./tests/test_files/invalid_permission
+invalid_command
