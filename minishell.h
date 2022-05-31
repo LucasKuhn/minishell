@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 13:36:50 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/05/31 17:40:32 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/01 00:59:54 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,15 @@
 # define PERMISSION_DENIED 126
 # define NOT_EXECUTABLE 126
 # define OUT_OF_RANGE 255
+# define BUILTIN_MISUSE 2
 
 # define CMD_NOT_FOUND_MSG	"command not found"
-# define NOT_EXECUTABLE_MSG "is a directory"
+# define NOT_EXECUTABLE_MSG "Is a directory"
 
 # define TRUE 1
 # define FALSE 0
 
-#define MAX_LONG 9223372036854775807
-#define MIN_LONG -9223372036854775807
+#define LLONG_MAX 9223372036854775807
 
 # include "42-libraries/libft/libft.h" // libft
 # include <readline/readline.h> // readline
@@ -119,5 +119,8 @@ int		has_unclosed_quotes(char *str);
 void	expand_variables(char **commands, t_env *minienv, int exit_status);
 void	print_error_and_exit(char *command, char *msg, int error);
 void	print_error_msg(char *command, char *msg);
+
+// builtin utils
+int is_varname(char c);
 
 #endif
