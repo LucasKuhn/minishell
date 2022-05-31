@@ -2,6 +2,7 @@ echo hello world
 echo "hello world"
 echo 'hello world'
 echo hello'world'
+echo hello""world
 echo ''
 echo "$PWD"
 echo '$PWD'

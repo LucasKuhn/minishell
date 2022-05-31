@@ -23,7 +23,7 @@ do
 	MINI_EXIT_CODE=$(echo -e "./minishell\n$teste\necho \$?\nexit\n" | ./minishell 2> /dev/null | sed -r "s:\x1B\[[0-9;]*[mK]::g" | grep -v "$PROMPT" | grep -v ^exit$ | tail -n 1)
 	MINI_ERROR_MSG=$(echo "$teste" | ./minishell 2>&1 > /dev/null | grep -o '[^:]*$' | xargs)
 
-	BASH_OUTPUT=$(bash -c "$teste" 2> /dev/null )
+	BASH_OUTPUT=$(bash -c "$teste" 2> /dev/null)
 	BASH_EXIT_CODE=$(echo $?)
 	BASH_ERROR_MSG=$(bash -c "$teste" 2>&1 > /dev/null | grep -o '[^:]*$' | xargs)
 
@@ -37,8 +37,8 @@ do
 	fi
 	printf "$GREY $teste \n$END"
 	if [ "$MINI_OUTPUT" != "$BASH_OUTPUT" ]; then
-		echo mini output = $MINI_OUTPUT
-		echo bash output = $BASH_OUTPUT
+		echo mini output = \($MINI_OUTPUT\)
+		echo bash output = \($BASH_OUTPUT\)
 	fi
 	if [ "$MINI_EXIT_CODE" != "$BASH_EXIT_CODE" ]; then
 		echo mini exit code = $MINI_EXIT_CODE

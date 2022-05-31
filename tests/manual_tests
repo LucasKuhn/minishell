@@ -1,0 +1,7 @@
+echo - "" "" "" "" - ❌
+echo -n hello ✅
+
+CTRL+C
+CTRL+D
+CTRL+\ 
+CTRL+C, CTRL+C, CTRL+C, exit ❌
