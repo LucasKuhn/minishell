@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 13:36:50 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/05/31 16:01:59 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/05/31 17:40:32 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@
 
 # define TRUE 1
 # define FALSE 0
+
+#define MAX_LONG 9223372036854775807
+#define MIN_LONG -9223372036854775807
 
 # include "42-libraries/libft/libft.h" // libft
 # include <readline/readline.h> // readline
@@ -114,4 +117,7 @@ int		has_unclosed_quotes(char *str);
 
 // utils
 void	expand_variables(char **commands, t_env *minienv, int exit_status);
+void	print_error_and_exit(char *command, char *msg, int error);
+void	print_error_msg(char *command, char *msg);
+
 #endif

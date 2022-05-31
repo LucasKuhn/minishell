@@ -4,13 +4,13 @@ LDLIBS	=	-lreadline -lft
 LDFLAGS	+= 	-L./42-libraries/libft
 OBJ_DIR	=	obj
 OBJS	=	$(SRCS:%.c=$(OBJ_DIR)/%.o)
-SRCS	=	main.c prompt.c str_utils.c \
-			execute_command.c signals.c split_args.c \
-			split_commands.c quote_checker.c redirects.c \
-			minishell.c executes.c expand_variables.c \
-			$(MINIENV) $(BUILTINS)
-MINIENV = minienv.c minienv_utils.c minienv_str_utils.c free_minienv.c
+SRCS	=	main.c minishell.c prompt.c split_commands.c \
+			executes.c execute_command.c  split_args.c \
+			redirects.c \
+			$(MINIENV) $(BUILTINS) $(UTILS)
+MINIENV =	minienv.c minienv_utils.c minienv_str_utils.c free_minienv.c
 BUILTINS =	builtins.c echo.c cd.c pwd.c export.c unset.c env.c exit.c
+UTILS =		error.c expand_variables.c quote_checker.c signals.c str_utils.c
 LIBFT_A	=	./42-libraries/libft/libft.a
 HEADER	=	minishell.h
 VPATH	=	builtins minienv utils execute src
@@ -47,5 +47,5 @@ leak: all
 	valgrind --suppressions=./local.supp --leak-check=full \
 	--show-leak-kinds=all ./$(NAME)
 
-test: all 
+test: all
 	./tests/tester
