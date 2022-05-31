@@ -6,7 +6,7 @@
 /*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 14:51:24 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/05/25 18:24:32 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/05/30 21:51:33 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,15 @@ static char *find_var_position(char *command)
 {
 	while (*command)
 	{
+		command++;
 		if (*command == '\'')
 		{
 			command++;
-			while(*command != '\'')
+			while(*command && *command != '\'')
 				command++;
 		}
 		if (*command == '$' && is_varname(command[1]))
 			return (command);
-		command++;
 	}
 	return (NULL);
 }
@@ -38,15 +38,15 @@ static char *find_exit_code_position(char *command)
 {
 	while (*command)
 	{
+		command++;
 		if (*command == '\'')
 		{
 			command++;
-			while(*command != '\'')
+			while(*command && *command != '\'')
 				command++;
 		}
 		if (*command == '$' && command[1] == '?')
 			return (command);
-		command++;
 	}
 	return (NULL);
 }

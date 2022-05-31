@@ -6,7 +6,7 @@
 /*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 16:29:54 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/05/12 16:45:20 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/05/30 21:33:58 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	**split_commands(char *input)
 
 	if (!contains_pipe(input))
 	{
-		commands = malloc(2 * sizeof(char *));
+		commands = malloc(sizeof(char *) * 2);
 		commands[0] = ft_strdup(input);
 		commands[1] = NULL;
 		return (commands);

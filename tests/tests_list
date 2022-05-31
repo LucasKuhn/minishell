@@ -8,8 +8,8 @@ echo 'aspas ->"'
 echo 'aspas -> " '
 echo "> >> < * ? [ ] | ; [ ] || && ( ) & # $ \ <<"
 echo '> >> < * ? [ ] | ; [ ] || && ( ) & # $ \ <<'
-echo "last status code was ->$?\n user name is ->$USER"
-echo 'last status code was ->$?\n user name is ->$USER'
+echo "exit_code was ->$? user name is ->$USER"
+echo 'exit_code was ->$? user name is ->$USER'
 echo -n bonjour
 pwd
 pwd oi
