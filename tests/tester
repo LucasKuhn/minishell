@@ -53,11 +53,14 @@ done < tests/$FILENAME
 
 printf $PURPLE
 printf "$ok/$i\n"
+printf $END
+
 if [[ "$ok" == "$i" ]]; then
 	echo "🎊 🎊 🎊"
 	echo "😎 😎 😎"
 	echo "🎉 🎉 🎉"
+	exit 0
 else
 	echo "😭 😭 😭"
+	exit 1
 fi
-printf $END
