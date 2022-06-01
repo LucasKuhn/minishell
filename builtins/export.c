@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 14:04:06 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/01 11:10:59 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/01 14:59:02 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,6 @@ int	export(char **args, t_env **minienv)
 		return (declare_env(*minienv));
 	// TODO: Daria pra fazer uma aux que recebe o tamanho do nome
 	name = name_only(key_pair);
-	if (name == NULL)
-		return (0); // TODO: Checar esse retorno
 	if (!is_valid_varname(name))
 	{
 		print_export_error_msg(name, "not a valid identifier");
