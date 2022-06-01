@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 14:02:34 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/01 00:27:37 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/01 18:22:20 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,10 @@ int	builtin_exit(char **args, t_env **minienv)
 	rl_clear_history();
 	free_minienv(minienv);
 	ft_putstr_fd("exit\n", STDOUT_FILENO);
-	if (!args[0] || !args[1])
+	if (!args || !args[1])
 	{
-		free_array(args);
+		if (args)
+			free_array(args);
 		exit(EXIT_SUCCESS);
 	}
 	exit_status = args[1];

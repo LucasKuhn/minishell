@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   split_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 16:19:32 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/05/31 14:55:06 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/01 18:40:26 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	replace_spaces(char *str, char delimeter);
-void	restore_spaces(char **exec_args);
-int		contains_quote_mark(char *str);
-void	remove_quotes(char *str);
+static void	replace_spaces(char *str, char delimeter);
+static void	restore_spaces(char **exec_args);
+static int	contains_quote_mark(char *str);
+static void	remove_quotes(char *str);
 
 char	**split_args(char *command)
 {
@@ -31,7 +31,7 @@ char	**split_args(char *command)
 	return (exec_args);
 }
 
-void	restore_spaces(char **exec_args)
+static void	restore_spaces(char **exec_args)
 {
 	char	*str;
 
@@ -49,7 +49,7 @@ void	restore_spaces(char **exec_args)
 	return ;
 }
 
-void	remove_quotes(char *str)
+static void	remove_quotes(char *str)
 {
 	char	last_opened;
 
@@ -78,7 +78,7 @@ void	remove_quotes(char *str)
 		return (remove_quotes(str));
 }
 
-void	replace_spaces(char *str, char delimeter)
+static void	replace_spaces(char *str, char delimeter)
 {
 	while (*str && *str != delimeter)
 		str++;
@@ -96,7 +96,7 @@ void	replace_spaces(char *str, char delimeter)
 		replace_spaces(str, delimeter);
 }
 
-int	contains_quote_mark(char *str)
+static int	contains_quote_mark(char *str)
 {
 	if (!str)
 		return (0);

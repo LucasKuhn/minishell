@@ -19,7 +19,7 @@ export HELLO="beautiful world" ✅
 unset HELLO- # diferente no mac e no workspaces ❌
 export HELLO=123 A- # => cria a primeira variável e retorna exit status = 1 ❌
 
-export hello # => não é para criar a variável na env ❌
+export hello # => não é para criar a variável na env ✅
 #porém, quando dá o comando export apenas, hello aparece...
 # para testar:
 export hello
@@ -49,3 +49,5 @@ cat minishell.h | grep $");" # não precisa ser igual ao do bash porque só temo
 
 #extra: variáveis locais
 aa==vv
+
+< infile

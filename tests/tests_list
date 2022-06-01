@@ -54,3 +54,5 @@ ls
 cat ./tests/test_files/infile_big
 cat ./tests/test_files/infile_big | grep oi
 cat minishell.h | grep ");"$
+grep oi <./tests/test_files/infile
+grep oi "<      infile" < ./tests/test_files/infile tchau

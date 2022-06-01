@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 13:36:50 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/01 00:59:54 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/01 18:35:40 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@
 # include <sys/wait.h> // waitpid
 # include <sys/stat.h> // stat
 # include <signal.h> // sigaction
+# include <fcntl.h> // open flags
 
 typedef struct s_env
 {
@@ -91,6 +92,9 @@ int		wait_for_child(int child_pid);
 // redirects
 void	redirect_fd(int fd_to_redirect, int fd_location);
 void	redirect_fds(int fd_in, int fd_out);
+void	prepare_io(int fd_stdout, int is_first_command,
+		int has_next_command);
+void	handle_input_redirect(char *command);
 
 // str functions
 char	*name_only(char *key_pair);
