@@ -1,6 +1,9 @@
 echo - "" "" "" "" - ❌
 echo -n hello ✅
 
+# PLATAFORM SPECIFIC - This has different results in diferent bashes 
+unset HELLO=
+
 CTRL+C
 CTRL+D
 CTRL+\

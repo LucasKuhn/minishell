@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 14:04:06 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/01 01:00:33 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/01 11:10:59 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ int	is_valid_varname(char *name)
 	while (*name)
 	{
 		if (!is_varname(*name))
-			return (1);
+			return (0);
 		name++;
 	}
-	return (0);
+	return (1);
 }
 
 static int	declare_env(t_env *minienv)
