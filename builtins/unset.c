@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 14:04:17 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/05/31 15:21:33 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/05/31 17:01:57 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	unset(char **args, t_env **minienv)
 		return (0);
 	if (ft_strrchr(name, '=') != 0)
 	{
-		ft_putstr_fd("not a valid identifier\n", STDERR_FILENO);
+		print_error_msg("unset", "not a valid identifier");
 		return (EXIT_FAILURE);
 	}
 	aux = *minienv;
