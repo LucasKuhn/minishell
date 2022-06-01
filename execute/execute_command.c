@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_command.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:39:20 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/05/31 14:16:05 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/05/31 18:04:11 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char	*get_path(char *cmd, t_env *minienv)
 	if (cmd[0] == '.' && cmd[1] == '/')
 	{
 		strs_cat(current_path, minienv_value("PWD", minienv), "/", cmd);
-		if (access(current_path, F_OK) == 0)
+		//if (access(current_path, F_OK) == 0)
 			return (ft_strdup(current_path));
 	}
 	path_env = minienv_value("PATH", minienv);
@@ -85,16 +85,6 @@ int	wait_for_child(int child_pid)
 	return (EXIT_FAILURE);
 }
 
-void	print_error_and_exit(char *command, char *msg, int error)
-{
-	ft_putstr_fd("minishell: ", STDERR_FILENO); // TODO: Colocar na ft_printf
-	ft_putstr_fd(command, STDERR_FILENO);
-	ft_putstr_fd(": ", STDERR_FILENO);
-	ft_putstr_fd(msg, STDERR_FILENO);
-	ft_putstr_fd("\n", STDERR_FILENO);
-	exit(error);
-}
-
 int	is_folder(char *command)
 {
 	struct stat	statbuf;
@@ -126,9 +116,11 @@ int	execute_command(char **args, t_env *minienv)
 		{
 			ft_putstr_fd("minishell: execve: ", STDERR_FILENO);
 			perror(args[0]);
+			if (access(path, F_OK) != 0)
+				exit(CMD_NOT_FOUND);
 			exit(NOT_EXECUTABLE);
 		}
-			// TODO: precisa retornar o errno certo!! 
+			// TODO: precisa retornar o errno certo!!
 			// (caso do permission denied ./minishell.c)
 	}
 	return(child_pid);

@@ -3,16 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 14:04:06 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/05/25 13:15:46 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/01 01:00:33 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
 // TODO: Conferir o que o export deve fazer quando não recebe nada
+int	is_valid_varname(char *name)
+{
+	while (*name)
+	{
+		if (!is_varname(*name))
+			return (1);
+		name++;
+	}
+	return (0);
+}
+
 static int	declare_env(t_env *minienv)
 {
 	t_env	*aux;
@@ -28,6 +39,15 @@ static int	declare_env(t_env *minienv)
 	return (0);
 }
 
+void	print_export_error_msg(char *varname, char *msg)
+{
+	ft_putstr_fd("minishell: export: ", STDERR_FILENO);
+	ft_putstr_fd(varname, STDERR_FILENO);
+	ft_putstr_fd(": ", STDERR_FILENO);
+	ft_putstr_fd(msg, STDERR_FILENO);
+	ft_putstr_fd("\n", STDERR_FILENO);
+}
+
 int	export(char **args, t_env **minienv)
 {
 	char	*key_pair;
@@ -35,13 +55,19 @@ int	export(char **args, t_env **minienv)
 	int		size;
 	t_env	*aux;
 
-	key_pair = args[1];
+	key_pair = args[1]; // TODO: implementar quando tem arg[2] ou mais
 	if (!key_pair)
 		return (declare_env(*minienv));
 	// TODO: Daria pra fazer uma aux que recebe o tamanho do nome
-	name = name_only(key_pair); 
+	name = name_only(key_pair);
 	if (name == NULL)
 		return (0); // TODO: Checar esse retorno
+	if (!is_valid_varname(name))
+	{
+		print_export_error_msg(name, "not a valid identifier");
+		free(name);
+		return (EXIT_FAILURE);
+	}
 	aux = *minienv;
 	size = ft_strlen(name) + 1;
 	free(name);

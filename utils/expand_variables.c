@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   expand_variables.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 14:51:24 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/05/31 13:54:33 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/01 00:59:09 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static int is_varname(char c)
+int is_varname(char c)
 {
 	return(ft_isalnum(c) || c == '_');
 }
