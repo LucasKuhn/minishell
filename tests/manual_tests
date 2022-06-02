@@ -1,7 +1,7 @@
 echo - "" "" "" "" - ❌
 echo -n hello ✅
 
-# PLATAFORM SPECIFIC - This has different results in diferent bashes 
+# PLATAFORM SPECIFIC - This has different results in diferent bashes
 unset HELLO=
 
 CTRL+C
@@ -16,7 +16,15 @@ env hello world # -> We need to implement "env with no options or arguments", th
 export HELLO=123
 export HELLO="beautiful world" ✅
 
-unset HELLO- # diferente no mac e no workspaces
+unset HELLO- # diferente no mac e no workspaces ❌
+export HELLO=123 A- # => cria a primeira variável e retorna exit status = 1 ❌
+
+export hello # => não é para criar a variável na env ✅
+#porém, quando dá o comando export apenas, hello aparece...
+# para testar:
+export hello
+env | grep hello
+export | grep hello
 
 cd # Not mandatory, we need to imlement only "cd with only a relative or absolute path"
 cd obj, echo $PWD $OLDPWD
@@ -41,3 +49,5 @@ cat minishell.h | grep $");" # não precisa ser igual ao do bash porque só temo
 
 #extra: variáveis locais
 aa==vv
+
+< infile
