@@ -8,3 +8,9 @@ cat <./tests/test_files/infile_big ./tests/test_files/infile
 cat <"1""2""3""4""5"
 echo <"./tests/test_files/infile" <missing <"./tests/test_files/infile"
 echo <missing <"./tests/test_files/infile" <missing
+echo <"./tests/test_files/infile_big" | cat <"./tests/test_files/infile"
+echo hi | cat <"./tests/test_files/infile_big"
+cat <"./tests/test_files/infile" | echo hi | echo bye | echo bon | echo jour
+cat <"./tests/test_files/infile_big" | echo hi
+cat <asdasd | cat <"./tests/test_files/infile"
+echo <123 <456 hi | echo 42

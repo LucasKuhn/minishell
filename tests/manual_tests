@@ -55,3 +55,7 @@ aa==vv
 # Pode ter um tab antes do nome do arquivo 
 cat <		./tests/test_files/infile
 
+# Checar se não cria processos zumbi 
+echo "hi" | cat | cat | cat | cat | cat | cat | cat
+# em outra janela
+ps -a 

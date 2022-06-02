@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   redirects.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 17:55:26 by sguilher          #+#    #+#             */
-/*   Updated: 2022/06/01 18:45:04 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/02 18:18:35 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+// echo hi | echo hi
+// cat <"./tests/test_files/infile_big" | echo hi
 void	prepare_io(int fd_stdout, int is_first_command,
 		int has_next_command)
 {

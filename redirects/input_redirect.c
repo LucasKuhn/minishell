@@ -6,7 +6,7 @@
 /*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 18:28:18 by sguilher          #+#    #+#             */
-/*   Updated: 2022/06/02 16:45:50 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/02 18:37:24 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int	handle_input_redirect(char *command)
 	if (!input_redirect)
 		return (EXIT_SUCCESS);
 	file_name = redirect_file_name(input_redirect);
-	fd = open(file_name, O_RDONLY);
+	fd = open(file_name, O_RDONLY, FD_CLOEXEC);
 	free(file_name);
 	if (fd == -1)
 	{

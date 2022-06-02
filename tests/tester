@@ -4,7 +4,7 @@ test_lists=(
 	"builtins"
 	"pipes"
 	"redirects"
-	"extras"
+	# "extras"
 	# "bonus"
 )
 
