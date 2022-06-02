@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 14:02:34 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/01 18:22:20 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/02 13:36:22 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	builtin_exit(char **args, t_env **minienv)
 	char	*exit_status;
 	long	number;
 
-	rl_clear_history();
+	// rl_clear_history();
 	free_minienv(minienv);
 	ft_putstr_fd("exit\n", STDOUT_FILENO);
 	if (!args || !args[1])

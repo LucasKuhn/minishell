@@ -6,7 +6,7 @@
 /*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 15:23:16 by sguilher          #+#    #+#             */
-/*   Updated: 2022/05/31 16:18:49 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/02 13:36:19 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	execute_forked_builtin(char **args, t_env **minienv, char **commands)
 		exit_status = execute_builtin(args, minienv);
 		free_array(args);
 		free_minienv(minienv);
-		rl_clear_history();
+		// rl_clear_history();
 		exit(exit_status);
 	}
 	else

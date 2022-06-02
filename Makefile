@@ -49,4 +49,4 @@ leak: all
 	--show-leak-kinds=all ./$(NAME)
 
 test: all
-	./tests/tester
+	./tests/tester $(NUMBER)

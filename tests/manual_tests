@@ -51,3 +51,7 @@ cat minishell.h | grep $");" # não precisa ser igual ao do bash porque só temo
 aa==vv
 
 < infile
+
+# Pode ter um tab antes do nome do arquivo 
+cat <		./tests/test_files/infile
+
