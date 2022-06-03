@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:39:20 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/03 14:53:24 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/03 18:08:02 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,9 @@ int	wait_for_child(int child_pid)
 	}
 	if (WIFSIGNALED(status))
 	{
-		ft_putstr_fd("\n", STDOUT_FILENO);
+		// TODO: verificar o comportamento para diferentes sinais que os filhos recebem
+		if (WTERMSIG(status) == SIGINT)
+			ft_putstr_fd("\n", STDOUT_FILENO);
 		return (INTERRUPT + WTERMSIG(status));
 	}
 	if (WIFEXITED(status))

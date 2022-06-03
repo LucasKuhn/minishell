@@ -4,17 +4,18 @@ echo -n hello ✅
 # PLATAFORM SPECIFIC - This has different results in diferent bashes
 unset HELLO=
 
-CTRL+C
-CTRL+D
-CTRL+\
-CTRL+C, CTRL+C, CTRL+C, exit ❌
+CTRL+C ✅
+CTRL+D ✅
+CTRL+\ ✅
+CTRL+C, CTRL+C, CTRL+C, exit ✅
+CTRL+C, CTRL+C, CTRL+C, Ctrl+D ✅
 
 env
 env hello world # -> We need to implement "env with no options or arguments", the output here is optional
 
-# mudança de valor de variável existente
+# mudança de valor de variável existente ✅
 export HELLO=123
-export HELLO="beautiful world" ✅
+export HELLO="beautiful world"
 
 unset HELLO- # diferente no mac e no workspaces ❌
 export HELLO=123 A- # => cria a primeira variável e retorna exit status = 1 ❌
@@ -52,10 +53,29 @@ aa==vv
 
 < infile
 
-# Pode ter um tab antes do nome do arquivo 
+# Pode ter um tab antes do nome do arquivo
 cat <		./tests/test_files/infile
 
-# Checar se não cria processos zumbi 
+# Checar se não cria processos zumbi
 echo "hi" | cat | cat | cat | cat | cat | cat | cat
 # em outra janela
-ps -a 
+ps -a
+
+cat | ls # testar dando depois:
+#- Enter ✅
+#- Ctrl+D ✅
+#- Ctrl+\ ✅
+#- Ctrl+C ✅
+
+grep oi | ls # testar dando depois:
+#- Enter + Ctrl+D ✅
+#- Ctrl+D ✅
+#- "oi" + Enter + Ctrl+D ✅
+#- Ctrl+\ ✅
+#- Ctrl+C ✅
+#- "oi" + Enter + Ctrl+\ ✅
+
+./tests/test_files/loop # finalizar com:
+#- Ctrl+C ✅
+#- Ctrl+\ ❌
+#- Ctrl+D -> não faz nada ✅
