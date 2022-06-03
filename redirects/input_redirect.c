@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   input_redirect.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 18:28:18 by sguilher          #+#    #+#             */
-/*   Updated: 2022/06/02 18:37:24 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/03 14:27:56 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*input_redirect_position(char *str)
+char	*input_redirect_position(char *str)
 {
 	while (*str)
 	{
@@ -104,6 +104,6 @@ int	handle_input_redirect(char *command)
 	else
 		redirect_fd(fd, STDIN_FILENO);
 	if (input_redirect_position(command))
-		return(handle_input_redirect(command));		
+		return(handle_input_redirect(command));
 	return (EXIT_SUCCESS);
 }

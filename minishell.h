@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 13:36:50 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/02 16:32:08 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/03 14:59:29 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ void	redirect_fds(int fd_in, int fd_out);
 void	prepare_io(int fd_stdout, int is_first_command,
 		int has_next_command);
 int		handle_input_redirect(char *command);
+char	*input_redirect_position(char *str);
 
 // str functions
 char	*name_only(char *key_pair);
@@ -123,6 +124,8 @@ int		has_unclosed_quotes(char *str);
 void	expand_variables(char **commands, t_env *minienv, int exit_status);
 void	print_error_and_exit(char *command, char *msg, int error);
 void	print_error_msg(char *command, char *msg);
+void	close_all_fds();
+void	close_extra_fds();
 
 // builtin utils
 int is_varname(char c);

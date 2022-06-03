@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 14:02:34 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/02 13:36:22 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/03 14:59:38 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,14 @@ int	builtin_exit(char **args, t_env **minienv)
 	char	*exit_status;
 	long	number;
 
-	// rl_clear_history();
+	rl_clear_history();
 	free_minienv(minienv);
 	ft_putstr_fd("exit\n", STDOUT_FILENO);
 	if (!args || !args[1])
 	{
 		if (args)
 			free_array(args);
+		close_all_fds();
 		exit(EXIT_SUCCESS);
 	}
 	exit_status = args[1];
@@ -63,5 +64,6 @@ int	builtin_exit(char **args, t_env **minienv)
 		print_error_and_exit("exit", "too many arguments", EXIT_FAILURE);
 	}
 	number = atoll(exit_status); // TODO: implementar ft_atoll ft_atoull
+	close_all_fds();
 	exit(number);
 }

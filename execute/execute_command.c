@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_command.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:39:20 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/02 19:12:32 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/03 14:53:24 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ int	execute_command(char **args, t_env *minienv)
 		perror("minishell : fork");
 	else if (child_pid == 0)
 	{
+		close_extra_fds();
 		if (is_folder(args[0]))
 			print_error_and_exit(args[0], NOT_EXECUTABLE_MSG, NOT_EXECUTABLE);
 		path = get_path(args[0], minienv);

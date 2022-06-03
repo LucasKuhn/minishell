@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_multiple_commands.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 13:29:31 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/02 19:15:52 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/03 13:25:00 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ int	execute_multiple_commands(char **commands, t_env **minienv)
 			continue;
 		}
 		args = split_args(commands[i]);
+		// TODO: fechar o pipe de leitura nos filhos (menos no último comando, que não tem)
+		// TODO: filhos precisam fechar os fds duplicados - principalmente a exit!!
 		if (is_builtin(args[0]))
 			child_pid = execute_forked_builtin(args, minienv, commands);
 		else

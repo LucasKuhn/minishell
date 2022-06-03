@@ -6,11 +6,27 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 16:56:25 by sguilher          #+#    #+#             */
-/*   Updated: 2022/06/01 00:54:50 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/03 14:59:45 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	close_extra_fds()
+{
+	// TODO: melhorar isso aqui!!
+	close(3);
+	close(4);
+	close(5);
+}
+
+void	close_all_fds()
+{
+	close(STDIN_FILENO);
+	close(STDOUT_FILENO);
+	close(STDERR_FILENO);
+	close_extra_fds();
+}
 
 void	print_error_msg(char *command, char *msg)
 {
@@ -24,5 +40,6 @@ void	print_error_msg(char *command, char *msg)
 void	print_error_and_exit(char *command, char *msg, int error)
 {
 	print_error_msg(command, msg);
+	close_all_fds();
 	exit(error);
 }

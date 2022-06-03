@@ -46,7 +46,7 @@ $(OBJ_DIR):
 
 leak: all
 	valgrind --suppressions=./local.supp --leak-check=full \
-	--show-leak-kinds=all ./$(NAME)
+	--show-leak-kinds=all --track-fds=yes --trace-children=yes ./$(NAME)
 
 test: all
 	./tests/tester $(NUMBER)
