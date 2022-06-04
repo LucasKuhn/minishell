@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 13:36:50 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/03 14:59:29 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/03 23:16:14 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@
 
 # define TRUE 1
 # define FALSE 0
+
+# define REDIRECT_FAILURE -1
 
 #define LLONG_MAX 9223372036854775807
 

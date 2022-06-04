@@ -17,5 +17,8 @@ echo hi | cat "./tests/test_files/infile"
 cat <"./tests/test_files/infile" | echo hi | echo bye | echo bon | echo jour
 cat <"./tests/test_files/infile" | grep hello
 cat <"./tests/test_files/infile_big" | echo hi
-cat <asdasd | cat <"./tests/test_files/infile"
+cat <missing
+cat <missing | cat
+cat <missing | echo oi
+cat <missing | cat <"./tests/test_files/infile"
 echo <123 <456 hi | echo 42

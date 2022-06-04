@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 18:28:18 by sguilher          #+#    #+#             */
-/*   Updated: 2022/06/03 19:04:15 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/04 00:06:29 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,14 +95,16 @@ int	handle_input_redirect(char *command)
 		return (EXIT_SUCCESS);
 	file_name = redirect_file_name(input_redirect);
 	fd = open(file_name, O_RDONLY, FD_CLOEXEC);
-	free(file_name);
 	if (fd == -1)
 	{
-		perror("minishell: input fd open error"); // TODO: arrumar a mensagem
+		ft_putstr_fd("minishell: ", 2);
+		perror(file_name); // TODO: arrumar a mensagem
+		free(file_name);
 		return(EXIT_FAILURE);
 	}
 	else
 		redirect_fd(fd, STDIN_FILENO);
+	free(file_name);
 	if (input_redirect_position(command))
 		return(handle_input_redirect(command));
 	return (EXIT_SUCCESS);
