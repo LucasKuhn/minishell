@@ -82,3 +82,5 @@ grep oi | ls # testar dando depois:
 
 chmod 000 ./tests/test_files/invalid_permission
 cat ./tests/test_files/invalid_permission ✅
+
+cat <"./tests/test_files/infile" | echo hi | echo bye | echo bon | echo jour ✅

@@ -14,7 +14,7 @@ echo <"./tests/test_files/infile_big" | cat "./tests/test_files/infile"
 echo <"./tests/test_files/infile_big" | echo <"./tests/test_files/infile"
 echo hi | cat <"./tests/test_files/infile"
 echo hi | cat "./tests/test_files/infile"
-cat <"./tests/test_files/infile" | echo hi | echo bye | echo bon | echo jour
+cat <"./tests/test_files/infile" | echo hi
 cat <"./tests/test_files/infile" | grep hello
 cat <"./tests/test_files/infile_big" | echo hi
 cat <missing

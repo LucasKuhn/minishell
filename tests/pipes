@@ -2,3 +2,4 @@ env | sort | grep -v SHLVL | grep -v ^_=
 cat ./tests/test_files/infile_big
 cat ./tests/test_files/infile_big | grep oi
 cat minishell.h | grep ");"$
+echo hi | echo bye | echo bon | echo jour | echo 42
