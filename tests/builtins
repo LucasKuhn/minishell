@@ -29,9 +29,9 @@ export UNO=1 DOS=2 TRES=3
 export hello world
 export HELLO-=123
 unset
+unset HOME
 unset HELLO
 unset HELLO1 HELLO2
-unset bon=jour
 cd $PWD
 cd 123123
 exit 123

@@ -6,7 +6,7 @@
 /*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 14:04:17 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/05 15:01:47 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/05 20:02:06 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@ int	unset(char **args, t_env **minienv)
 	name = args[1];
 	if (!name)
 		return (0);
+	if (ft_strrchr(name, '=') != 0)
+	{
+		print_error_msg("unset", "not a valid identifier");
+		return (EXIT_FAILURE);
+	}
 	aux = *minienv;
 	while (aux && aux->next)
 	{
