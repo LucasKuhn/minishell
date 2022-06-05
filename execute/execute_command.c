@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_command.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:39:20 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/03 18:08:02 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/05 12:19:01 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,10 +112,10 @@ int	execute_command(char **args, t_env *minienv)
 	{
 		close_extra_fds();
 		if (is_folder(args[0]))
-			print_error_and_exit(args[0], NOT_EXECUTABLE_MSG, NOT_EXECUTABLE);
+			exit_with_error(args[0], NOT_EXECUTABLE_MSG, NOT_EXECUTABLE);
 		path = get_path(args[0], minienv);
 		if (path == NULL)
-			print_error_and_exit(args[0], CMD_NOT_FOUND_MSG, CMD_NOT_FOUND);
+			exit_with_error(args[0], CMD_NOT_FOUND_MSG, CMD_NOT_FOUND);
 		else if (execve(path, args, minienv_to_envp(minienv)) == -1)
 		{
 			ft_putstr_fd("minishell: execve: ", STDERR_FILENO);

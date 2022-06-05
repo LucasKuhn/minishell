@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 13:36:50 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/03 23:16:14 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/05 19:02:02 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,11 +123,13 @@ char	**split_commands(char *input);
 int		has_unclosed_quotes(char *str);
 
 // utils
-void	expand_variables(char **commands, t_env *minienv, int exit_status);
-void	print_error_and_exit(char *command, char *msg, int error);
-void	print_error_msg(char *command, char *msg);
-void	close_all_fds();
-void	close_extra_fds();
+void		expand_variables(char **commands, t_env *minienv, int exit_status);
+void		exit_with_error(char *command, char *msg, int error);
+void		print_error_msg(char *command, char *msg);
+void		exit_with_perror(char *command, char *perror_msg, int error);
+void		close_all_fds();
+void		close_extra_fds();
+long long	ft_atoll(const char *str);
 
 // builtin utils
 int is_varname(char c);

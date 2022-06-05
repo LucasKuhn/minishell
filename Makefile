@@ -11,7 +11,8 @@ BUILTINS =	builtins.c echo.c cd.c pwd.c export.c unset.c env.c exit.c
 EXECUTES =	execute_one_command.c execute_multiple_commands.c \
 			execute_command.c split_args.c
 REDIRECTS =	redirects.c input_redirect.c file_descriptors.c
-UTILS =		error.c expand_variables.c quote_checker.c signals.c str_utils.c
+UTILS =		error.c expand_variables.c quote_checker.c signals.c str_utils.c \
+			ft_atoll.c
 LIBFT_A	=	./42-libraries/libft/libft.a
 HEADER	=	minishell.h
 VPATH	=	builtins minienv utils execute src redirects
