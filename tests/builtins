@@ -25,12 +25,13 @@ export HELLO=123
 export A-
 export HELLO=123 A
 export HELLO="123 A-"
-export HELLO1=1 HELLO2=2
+export UNO=1 DOS=2 TRES=3
 export hello world
 export HELLO-=123
 unset
 unset HELLO
 unset HELLO1 HELLO2
+unset bon=jour
 cd $PWD
 cd 123123
 exit 123
