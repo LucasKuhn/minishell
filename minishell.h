@@ -6,7 +6,7 @@
 /*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 13:36:50 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/05 19:02:02 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/05 20:20:11 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ int		has_unclosed_quotes(char *str);
 void		expand_variables(char **commands, t_env *minienv, int exit_status);
 void		exit_with_error(char *command, char *msg, int error);
 void		print_error_msg(char *command, char *msg);
-void		exit_with_perror(char *command, char *perror_msg, int error);
+void		print_perror_msg(char *command, char *perror_msg);
 void		close_all_fds();
 void		close_extra_fds();
 long long	ft_atoll(const char *str);

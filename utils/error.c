@@ -6,7 +6,7 @@
 /*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 16:56:25 by sguilher          #+#    #+#             */
-/*   Updated: 2022/06/05 18:58:47 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/05 20:19:54 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,4 @@ void	print_perror_msg(char *command, char *perror_msg)
 	ft_putstr_fd(command, STDERR_FILENO);
 	ft_putstr_fd(": ", STDERR_FILENO);
 	perror(perror_msg);
-}
-
-void	exit_with_perror(char *command, char *perror_msg, int error)
-{
-	print_perror_msg(command, perror_msg);
-	close_all_fds();
-	exit(error);
 }
