@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:39:20 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/05/31 18:04:11 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/03 18:08:02 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ char	*get_path(char *cmd, t_env *minienv)
 	return (NULL);
 }
 
+// TODO: Transform into wait_for_children
 int	wait_for_child(int child_pid)
 {
 	int	status;
@@ -77,7 +78,9 @@ int	wait_for_child(int child_pid)
 	}
 	if (WIFSIGNALED(status))
 	{
-		ft_putstr_fd("\n", STDOUT_FILENO);
+		// TODO: verificar o comportamento para diferentes sinais que os filhos recebem
+		if (WTERMSIG(status) == SIGINT)
+			ft_putstr_fd("\n", STDOUT_FILENO);
 		return (INTERRUPT + WTERMSIG(status));
 	}
 	if (WIFEXITED(status))
@@ -107,6 +110,7 @@ int	execute_command(char **args, t_env *minienv)
 		perror("minishell : fork");
 	else if (child_pid == 0)
 	{
+		close_extra_fds();
 		if (is_folder(args[0]))
 			print_error_and_exit(args[0], NOT_EXECUTABLE_MSG, NOT_EXECUTABLE);
 		path = get_path(args[0], minienv);

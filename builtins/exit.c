@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 14:02:34 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/01 18:22:20 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/03 14:59:38 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int	builtin_exit(char **args, t_env **minienv)
 	{
 		if (args)
 			free_array(args);
+		close_all_fds();
 		exit(EXIT_SUCCESS);
 	}
 	exit_status = args[1];
@@ -63,5 +64,6 @@ int	builtin_exit(char **args, t_env **minienv)
 		print_error_and_exit("exit", "too many arguments", EXIT_FAILURE);
 	}
 	number = atoll(exit_status); // TODO: implementar ft_atoll ft_atoull
+	close_all_fds();
 	exit(number);
 }

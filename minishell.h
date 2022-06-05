@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 13:36:50 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/01 18:35:40 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/03 23:16:14 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@
 
 # define TRUE 1
 # define FALSE 0
+
+# define REDIRECT_FAILURE -1
 
 #define LLONG_MAX 9223372036854775807
 
@@ -94,7 +96,8 @@ void	redirect_fd(int fd_to_redirect, int fd_location);
 void	redirect_fds(int fd_in, int fd_out);
 void	prepare_io(int fd_stdout, int is_first_command,
 		int has_next_command);
-void	handle_input_redirect(char *command);
+int		handle_input_redirect(char *command);
+char	*input_redirect_position(char *str);
 
 // str functions
 char	*name_only(char *key_pair);
@@ -123,6 +126,8 @@ int		has_unclosed_quotes(char *str);
 void	expand_variables(char **commands, t_env *minienv, int exit_status);
 void	print_error_and_exit(char *command, char *msg, int error);
 void	print_error_msg(char *command, char *msg);
+void	close_all_fds();
+void	close_extra_fds();
 
 // builtin utils
 int is_varname(char c);

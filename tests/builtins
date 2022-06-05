@@ -14,10 +14,11 @@ echo "> >> < * ? [ ] | ; [ ] || && ( ) & # $ \ <<"
 echo '> >> < * ? [ ] | ; [ ] || && ( ) & # $ \ <<'
 echo "exit_code ->$? user name ->$USER"
 echo 'exit_code ->$? user name ->$USER'
-$PWD
+echo "$"
+echo '$'
+echo $
 pwd
 pwd oi
-env | sort | grep -v SHLVL | grep -v ^_=
 export hello
 export HELLO=123 | env | grep HELLO
 export HELLO=123
@@ -51,8 +52,3 @@ b.out
 minishell.h
 oi
 ls
-cat ./tests/test_files/infile_big
-cat ./tests/test_files/infile_big | grep oi
-cat minishell.h | grep ");"$
-grep oi <./tests/test_files/infile
-grep oi "<      infile" < ./tests/test_files/infile tchau

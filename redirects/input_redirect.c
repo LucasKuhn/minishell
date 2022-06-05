@@ -6,13 +6,13 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 18:28:18 by sguilher          #+#    #+#             */
-/*   Updated: 2022/06/01 18:29:11 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/04 00:06:29 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*input_redirect_position(char *str)
+char	*input_redirect_position(char *str)
 {
 	while (*str)
 	{
@@ -35,25 +35,56 @@ static char	*input_redirect_position(char *str)
 	return (NULL);
 }
 
+static void move_one_forward(char *str)
+{
+	ft_memmove(str, str + 1, ft_strlen(str + 1) + 1);
+}
+
+static int get_name_end(char *name)
+{
+	int name_end;
+
+	name_end = 0;
+	while (name[name_end] && name[name_end] != ' ')
+	{
+		if (name[name_end] == '\'')
+		{
+			move_one_forward(&name[name_end]);
+			while (name[name_end] && name[name_end] != '\'')
+				name_end++;
+			move_one_forward(&name[name_end]);
+		}
+		if (name[name_end] == '"')
+		{
+			move_one_forward(&name[name_end]);
+			while (name[name_end] && name[name_end] != '"')
+				name_end++;
+			move_one_forward(&name[name_end]);
+		}
+		if (name[name_end] && name[name_end] != ' ')
+			name_end++;
+	}
+	return (name_end);
+}
+
 static char	*redirect_file_name(char *redirect_str)
 {
 	int		name_start;
 	int		name_end;
 	char	*name;
+	char	*remaining_cmd;
 
 	name_start = 1;
-	while (redirect_str[name_start] == ' ') // TODO: redirect vazio ex: '<'
+	while (redirect_str[name_start] == ' ' || redirect_str[name_start] == '\t')
 		name_start++;
-	name_end = name_start;
-	// TODO: tem que pular as aspas --> grep oi < "arquivo com espaco" ou < "infile"
-	while (redirect_str[name_end] && redirect_str[name_end] != ' ')
-		name_end++;
-	name = ft_substr(redirect_str, name_start, name_end - name_start);
-	ft_memmove(redirect_str, &redirect_str[name_end], ft_strlen(&redirect_str[name_end]) + 1);
+	name_end = get_name_end(&redirect_str[name_start]);
+	name = ft_substr(&redirect_str[name_start], 0, name_end);
+	remaining_cmd = &redirect_str[name_start + name_end];
+	ft_memmove(redirect_str, remaining_cmd, ft_strlen(remaining_cmd) + 2);
 	return (name);
 }
 
-void	handle_input_redirect(char *command)
+int	handle_input_redirect(char *command)
 {
 	char	*input_redirect;
 	char	*file_name;
@@ -61,12 +92,20 @@ void	handle_input_redirect(char *command)
 
 	input_redirect = input_redirect_position(command);
 	if (!input_redirect)
-		return ;
+		return (EXIT_SUCCESS);
 	file_name = redirect_file_name(input_redirect);
-	fd = open(file_name, O_RDONLY);
+	fd = open(file_name, O_RDONLY, FD_CLOEXEC);
 	if (fd == -1)
-		perror("minishell: input fd open error"); // TODO: arrumar a mensagem
+	{
+		ft_putstr_fd("minishell: ", 2);
+		perror(file_name); // TODO: arrumar a mensagem
+		free(file_name);
+		return(EXIT_FAILURE);
+	}
 	else
 		redirect_fd(fd, STDIN_FILENO);
 	free(file_name);
+	if (input_redirect_position(command))
+		return(handle_input_redirect(command));
+	return (EXIT_SUCCESS);
 }

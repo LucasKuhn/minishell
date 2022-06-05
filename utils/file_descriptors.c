@@ -1,29 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   file_descriptors.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/31 16:56:25 by sguilher          #+#    #+#             */
-/*   Updated: 2022/06/03 21:30:14 by sguilher         ###   ########.fr       */
+/*   Created: 2022/06/03 21:29:52 by sguilher          #+#    #+#             */
+/*   Updated: 2022/06/03 23:57:52 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	print_error_msg(char *command, char *msg)
+void	close_extra_fds()
 {
-	ft_putstr_fd("minishell: ", STDERR_FILENO);
-	ft_putstr_fd(command, STDERR_FILENO);
-	ft_putstr_fd(": ", STDERR_FILENO);
-	ft_putstr_fd(msg, STDERR_FILENO);
-	ft_putstr_fd("\n", STDERR_FILENO);
+	int	last_open_fd;
+	int	fd;
+
+	// TODO: melhorar isso aqui!!
+	last_open_fd = open("minishell.h", O_RDONLY, FD_CLOEXEC);
+	if (last_open_fd == -1)
+		return ; // não sei se isso é bom
+	fd = 3;
+	while (fd <= last_open_fd)
+	{
+		close(fd);
+		fd++;
+	}
 }
 
-void	print_error_and_exit(char *command, char *msg, int error)
+void	close_all_fds()
 {
-	print_error_msg(command, msg);
-	close_all_fds();
-	exit(error);
+	close(STDIN_FILENO);
+	close(STDOUT_FILENO);
+	close(STDERR_FILENO);
+	close_extra_fds();
 }
