@@ -9,3 +9,5 @@ obj
 #exec
 minishell
 *.out
+
+vgcore.*

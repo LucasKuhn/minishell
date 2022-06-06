@@ -3,25 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 14:04:06 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/05 21:44:52 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/06 16:58:13 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-static int	is_valid_varname(char *name)
-{
-	while (*name)
-	{
-		if (!is_varname(*name))
-			return (0);
-		name++;
-	}
-	return (1);
-}
 
 static int	declare_env(t_env *minienv)
 {
@@ -45,15 +34,6 @@ static int	declare_env(t_env *minienv)
 	return (0);
 }
 
-static void	print_export_error_msg(char *varname, char *msg)
-{
-	ft_putstr_fd("minishell: export: ", STDERR_FILENO);
-	ft_putstr_fd(varname, STDERR_FILENO);
-	ft_putstr_fd(": ", STDERR_FILENO);
-	ft_putstr_fd(msg, STDERR_FILENO);
-	ft_putstr_fd("\n", STDERR_FILENO);
-}
-
 int	export(char **args, t_env **minienv)
 {
 	char	*key_pair;
@@ -65,7 +45,7 @@ int	export(char **args, t_env **minienv)
 	varname = name_only(key_pair);
 	if (!is_valid_varname(varname))
 	{
-		print_export_error_msg(varname, "not a valid identifier");
+		print_varname_error_msg("export", varname);
 		free(varname);
 		return (EXIT_FAILURE);
 	}
@@ -75,3 +55,7 @@ int	export(char **args, t_env **minienv)
 		list_append(key_pair, minienv);
 	return (EXIT_SUCCESS);
 }
+// TODO: implementar multiplos exports
+// export UM=1 DOIS-2 TRES=3
+// mesmo dando erro no segundo, cria as duas outras variáveis
+// exit code = 1

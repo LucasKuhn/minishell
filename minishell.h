@@ -6,7 +6,7 @@
 /*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 13:36:50 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/06 15:33:26 by coder            ###   ########.fr       */
+/*   Updated: 2022/06/06 16:43:34 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,11 +129,13 @@ void		expand_exit_status(char **command, int exit_status);
 void		exit_with_error(char *command, char *msg, int error);
 void		print_error_msg(char *command, char *msg);
 void		print_perror_msg(char *command, char *perror_msg);
+void		print_varname_error_msg(char *command, char *varname);
 void		close_all_fds(void);
 void		close_extra_fds(void);
 long long	ft_atoll(const char *str);
 
 // builtin utils
 int is_varname(char c);
+int	is_valid_varname(char *name);
 
 #endif

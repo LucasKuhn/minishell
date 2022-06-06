@@ -6,16 +6,11 @@
 /*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 14:51:24 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/06 15:31:30 by coder            ###   ########.fr       */
+/*   Updated: 2022/06/06 16:20:05 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-int	is_varname(char c)
-{
-	return (ft_isalnum(c) || c == '_');
-}
 
 static char	*find_var_position(char *command)
 {
