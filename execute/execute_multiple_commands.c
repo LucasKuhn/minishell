@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_multiple_commands.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 13:29:31 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/03 23:53:32 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/06 20:21:36 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,12 @@ int	execute_multiple_commands(char **commands, t_env **minienv)
 	int		children_pid[1024]; // TODO: podia ser uma lista linkada
 	int		is_first_command;
 	int		has_input_redirect;
+	int		i;
 
 	original_fds[0] = dup(STDIN_FILENO);
 	original_fds[1] = dup(STDOUT_FILENO);
 	is_first_command = TRUE;
-	int i = 0;
+	i = 0;
 	while (commands[i])
 	{
 		prepare_io(original_fds[1], is_first_command, (commands[i + 1] != NULL));
@@ -48,7 +49,7 @@ int	execute_multiple_commands(char **commands, t_env **minienv)
 		has_input_redirect = input_redirect_position(commands[i]) != NULL;
 		if (has_input_redirect)
 		{
-			if(handle_input_redirect(commands[i]) == EXIT_FAILURE)
+			if (handle_input_redirect(commands[i]) == EXIT_FAILURE)
 			{
 				children_pid[i] = REDIRECT_FAILURE;
 				if (commands[i + 1] == NULL)

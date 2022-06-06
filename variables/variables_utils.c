@@ -1,24 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   variables_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/26 14:51:36 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/06 19:43:30 by coder            ###   ########.fr       */
+/*   Created: 2022/06/06 16:19:08 by coder             #+#    #+#             */
+/*   Updated: 2022/06/06 21:23:14 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
-int	main(int argc, char **argv, char **envp)
+int	is_varname(char c)
 {
-	if (argv && argc > 1)
+	return (ft_isalnum(c) || c == '_');
+}
+
+int	is_valid_varname(char *name)
+{
+	while (*name)
 	{
-		ft_putstr_fd("Minishell can't run with arguments 🧙🏻‍♂️\n",
-			STDOUT_FILENO);
-		return (EXIT_FAILURE);
+		if (!is_varname(*name))
+			return (0);
+		name++;
 	}
-	return (minishell(init_minienv(envp)));
+	return (1);
 }

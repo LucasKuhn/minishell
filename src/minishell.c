@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 14:44:34 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/01 16:11:04 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/06 20:46:15 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,7 @@ int	minishell(t_env *minienv)
 			continue ;
 		// TODO: check syntax before splitting
 		commands = split_commands(input);
-		// TODO: se tiver só um comando não precisa fazer split (se não tiver pipes) -->
-		// chamar direto o execute_one_command
+		// TODO: se não tiver pipes --> chamar direto o execute_one_command
 		expand_variables(commands, minienv, exit_status);
 		if (commands[1] == NULL)
 		{

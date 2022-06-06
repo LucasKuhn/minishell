@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 14:02:34 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/05 21:49:52 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/06 15:35:46 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,14 @@ static void	check_args_error(char **args)
 {
 	char	*exit_status;
 
-	exit_status = args[1];
-	if (!args || !exit_status)
+	if (!args || !args[1])
 	{
 		if (args)
 			free_array(args);
 		close_all_fds();
 		exit(EXIT_SUCCESS);
 	}
+	exit_status = args[1];
 	if (!fits_in_long_long(exit_status))
 	{
 		printf("TAMO AQUI\n");
