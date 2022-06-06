@@ -12,10 +12,10 @@ EXECUTES =	execute_one_command.c execute_multiple_commands.c \
 			execute_command.c split_args.c
 REDIRECTS =	redirects.c input_redirect.c file_descriptors.c
 UTILS =		error.c quote_checker.c signals.c str_utils.c \
-			variables.c expand_variables.c exit_code.c ft_atoll.c 
+			variables_utils.c expand_variables.c exit_code.c ft_atoll.c 
 LIBFT_A	=	./42-libraries/libft/libft.a
 HEADER	=	minishell.h
-VPATH	=	builtins minienv utils execute src redirects
+VPATH	=	builtins minienv utils execute src redirects variables
 
 all: $(NAME)
 
