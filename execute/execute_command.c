@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_command.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:39:20 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/05 12:19:01 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/06 16:00:48 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ char	*get_path(char *cmd, t_env *minienv)
 	return (NULL);
 }
 
-// TODO: Transform into wait_for_children
 int	wait_for_child(int child_pid)
 {
 	int	status;
@@ -127,5 +126,5 @@ int	execute_command(char **args, t_env *minienv)
 			// TODO: precisa retornar o errno certo!!
 			// (caso do permission denied ./minishell.c)
 	}
-	return(child_pid);
+	return (child_pid);
 }

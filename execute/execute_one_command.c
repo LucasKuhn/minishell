@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_one_command.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 18:38:18 by sguilher          #+#    #+#             */
-/*   Updated: 2022/06/03 23:59:48 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/06 16:03:54 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ int	execute_one_command(char *command, t_env **minienv)
 	if (has_input_redirect)
 	{
 		original_fds[0] = dup(STDIN_FILENO);
-		if(handle_input_redirect(command) == EXIT_FAILURE)
+		if (handle_input_redirect(command) == EXIT_FAILURE)
 		{
 			free(command);
 			redirect_fd(original_fds[0], STDIN_FILENO);
-			return(EXIT_FAILURE);
+			return (EXIT_FAILURE);
 		}
 	}
 	// TODO: talvez colocar a parte acima em uma função a parte

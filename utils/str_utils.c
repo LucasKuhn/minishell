@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   str_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 13:28:39 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/05/26 11:32:47 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/06 15:50:16 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	free_array(char **arr)
 	int	i;
 
 	i = 0;
-	while(arr[i])
+	while (arr[i])
 	{
 		free(arr[i]);
 		arr[i] = NULL;

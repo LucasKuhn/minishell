@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_redirect.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 18:28:18 by sguilher          #+#    #+#             */
-/*   Updated: 2022/06/04 00:06:29 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/06 16:02:42 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,14 @@ char	*input_redirect_position(char *str)
 	return (NULL);
 }
 
-static void move_one_forward(char *str)
+static void	move_one_forward(char *str)
 {
 	ft_memmove(str, str + 1, ft_strlen(str + 1) + 1);
 }
 
-static int get_name_end(char *name)
+static int	get_name_end(char *name)
 {
-	int name_end;
+	int	name_end;
 
 	name_end = 0;
 	while (name[name_end] && name[name_end] != ' ')
@@ -100,12 +100,12 @@ int	handle_input_redirect(char *command)
 		ft_putstr_fd("minishell: ", 2);
 		perror(file_name); // TODO: arrumar a mensagem
 		free(file_name);
-		return(EXIT_FAILURE);
+		return (EXIT_FAILURE);
 	}
 	else
 		redirect_fd(fd, STDIN_FILENO);
 	free(file_name);
 	if (input_redirect_position(command))
-		return(handle_input_redirect(command));
+		return (handle_input_redirect(command));
 	return (EXIT_SUCCESS);
 }
