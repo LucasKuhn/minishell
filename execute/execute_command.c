@@ -6,7 +6,7 @@
 /*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:39:20 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/06 16:00:48 by coder            ###   ########.fr       */
+/*   Updated: 2022/06/06 18:02:01 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,21 @@ int	is_folder(char *command)
 	return (S_ISDIR(statbuf.st_mode));
 }
 
+static void	handle_execve_errors(char **args, char *path)
+{
+	ft_putstr_fd("minishell: execve: ", STDERR_FILENO);
+	perror(args[0]);
+	free_array(args);
+	if (access(path, F_OK) != 0)
+	{
+		free(path);
+		exit(CMD_NOT_FOUND);
+	}
+	exit(NOT_EXECUTABLE);
+	// TODO: precisa retornar o errno certo!!
+	// (caso do permission denied ./minishell.c)
+}
+
 int	execute_command(char **args, t_env *minienv)
 {
 	char	*path;
@@ -116,15 +131,7 @@ int	execute_command(char **args, t_env *minienv)
 		if (path == NULL)
 			exit_with_error(args[0], CMD_NOT_FOUND_MSG, CMD_NOT_FOUND);
 		else if (execve(path, args, minienv_to_envp(minienv)) == -1)
-		{
-			ft_putstr_fd("minishell: execve: ", STDERR_FILENO);
-			perror(args[0]);
-			if (access(path, F_OK) != 0)
-				exit(CMD_NOT_FOUND);
-			exit(NOT_EXECUTABLE);
-		}
-			// TODO: precisa retornar o errno certo!!
-			// (caso do permission denied ./minishell.c)
+			handle_execve_errors(args, path);
 	}
 	return (child_pid);
 }

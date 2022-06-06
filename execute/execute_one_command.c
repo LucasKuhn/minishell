@@ -6,7 +6,7 @@
 /*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 18:38:18 by sguilher          #+#    #+#             */
-/*   Updated: 2022/06/06 17:45:05 by coder            ###   ########.fr       */
+/*   Updated: 2022/06/06 17:51:46 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	execute_one_command(char *command, t_env **minienv)
 	int		child_pid;
 	int		exit_status;
 	int		original_fds[2];
-	
+
 	original_fds[0] = input_redirect(command);
 	if (original_fds[0] == REDIRECT_FAILURE)
 		return (EXIT_FAILURE);
