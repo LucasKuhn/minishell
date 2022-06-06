@@ -6,7 +6,7 @@
 /*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 18:28:18 by sguilher          #+#    #+#             */
-/*   Updated: 2022/06/06 16:02:42 by coder            ###   ########.fr       */
+/*   Updated: 2022/06/06 17:32:01 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int	handle_input_redirect(char *command)
 	if (fd == -1)
 	{
 		ft_putstr_fd("minishell: ", 2);
-		perror(file_name); // TODO: arrumar a mensagem
+		perror(file_name);
 		free(file_name);
 		return (EXIT_FAILURE);
 	}

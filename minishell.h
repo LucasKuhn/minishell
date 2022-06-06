@@ -6,7 +6,7 @@
 /*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 13:36:50 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/06 16:43:34 by coder            ###   ########.fr       */
+/*   Updated: 2022/06/06 17:42:28 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 # define FALSE 0
 
 # define REDIRECT_FAILURE -1
+# define NO_REDIRECT 0
 
 #define LLONG_MAX 9223372036854775807
 
