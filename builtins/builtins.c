@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 15:23:16 by sguilher          #+#    #+#             */
-/*   Updated: 2022/06/03 15:09:59 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/05 20:03:42 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	execute_forked_builtin(char **args, t_env **minienv, char **commands)
 {
 	int	child_pid;
-	int exit_status;
+	int	exit_status;
 
 	child_pid = fork();
 	if (child_pid == -1)
@@ -63,7 +63,7 @@ int	execute_builtin(char **args, t_env **minienv)
 int	is_builtin(char *command)
 {
 	if (!command)
-		return(0);
+		return (0);
 	if (str_equal(command, "echo"))
 		return (1);
 	if (str_equal(command, "cd"))

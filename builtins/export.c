@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 14:04:06 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/01 14:59:02 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/05 21:44:52 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-// TODO: Conferir o que o export deve fazer quando não recebe nada
-int	is_valid_varname(char *name)
+static int	is_valid_varname(char *name)
 {
 	while (*name)
 	{
@@ -32,14 +31,21 @@ static int	declare_env(t_env *minienv)
 	while (aux)
 	{
 		ft_putstr_fd("declare -x ", STDOUT_FILENO);
-		ft_putstr_fd(aux->key_pair, STDOUT_FILENO);
+		ft_putstr_fd(name_only(aux->key_pair), STDOUT_FILENO);
+		if (ft_strchr(aux->key_pair, '='))
+		{
+			ft_putstr_fd("=", STDOUT_FILENO);
+			ft_putstr_fd("\"", STDOUT_FILENO);
+			ft_putstr_fd(value_only(aux->key_pair), STDOUT_FILENO);
+			ft_putstr_fd("\"", STDOUT_FILENO);
+		}
 		ft_putstr_fd("\n", STDOUT_FILENO);
 		aux = aux->next;
 	}
 	return (0);
 }
 
-void	print_export_error_msg(char *varname, char *msg)
+static void	print_export_error_msg(char *varname, char *msg)
 {
 	ft_putstr_fd("minishell: export: ", STDERR_FILENO);
 	ft_putstr_fd(varname, STDERR_FILENO);
@@ -51,34 +57,21 @@ void	print_export_error_msg(char *varname, char *msg)
 int	export(char **args, t_env **minienv)
 {
 	char	*key_pair;
-	char	*name;
-	int		size;
-	t_env	*aux;
+	char	*varname;
 
-	key_pair = args[1]; // TODO: implementar quando tem arg[2] ou mais
+	key_pair = args[1];
 	if (!key_pair)
 		return (declare_env(*minienv));
-	// TODO: Daria pra fazer uma aux que recebe o tamanho do nome
-	name = name_only(key_pair);
-	if (!is_valid_varname(name))
+	varname = name_only(key_pair);
+	if (!is_valid_varname(varname))
 	{
-		print_export_error_msg(name, "not a valid identifier");
-		free(name);
+		print_export_error_msg(varname, "not a valid identifier");
+		free(varname);
 		return (EXIT_FAILURE);
 	}
-	aux = *minienv;
-	size = ft_strlen(name) + 1;
-	free(name);
-	while (aux)
-	{
-		if (ft_strncmp(aux->key_pair, key_pair, size) == 0)
-		{
-			free(aux->key_pair);
-			aux->key_pair = ft_strdup(key_pair);
-			return (0); // TODO: Checar esse retorno
-		}
-		aux = aux->next;
-	}
-	list_append(key_pair, minienv);
-	return (0);
+	if (minienv_node(varname, *minienv))
+		minienv_update(varname, value_only(key_pair), *minienv);
+	else
+		list_append(key_pair, minienv);
+	return (EXIT_SUCCESS);
 }

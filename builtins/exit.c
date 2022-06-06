@@ -3,67 +3,74 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 14:02:34 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/03 14:59:38 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/05 21:49:52 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int    fits_in_long_long(char *str)
+int	fits_in_long_long(char *str)
 {
-    long long    out;
-    int            c;
+	long long	out;
+	int			c;
 
-    if (ft_strlen(str) > 20)
+	if (ft_strlen(str) > 20)
 		return (0);
-	if (ft_strncmp(str, "-9223372036854775808", 21)==0)
-        return(1);
-    out = 0;
-    if (*str == '-')
-        str++;
-    while (*str)
-    {
-        if (*str < '0' || *str > '9')
-            return (0);
-        c = *str - '0';
-        if (out > (LLONG_MAX - c) / 10)
-            return (0);
-        out = out * 10 + c;
-        str++;
-    }
-    return (1);
+	if (ft_strncmp(str, "-9223372036854775808", 21) == 0)
+		return (1);
+	out = 0;
+	if (*str == '-')
+		str++;
+	while (*str)
+	{
+		if (*str < '0' || *str > '9')
+			return (0);
+		c = *str - '0';
+		if (out > (LLONG_MAX - c) / 10)
+			return (0);
+		out = out * 10 + c;
+		str++;
+	}
+	return (1);
 }
 
-int	builtin_exit(char **args, t_env **minienv)
+static void	check_args_error(char **args)
 {
 	char	*exit_status;
-	long	number;
 
-	rl_clear_history();
-	free_minienv(minienv);
-	ft_putstr_fd("exit\n", STDOUT_FILENO);
-	if (!args || !args[1])
+	exit_status = args[1];
+	if (!args || !exit_status)
 	{
 		if (args)
 			free_array(args);
 		close_all_fds();
 		exit(EXIT_SUCCESS);
 	}
-	exit_status = args[1];
 	if (!fits_in_long_long(exit_status))
 	{
+		printf("TAMO AQUI\n");
 		free_array(args);
-		print_error_and_exit("exit", "numeric argument required", BUILTIN_MISUSE);
+		exit_with_error("exit", "numeric argument required", BUILTIN_MISUSE);
 	}
 	if (args[2] != NULL)
 	{
 		free_array(args);
-		print_error_and_exit("exit", "too many arguments", EXIT_FAILURE);
+		exit_with_error("exit", "too many arguments", EXIT_FAILURE);
 	}
-	number = atoll(exit_status); // TODO: implementar ft_atoll ft_atoull
+}
+
+int	builtin_exit(char **args, t_env **minienv)
+{
+	int	exit_status;
+
+	rl_clear_history();
+	free_minienv(minienv);
+	ft_putstr_fd("exit\n", STDOUT_FILENO);
+	check_args_error(args);
 	close_all_fds();
-	exit(number);
+	exit_status = ft_atoll(args[1]);
+	exit(exit_status);
 }
