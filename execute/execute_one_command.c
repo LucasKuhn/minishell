@@ -6,13 +6,13 @@
 /*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 18:38:18 by sguilher          #+#    #+#             */
-/*   Updated: 2022/06/06 17:51:46 by coder            ###   ########.fr       */
+/*   Updated: 2022/06/06 20:50:39 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	input_redirect(char *command) // melhorar o nome da funçãos
+static int	redirect_input(char *command) // melhorar o nome da função
 {
 	int	has_input_redirect;
 	int	original_in_fd;
@@ -47,7 +47,7 @@ int	execute_one_command(char *command, t_env **minienv)
 	int		exit_status;
 	int		original_fds[2];
 
-	original_fds[0] = input_redirect(command);
+	original_fds[0] = redirect_input(command);
 	if (original_fds[0] == REDIRECT_FAILURE)
 		return (EXIT_FAILURE);
 	// TODO: handle output -> original_fds[1] = dup(STDOUT_FILENO);

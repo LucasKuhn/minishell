@@ -6,7 +6,7 @@
 /*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:39:20 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/06 18:02:01 by coder            ###   ########.fr       */
+/*   Updated: 2022/06/06 19:35:30 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,6 @@
 
 // TODO: Adicionar um novo path e tentar executar um programa naquele path
 // ex: Adicionar o minishell no path, dar um cd, e tentar executar minishell
-void	ft_free_arr(char **arr)
-{
-	int	i;
-
-	if (!arr)
-		return ;
-	i = 0;
-	while (arr[i])
-	{
-		free(arr[i]);
-		arr[i] = NULL;
-		i++;
-	}
-	free(arr);
-	arr = NULL;
-	return ;
-}
-
 char	*get_path(char *cmd, t_env *minienv)
 {
 	char	*path_env;
@@ -55,12 +37,12 @@ char	*get_path(char *cmd, t_env *minienv)
 		strs_cat(current_path, paths[i], "/", cmd);
 		if (access(current_path, F_OK) == 0)
 		{
-			ft_free_arr(paths);
+			free_array(paths);
 			return (ft_strdup(current_path));
 		}
 		i++;
 	}
-	ft_free_arr(paths);
+	free_array(paths);
 	return (NULL);
 }
 

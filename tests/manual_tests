@@ -77,7 +77,7 @@ grep oi | ls # testar dando depois:
 
 ./tests/test_files/loop # finalizar com:
 #- Ctrl+C ✅
-#- Ctrl+\ ❌
+#- Ctrl+\ ❌  --> workspaces: ^\Quit\n
 #- Ctrl+D -> não faz nada ✅
 
 chmod 000 ./tests/test_files/invalid_permission
