@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 13:36:50 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/05 20:20:11 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/06 15:33:26 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,9 @@ void	minienv_update(char *name, char *value, t_env *minienv);
 void	list_append(char *key_pair, t_env **list);
 char	**minienv_to_envp(t_env *minienv);
 void	free_minienv(t_env **minienv);
+char	*create_keypair(char *name, char *value);
+char	*name_only(char *key_pair);
+char	*value_only(char *key_pair);
 
 // generic execute function
 int		execute_command(char **args, t_env *minienv);
@@ -100,8 +103,6 @@ int		handle_input_redirect(char *command);
 char	*input_redirect_position(char *str);
 
 // str functions
-char	*name_only(char *key_pair);
-char	*value_only(char *key_pair);
 int		str_equal(const char *str1, const char *str2);
 char	*ft_strsjoin(int n, char *str1, ...);
 void	strs_cat(char *base, char *str1, char *str2, char *str3);
@@ -124,11 +125,12 @@ int		has_unclosed_quotes(char *str);
 
 // utils
 void		expand_variables(char **commands, t_env *minienv, int exit_status);
+void		expand_exit_status(char **command, int exit_status);
 void		exit_with_error(char *command, char *msg, int error);
 void		print_error_msg(char *command, char *msg);
 void		print_perror_msg(char *command, char *perror_msg);
-void		close_all_fds();
-void		close_extra_fds();
+void		close_all_fds(void);
+void		close_extra_fds(void);
 long long	ft_atoll(const char *str);
 
 // builtin utils
