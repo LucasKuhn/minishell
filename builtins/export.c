@@ -6,7 +6,7 @@
 /*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 14:04:06 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/05 14:54:53 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/05 21:44:52 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,15 @@ static int	declare_env(t_env *minienv)
 	return (0);
 }
 
+static void	print_export_error_msg(char *varname, char *msg)
+{
+	ft_putstr_fd("minishell: export: ", STDERR_FILENO);
+	ft_putstr_fd(varname, STDERR_FILENO);
+	ft_putstr_fd(": ", STDERR_FILENO);
+	ft_putstr_fd(msg, STDERR_FILENO);
+	ft_putstr_fd("\n", STDERR_FILENO);
+}
+
 int	export(char **args, t_env **minienv)
 {
 	char	*key_pair;
@@ -56,7 +65,7 @@ int	export(char **args, t_env **minienv)
 	varname = name_only(key_pair);
 	if (!is_valid_varname(varname))
 	{
-		print_error_msg(varname, "not a valid identifier");
+		print_export_error_msg(varname, "not a valid identifier");
 		free(varname);
 		return (EXIT_FAILURE);
 	}

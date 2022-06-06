@@ -6,7 +6,7 @@
 /*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 14:02:34 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/05 20:03:42 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/05 21:49:52 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ static void	check_args_error(char **args)
 	{
 		if (args)
 			free_array(args);
+		close_all_fds();
 		exit(EXIT_SUCCESS);
 	}
 	if (!fits_in_long_long(exit_status))
