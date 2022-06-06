@@ -6,7 +6,7 @@
 /*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 13:36:50 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/06 17:42:28 by coder            ###   ########.fr       */
+/*   Updated: 2022/06/06 17:50:17 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 # define REDIRECT_FAILURE -1
 # define NO_REDIRECT 0
 
-#define LLONG_MAX 9223372036854775807
+# define LLONG_MAX 9223372036854775807
 
 # include "42-libraries/libft/libft.h" // libft
 # include <readline/readline.h> // readline
@@ -58,71 +58,72 @@ typedef struct s_env
 }				t_env;
 
 // minishell
-int		minishell(t_env	*minienv);
+int			minishell(t_env	*minienv);
 
 // prompt functions
-char	*prompt_input(t_env *minienv);
+char		*prompt_input(t_env *minienv);
 
 // builtin functions
-int		is_builtin(char *command);
-int		execute_forked_builtin(char **args, t_env **minienv, char **commands);
-int		execute_builtin(char **args, t_env **minienv);
-int		cd(char **args, t_env *minienv);
-int		echo(char **args);
-int		pwd(void);
-int		export(char **args, t_env **minienv);
-int		env(t_env *envp);
-int		unset(char **args, t_env **minienv);
-int		builtin_exit(char **args, t_env **minienv);
+int			is_builtin(char *command);
+int			execute_forked_builtin(char **args, t_env **minienv,
+				char **commands);
+int			execute_builtin(char **args, t_env **minienv);
+int			cd(char **args, t_env *minienv);
+int			echo(char **args);
+int			pwd(void);
+int			export(char **args, t_env **minienv);
+int			env(t_env *envp);
+int			unset(char **args, t_env **minienv);
+int			builtin_exit(char **args, t_env **minienv);
 
 // executes
-int		execute_one_command(char *command, t_env	**minienv);
-int		execute_multiple_commands(char **commands, t_env **minienv);
+int			execute_one_command(char *command, t_env	**minienv);
+int			execute_multiple_commands(char **commands, t_env **minienv);
 
 // env functions
-t_env	*init_minienv(char **envp);
-char	*minienv_value(char *name, t_env *minienv);
-t_env	*minienv_node(char *name, t_env *minienv);
-void	minienv_update(char *name, char *value, t_env *minienv);
-void	list_append(char *key_pair, t_env **list);
-char	**minienv_to_envp(t_env *minienv);
-void	free_minienv(t_env **minienv);
-char	*create_keypair(char *name, char *value);
-char	*name_only(char *key_pair);
-char	*value_only(char *key_pair);
+t_env		*init_minienv(char **envp);
+char		*minienv_value(char *name, t_env *minienv);
+t_env		*minienv_node(char *name, t_env *minienv);
+void		minienv_update(char *name, char *value, t_env *minienv);
+void		list_append(char *key_pair, t_env **list);
+char		**minienv_to_envp(t_env *minienv);
+void		free_minienv(t_env **minienv);
+char		*create_keypair(char *name, char *value);
+char		*name_only(char *key_pair);
+char		*value_only(char *key_pair);
 
 // generic execute function
-int		execute_command(char **args, t_env *minienv);
-int		wait_for_child(int child_pid);
+int			execute_command(char **args, t_env *minienv);
+int			wait_for_child(int child_pid);
 
 // redirects
-void	redirect_fd(int fd_to_redirect, int fd_location);
-void	redirect_fds(int fd_in, int fd_out);
-void	prepare_io(int fd_stdout, int is_first_command,
-		int has_next_command);
-int		handle_input_redirect(char *command);
-char	*input_redirect_position(char *str);
+void		redirect_fd(int fd_to_redirect, int fd_location);
+void		redirect_fds(int fd_in, int fd_out);
+void		prepare_io(int fd_stdout, int is_first_command,
+				int has_next_command);
+int			handle_input_redirect(char *command);
+char		*input_redirect_position(char *str);
 
 // str functions
-int		str_equal(const char *str1, const char *str2);
-char	*ft_strsjoin(int n, char *str1, ...);
-void	strs_cat(char *base, char *str1, char *str2, char *str3);
-int		is_quote(char c);
-int		is_empty(char *str);
-void	free_array(char **arr);
+int			str_equal(const char *str1, const char *str2);
+char		*ft_strsjoin(int n, char *str1, ...);
+void		strs_cat(char *base, char *str1, char *str2, char *str3);
+int			is_quote(char c);
+int			is_empty(char *str);
+void		free_array(char **arr);
 
 // signals
-void	define_main_signals(void);
-void	define_execute_signals(int child_pid);
+void		define_main_signals(void);
+void		define_execute_signals(int child_pid);
 
 // tokenizer
-char	**split_args(char *command);
+char		**split_args(char *command);
 
 // pipes
-char	**split_commands(char *input);
+char		**split_commands(char *input);
 
 // error checker
-int		has_unclosed_quotes(char *str);
+int			has_unclosed_quotes(char *str);
 
 // utils
 void		expand_variables(char **commands, t_env *minienv, int exit_status);
@@ -136,7 +137,7 @@ void		close_extra_fds(void);
 long long	ft_atoll(const char *str);
 
 // builtin utils
-int is_varname(char c);
-int	is_valid_varname(char *name);
+int			is_varname(char c);
+int			is_valid_varname(char *name);
 
 #endif
