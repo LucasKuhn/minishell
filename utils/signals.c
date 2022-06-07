@@ -6,7 +6,7 @@
 /*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 14:18:39 by sguilher          #+#    #+#             */
-/*   Updated: 2022/06/07 16:56:43 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/07 18:07:40 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void	define_main_signals(void)
 	struct sigaction	sa_sigquit;
 
 	sa_sigint.sa_handler = &handle_sigint;
-	sa_sigint.sa_flags = 0; // TODO: Entender o que essa flag faz
+	// TODO: Entender o que a flag sa_flags faz
+	sa_sigint.sa_flags = 0;
 	sigemptyset(&sa_sigint.sa_mask);
 	sigaction(SIGINT, &sa_sigint, NULL);
 	sa_sigquit.sa_handler = SIG_IGN;

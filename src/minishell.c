@@ -6,22 +6,11 @@
 /*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 14:44:34 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/07 17:07:24 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/07 17:58:47 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static int	contains_pipe(char *str)
-{
-	while (*str)
-	{
-		if (*str == '|')
-			return (1);
-		str++;
-	}
-	return (0);
-}
 
 int	minishell(t_env *minienv)
 {

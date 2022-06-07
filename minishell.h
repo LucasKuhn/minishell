@@ -6,7 +6,7 @@
 /*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 13:36:50 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/07 16:29:39 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/07 18:00:19 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ char		*ft_strsjoin(int n, char *str1, ...);
 void		strs_cat(char *base, char *str1, char *str2, char *str3);
 int			is_quote(char c);
 int			is_empty(char *str);
+int			contains_pipe(char *str);
 void		free_array(char **arr);
 long long	ft_atoll(const char *str);
 

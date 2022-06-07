@@ -6,7 +6,7 @@
 /*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 13:29:21 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/07 17:06:17 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/07 18:01:19 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,6 @@ char	*prompt_input(t_env *minienv)
 		builtin_exit(NULL, &minienv);
 	if (input && *input)
 		add_history(input);
-	return (ft_strdup(input)); // TODO: Checar com valgrind E se precisa desse dup rodando no workspaces
+	// TODO: Checar com valgrind E se precisa desse dup rodando no workspaces
+	return (ft_strdup(input));
 }

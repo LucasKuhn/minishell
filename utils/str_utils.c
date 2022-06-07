@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   str_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 13:28:39 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/06 20:28:16 by coder            ###   ########.fr       */
+/*   Updated: 2022/06/07 18:00:32 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,19 +50,13 @@ void	strs_cat(char base[], char *str1, char *str2, char *str3)
 	ft_strlcat(base, str3, PATH_MAX);
 }
 
-void	free_array(char **arr)
+int	contains_pipe(char *str)
 {
-	int	i;
-
-	if (!arr)
-	   	return ;
-	i = 0;
-	while (arr[i])
+	while (*str)
 	{
-		free(arr[i]);
-		arr[i] = NULL;
-		i++;
+		if (*str == '|')
+			return (1);
+		str++;
 	}
-	free(arr);
-	arr = NULL;
+	return (0);
 }
