@@ -6,7 +6,7 @@
 /*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 14:44:34 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/07 16:32:22 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/07 17:07:24 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	minishell(t_env *minienv)
 	{
 		define_main_signals();
 		input = prompt_input(minienv);
-		if (!*input || has_unclosed_quotes(input) || is_empty(input))
+		if (is_empty(input) || has_unclosed_quotes(input))
 			continue ;
 		// TODO: check syntax before splitting
 		handle_expansions(&input, minienv, exit_status);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 14:18:39 by sguilher          #+#    #+#             */
-/*   Updated: 2022/06/06 19:41:58 by coder            ###   ########.fr       */
+/*   Updated: 2022/06/07 16:56:43 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,4 @@ void	define_execute_signals(int child_pid)
 		sa.sa_handler = SIG_IGN;
 	sigaction(SIGINT, &sa, NULL);
 	sigaction(SIGQUIT, &sa, NULL);
-	// ctrl+\ TODO: verificar no workspaces se escreve Quit
-	// apenas quando executa o loop, em outros casos não...
 }

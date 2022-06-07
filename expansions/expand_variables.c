@@ -6,7 +6,7 @@
 /*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 16:29:20 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/07 16:31:33 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/07 17:50:59 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,19 @@ static char	*find_var_position(char *input)
 	return (NULL);
 }
 
-static void	input_update(char **input, char *var_value, char *after_var)
+static void	update_input(char **input, char *var_value, char *second_part)
 {
-	char	*aux1;
-	char	*aux2;
+	char	*first_part;
+	char	*updated_input;
 
 	if (!var_value)
-		aux1 = ft_strjoin(*input, "");
+		first_part = ft_strjoin(*input, "");
 	else
-		aux1 = ft_strjoin(*input, var_value);
-	aux2 = ft_strjoin(aux1, after_var);
+		first_part = ft_strjoin(*input, var_value);
+	updated_input = ft_strjoin(first_part, second_part);
+	free(first_part);
 	free(*input);
-	*input = aux2;
-	free(aux1);
+	*input = updated_input;
 }
 
 void	expand_variables(char **input, t_env *minienv)
@@ -54,13 +54,13 @@ void	expand_variables(char **input, t_env *minienv)
 	var_position = find_var_position(*input);
 	if (var_position)
 	{
-		name_size = 1;
-		while (is_varname(var_position[name_size]))
+		name_size = 0;
+		while (is_varname(var_position[name_size + 1]))
 			name_size++;
-		var_name = ft_substr(var_position, 1, name_size - 1);
+		var_name = ft_substr(var_position, 1, name_size);
 		*var_position = '\0';
 		var_value = minienv_value(var_name, minienv);
-		input_update(input, var_value, (var_position + name_size));
+		update_input(input, var_value, (var_position + 1 + name_size));
 		free(var_name);
 		expand_variables(input, minienv);
 	}

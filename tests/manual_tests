@@ -84,3 +84,7 @@ chmod 000 ./tests/test_files/invalid_permission
 cat ./tests/test_files/invalid_permission ✅
 
 cat <"./tests/test_files/infile" | echo hi | echo bye | echo bon | echo jour ✅
+
+# Checar se precisamos lidar com pipe no final da linha que pede mais comandos 
+# ex: 
+ls | ❌

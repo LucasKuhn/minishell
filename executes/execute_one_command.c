@@ -6,7 +6,7 @@
 /*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 18:38:18 by sguilher          #+#    #+#             */
-/*   Updated: 2022/06/07 14:24:23 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/07 16:52:28 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ int	execute_one_command(char *command, t_env **minienv)
 		child_pid = execute_command(args, *minienv);
 		exit_status = wait_for_child(child_pid);
 	}
+	if (exit_status == (INTERRUPT + SIGQUIT))
+		ft_putstr_fd("Quit\n", STDOUT_FILENO);
 	free_array(args);
 	restore_fds(original_fds[0]);
 	return (exit_status);

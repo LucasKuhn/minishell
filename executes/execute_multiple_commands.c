@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_multiple_commands.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 13:29:31 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/06 20:21:36 by coder            ###   ########.fr       */
+/*   Updated: 2022/06/07 16:51:25 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ int	wait_for_children(int children_pid[1024])
 			exit_status = wait_for_child(children_pid[i]);
 		i++;
 	}
+	if (exit_status == (INTERRUPT + SIGQUIT))
+		ft_putstr_fd("Quit\n", STDOUT_FILENO);
 	return (exit_status);
 }
 
