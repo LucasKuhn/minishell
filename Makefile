@@ -5,17 +5,20 @@ LDFLAGS	+= 	-L./42-libraries/libft
 OBJ_DIR	=	obj
 OBJS	=	$(SRCS:%.c=$(OBJ_DIR)/%.o)
 SRCS	=	main.c minishell.c prompt.c split_commands.c \
-			$(MINIENV) $(BUILTINS) $(EXECUTES) $(REDIRECTS) $(UTILS)
+			$(MINIENV) $(BUILTINS) $(EXECUTES) $(REDIRECTS) $(UTILS) $(EXPANDS)
 MINIENV =	minienv.c minienv_utils.c minienv_str_utils.c free_minienv.c
 BUILTINS =	builtins.c echo.c cd.c pwd.c export.c unset.c env.c exit.c
 EXECUTES =	execute_one_command.c execute_multiple_commands.c \
 			execute_command.c split_args.c
 REDIRECTS =	redirects.c input_redirect.c file_descriptors.c
 UTILS =		error.c quote_checker.c signals.c str_utils.c \
-			variables_utils.c expand_variables.c exit_code.c ft_atoll.c 
+			ft_atoll.c 
+EXPANDS	= 	handle_expansions.c expand_variables.c expand_exit_status.c \
+			variables_utils.c
 LIBFT_A	=	./42-libraries/libft/libft.a
-HEADER	=	minishell.h
-VPATH	=	builtins minienv utils execute src redirects variables
+HEADER	=	minishell.h allowed_libs.h builtins.h errors.h executes.h minienv.h
+VPATH	=	builtins minienv utils executes src redirects includes expansions
+INCLUDE	=	-I ./ -I ./includes
 
 all: $(NAME)
 
@@ -40,7 +43,7 @@ $(NAME): $(LIBFT_A) $(OBJ_DIR) $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LDLIBS) $(LDFLAGS)
 
 $(OBJ_DIR)/%.o: %.c $(HEADER)
-	$(CC) $(CFLAGS) -c $< -o $@ -I ./
+	$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDE)
 
 $(OBJ_DIR):
 	mkdir -p $@

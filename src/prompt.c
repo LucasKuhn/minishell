@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 13:29:21 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/06 15:53:38 by coder            ###   ########.fr       */
+/*   Updated: 2022/06/07 16:10:26 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,5 @@ char	*prompt_input(t_env *minienv)
 	// check if needs more input
 	// if (input[ft_strlen(input) -1] == '|')
 	// 	readline(" > ");
-	return (input);
+	return (ft_strdup(input));
 }

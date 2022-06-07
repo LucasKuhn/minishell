@@ -1,53 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit_code.c                                        :+:      :+:    :+:   */
+/*   expand_exit_status.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 15:21:57 by coder             #+#    #+#             */
-/*   Updated: 2022/06/06 15:31:23 by coder            ###   ########.fr       */
+/*   Updated: 2022/06/07 16:26:20 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "minishell.h"
 
-static char	*find_exit_code_position(char *command)
+static char	*find_exit_code_position(char *input)
 {
-	while (*command)
+	while (*input)
 	{
-		if (*command == '\'')
+		if (*input == '\'')
 		{
-			command++;
-			while (*command && *command != '\'')
-				command++;
+			input++;
+			while (*input && *input != '\'')
+				input++;
 		}
-		if (*command == '$' && command[1] == '?')
-			return (command);
-		command++;
+		if (*input == '$' && input[1] == '?')
+			return (input);
+		input++;
 	}
 	return (NULL);
 }
 
-void	expand_exit_status(char **command, int exit_status)
+void	expand_exit_status(char **input, int exit_status)
 {
 	char	*position;
 	char	*exit_code_str;
 	char	*aux1;
 	char	*aux2;
 
-	position = find_exit_code_position(*command);
+	position = find_exit_code_position(*input);
 	if (position)
 	{
 		exit_code_str = ft_itoa(exit_status);
 		position[0] = '\0';
-		aux1 = ft_strjoin(*command, exit_code_str);
+		aux1 = ft_strjoin(*input, exit_code_str);
 		aux2 = ft_strjoin(aux1, &position[2]);
-		free(*command);
-		*command = aux2;
+		free(*input);
+		*input = aux2;
 		free(exit_code_str);
 		free(aux1);
-		if (find_exit_code_position(*command))
-			expand_exit_status(&*command, exit_status);
+		expand_exit_status(input, exit_status);
 	}
 }
