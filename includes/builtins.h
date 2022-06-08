@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 15:23:07 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/07 15:25:56 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/08 18:17:41 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 # include "minienv.h"
 
 int	is_builtin(char *command);
-int	execute_forked_builtin(char **args, t_env **minienv, char **commands);
-int	execute_builtin(char **args, t_env **minienv);
 int	cd(char **args, t_env *minienv);
 int	echo(char **args);
 int	pwd(void);

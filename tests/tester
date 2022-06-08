@@ -16,6 +16,8 @@ BLUE="\033[0;36m"
 RED="\e[0;31m"
 END="\033[0m"
 
+chmod 000 ./tests/test_files/invalid_permission
+
 printf $YELLOW
 printf "\n****************** MINISHELL TESTER ******************\n\n"
 
@@ -85,3 +87,5 @@ else
 	echo "😭 😭 😭"
 	exit 1
 fi
+
+chmod 666 ./tests/test_files/invalid_permission

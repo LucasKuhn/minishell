@@ -85,6 +85,9 @@ cat ./tests/test_files/invalid_permission ✅
 
 cat <"./tests/test_files/infile" | echo hi | echo bye | echo bon | echo jour ✅
 
-# Checar se precisamos lidar com pipe no final da linha que pede mais comandos 
-# ex: 
+# Checar se precisamos lidar com pipe no final da linha que pede mais comandos
+# ex:
 ls | ❌
+
+// TODO: Adicionar um novo PATH e tentar executar um programa naquele path
+// ex: Adicionar o minishell no path, dar um cd, e tentar executar minishell

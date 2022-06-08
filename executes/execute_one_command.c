@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 18:38:18 by sguilher          #+#    #+#             */
-/*   Updated: 2022/06/08 16:29:26 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/08 17:00:06 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	execute_one_command(char *command, t_env **minienv)
 		exit_status = execute_builtin(args, minienv);
 	else
 	{
-		child_pid = execute_command(args, *minienv);
+		child_pid = execute_external(args, *minienv);
 		exit_status = wait_for_child(child_pid);
 		if (is_quit(exit_status))
 			print_quit();

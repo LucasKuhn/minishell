@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 13:36:50 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/08 16:36:37 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/08 18:43:25 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,6 @@ void		print_quit();
 
 // utils
 int			str_equal(const char *str1, const char *str2);
-char		*ft_strsjoin(int n, char *str1, ...);
-void		strs_cat(char *base, char *str1, char *str2, char *str3);
 int			is_quote(char c);
 int			is_empty(char *str);
 int			contains_pipe(char *str);

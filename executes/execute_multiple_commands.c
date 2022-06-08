@@ -6,29 +6,11 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 13:29:31 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/08 16:41:50 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/08 18:21:35 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	wait_for_children(int children_pid[1024])
-{
-	int	i;
-	int	exit_status;
-
-	i = 0;
-	exit_status = 0;
-	while (children_pid[i] != 0)
-	{
-		if (children_pid[i] != REDIRECT_FAILURE)
-			exit_status = wait_for_child(children_pid[i]);
-		i++;
-	}
-	if (is_quit(exit_status))
-		print_quit();
-	return (exit_status);
-}
 
 int	execute_multiple_commands(char **commands, t_env **minienv)
 {
@@ -71,7 +53,7 @@ int	execute_multiple_commands(char **commands, t_env **minienv)
 		if (is_builtin(args[0]))
 			children_pid[i] = execute_forked_builtin(args, minienv, commands);
 		else
-			children_pid[i] = execute_command(args, *minienv);
+			children_pid[i] = execute_external(args, *minienv);
 		free_array(args);
 		i++;
 	}
