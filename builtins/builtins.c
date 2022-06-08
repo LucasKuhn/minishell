@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 15:23:16 by sguilher          #+#    #+#             */
-/*   Updated: 2022/06/07 15:28:50 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/08 13:53:18 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	execute_forked_builtin(char **args, t_env **minienv, char **commands)
 		exit_status = execute_builtin(args, minienv);
 		free_array(args);
 		free_minienv(minienv);
-		clear_history();
+		rl_clear_history();
 		exit(exit_status);
 	}
 	else
