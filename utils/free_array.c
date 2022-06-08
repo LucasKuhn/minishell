@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   free_array.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/12 14:03:57 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/07 15:06:39 by lalex-ku         ###   ########.fr       */
+/*   Created: 2022/06/07 17:59:11 by lalex-ku          #+#    #+#             */
+/*   Updated: 2022/06/07 17:59:19 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	env(t_env *minienv)
+void	free_array(char **arr)
 {
-	t_env	*aux;
+	int	i;
 
-	aux = minienv;
-	while (aux)
+	if (!arr)
+		return ;
+	i = 0;
+	while (arr[i])
 	{
-		if (ft_strchr(aux->key_pair, '='))
-		{
-			ft_putstr_fd(aux->key_pair, STDOUT_FILENO);
-			ft_putstr_fd("\n", STDOUT_FILENO);
-		}
-		aux = aux->next;
+		free(arr[i]);
+		arr[i] = NULL;
+		i++;
 	}
-	return (0);
+	free(arr);
+	arr = NULL;
 }

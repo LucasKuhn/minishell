@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 14:44:34 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/06 20:46:15 by coder            ###   ########.fr       */
+/*   Updated: 2022/06/07 18:30:38 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,30 +17,25 @@ int	minishell(t_env *minienv)
 	int		exit_status;
 	char	*input;
 	char	**commands;
-	char	*command;
 
-	exit_status = 0;
+	exit_status = EXIT_SUCCESS;
 	while (1)
 	{
 		define_main_signals();
 		input = prompt_input(minienv);
-		if (!*input || has_unclosed_quotes(input) || is_empty(input))
+		if (is_empty(input) || has_unclosed_quotes(input))
 			continue ;
 		// TODO: check syntax before splitting
-		commands = split_commands(input);
-		// TODO: se não tiver pipes --> chamar direto o execute_one_command
-		expand_variables(commands, minienv, exit_status);
-		if (commands[1] == NULL)
-		{
-			command = ft_strdup(commands[0]);
-			free_array(commands);
-			exit_status = execute_one_command(command, &minienv);
-		}
+		handle_expansions(&input, minienv, exit_status);
+		if (!contains_pipe(input))
+			exit_status = execute_one_command(input, &minienv);
 		else
 		{
+			commands = split_commands(input);
 			exit_status = execute_multiple_commands(commands, &minienv);
 			free_array(commands);
 		}
+		// free(input);
 	}
 	return (exit_status);
 }

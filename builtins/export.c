@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   export.c                                           :+:      :+:    :+:   */
+/*   builtin_export.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 14:04:06 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/06 16:58:13 by coder            ###   ########.fr       */
+/*   Updated: 2022/06/07 15:28:26 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "minishell.h"
 
 static int	declare_env(t_env *minienv)
 {
@@ -34,7 +34,7 @@ static int	declare_env(t_env *minienv)
 	return (0);
 }
 
-int	export(char **args, t_env **minienv)
+int	builtin_export(char **args, t_env **minienv)
 {
 	char	*key_pair;
 	char	*varname;

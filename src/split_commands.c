@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_commands.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 16:29:54 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/06 20:47:49 by coder            ###   ########.fr       */
+/*   Updated: 2022/06/07 16:13:54 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,35 +14,16 @@
 
 static void	replace_pipes(char *str, char delimeter);
 static void	restore_pipes(char **exec_args);
-static int	contains_pipe(char *str);
 
 char	**split_commands(char *input)
 {
 	char	**commands;
 
-	if (!contains_pipe(input))
-	{
-		commands = malloc(sizeof(char *) * 2);
-		commands[0] = ft_strdup(input);
-		commands[1] = NULL;
-		return (commands);
-	}
 	replace_pipes(input, '"');
 	replace_pipes(input, '\'');
 	commands = ft_split(input, '|');
 	restore_pipes(commands);
 	return (commands);
-}
-
-static int	contains_pipe(char *str)
-{
-	while (*str)
-	{
-		if (*str == '|')
-			return (1);
-		str++;
-	}
-	return (0);
 }
 
 static void	replace_pipes(char *str, char delimeter)

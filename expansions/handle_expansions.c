@@ -1,29 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   variables_utils.c                                  :+:      :+:    :+:   */
+/*   handle_expansions.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/06 16:19:08 by coder             #+#    #+#             */
-/*   Updated: 2022/06/06 21:23:14 by coder            ###   ########.fr       */
+/*   Created: 2022/05/25 14:51:24 by lalex-ku          #+#    #+#             */
+/*   Updated: 2022/06/07 16:30:01 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "minishell.h"
 
-int	is_varname(char c)
+void	handle_expansions(char **input, t_env *minienv, int exit_status)
 {
-	return (ft_isalnum(c) || c == '_');
-}
-
-int	is_valid_varname(char *name)
-{
-	while (*name)
-	{
-		if (!is_varname(*name))
-			return (0);
-		name++;
-	}
-	return (1);
+	expand_exit_status(input, exit_status);
+	expand_variables(input, minienv);
 }

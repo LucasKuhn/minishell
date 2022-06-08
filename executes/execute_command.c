@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   execute_command.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:39:20 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/06 19:35:30 by coder            ###   ########.fr       */
+/*   Updated: 2022/06/07 16:51:57 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "minishell.h"
 
 // TODO: Adicionar um novo path e tentar executar um programa naquele path
 // ex: Adicionar o minishell no path, dar um cd, e tentar executar minishell

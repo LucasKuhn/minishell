@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_multiple_commands.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 13:29:31 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/06 20:21:36 by coder            ###   ########.fr       */
+/*   Updated: 2022/06/07 18:31:44 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ int	wait_for_children(int children_pid[1024])
 			exit_status = wait_for_child(children_pid[i]);
 		i++;
 	}
+	if (exit_status == (INTERRUPT + SIGQUIT))
+		ft_putstr_fd("Quit\n", STDOUT_FILENO);
 	return (exit_status);
 }
 
@@ -49,7 +51,7 @@ int	execute_multiple_commands(char **commands, t_env **minienv)
 		has_input_redirect = input_redirect_position(commands[i]) != NULL;
 		if (has_input_redirect)
 		{
-			if (handle_input_redirect(commands[i]) == EXIT_FAILURE)
+			if (redirect_input(commands[i]) == EXIT_FAILURE)
 			{
 				children_pid[i] = REDIRECT_FAILURE;
 				if (commands[i + 1] == NULL)
@@ -74,6 +76,7 @@ int	execute_multiple_commands(char **commands, t_env **minienv)
 		i++;
 	}
 	redirect_fd(original_fds[0], STDIN_FILENO);
+	close_extra_fds();
 	children_pid[i] = 0;
 	exit_status = wait_for_children(children_pid);
 	return (exit_status);

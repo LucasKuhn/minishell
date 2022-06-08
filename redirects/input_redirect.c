@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_redirect.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 18:28:18 by sguilher          #+#    #+#             */
-/*   Updated: 2022/06/06 17:32:01 by coder            ###   ########.fr       */
+/*   Updated: 2022/06/07 18:22:25 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ static char	*redirect_file_name(char *redirect_str)
 	return (name);
 }
 
-int	handle_input_redirect(char *command)
+int	redirect_input(char *command)
 {
 	char	*input_redirect;
 	char	*file_name;
@@ -106,6 +106,6 @@ int	handle_input_redirect(char *command)
 		redirect_fd(fd, STDIN_FILENO);
 	free(file_name);
 	if (input_redirect_position(command))
-		return (handle_input_redirect(command));
+		return (redirect_input(command));
 	return (EXIT_SUCCESS);
 }

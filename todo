@@ -16,3 +16,6 @@
     - Análise Léxica -> Dizer o que é 
     - Análise Sintática -> Dizer se é válido o comando 
     - Expandir as variáveis 
+
+
+TODO: Tirar o local.supp

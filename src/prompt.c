@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 13:29:21 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/06 15:53:38 by coder            ###   ########.fr       */
+/*   Updated: 2022/06/07 18:01:19 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ char	*prompt_input(t_env *minienv)
 		builtin_exit(NULL, &minienv);
 	if (input && *input)
 		add_history(input);
-	// check if needs more input
-	// if (input[ft_strlen(input) -1] == '|')
-	// 	readline(" > ");
-	return (input);
+	// TODO: Checar com valgrind E se precisa desse dup rodando no workspaces
+	return (ft_strdup(input));
 }

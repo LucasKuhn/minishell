@@ -6,11 +6,11 @@
 /*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 14:03:53 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/05/25 13:15:54 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/07 15:06:39 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "minishell.h"
 
 int	echo(char **args)
 {
