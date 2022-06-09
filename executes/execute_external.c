@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_external.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:39:20 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/08 18:55:52 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/09 14:45:20 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	execute_external(char **args, t_env *minienv)
 	child_pid = fork();
 	define_execute_signals(child_pid);
 	if (child_pid == -1)
-		print_perror_msg("fork", command);
+		exit_with_perror("fork", command, EXIT_FAILURE);
 	else if (child_pid == 0)
 	{
 		close_extra_fds();

@@ -46,12 +46,4 @@ exit 9223372036854775808
 exit -9223372036854775807
 exit -9223372036854775808
 exit -9223372036854775809
-./tests/test_files/invalid_permission
-invalid_command
-./b.out
-b.out
-"aa"
-./obj
-minishell.h
-oi
-ls
+

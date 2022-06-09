@@ -80,6 +80,18 @@ grep oi | ls # testar dando depois:
 #- Ctrl+\ ❌  --> workspaces: ^\Quit\n
 #- Ctrl+D -> não faz nada ✅
 
+./tests/test_files/loop.out | ls
+# finalizar com:
+#- Ctrl+C ✅
+#- Ctrl+\ ✅
+#- Ctrl+D ✅
+
+ls | ./tests/test_files/loop.out
+# finalizar com:
+#- Ctrl+C ✅
+#- Ctrl+\ ✅
+#- Ctrl+D ✅
+
 chmod 000 ./tests/test_files/invalid_permission
 cat ./tests/test_files/invalid_permission ✅
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 13:36:50 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/08 18:43:25 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/09 14:37:14 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,6 @@ char		**split_args(char *command);
 // signals
 void		define_main_signals(void);
 void		define_execute_signals(int child_pid);
-int			is_quit(int exit_status);
-void		print_quit();
 
 // utils
 int			str_equal(const char *str1, const char *str2);

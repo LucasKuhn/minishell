@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executes.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 15:41:13 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/08 18:32:14 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/09 14:33:04 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,10 @@ int		execute_builtin(char **args, t_env **minienv);
 // execute external
 int		execute_external(char **args, t_env *minienv);
 char	*get_path(char *command, t_env *minienv);
+
+// wait after fork
+int		wait_for_child(int child_pid, int is_last_child);
 int		wait_for_children(int children_pid[1024]);
-int		wait_for_child(int child_pid);
 
 // redirects
 void	redirect_fd(int fd_to_redirect, int fd_location);
