@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   str_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 13:28:39 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/07 18:00:32 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/08 18:14:26 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,6 @@ int	str_equal(const char *str1, const char *str2)
 	if (size != ft_strlen(str2))
 		return (0);
 	return (ft_strncmp(str1, str2, size) == 0);
-}
-
-// Adds 3 strings to a base string that was previously allocated
-void	strs_cat(char base[], char *str1, char *str2, char *str3)
-{
-	ft_strlcat(base, str1, PATH_MAX);
-	ft_strlcat(base, str2, PATH_MAX);
-	ft_strlcat(base, str3, PATH_MAX);
 }
 
 int	contains_pipe(char *str)

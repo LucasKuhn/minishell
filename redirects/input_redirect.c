@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_redirect.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 18:28:18 by sguilher          #+#    #+#             */
-/*   Updated: 2022/06/07 18:22:25 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/08 16:17:09 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int	redirect_input(char *command)
 
 	input_redirect = input_redirect_position(command);
 	if (!input_redirect)
-		return (EXIT_SUCCESS);
+		return (SUCCESS);
 	file_name = redirect_file_name(input_redirect);
 	fd = open(file_name, O_RDONLY, FD_CLOEXEC);
 	if (fd == -1)
@@ -100,12 +100,10 @@ int	redirect_input(char *command)
 		ft_putstr_fd("minishell: ", 2);
 		perror(file_name);
 		free(file_name);
-		return (EXIT_FAILURE);
+		return (FAILED);
 	}
 	else
 		redirect_fd(fd, STDIN_FILENO);
 	free(file_name);
-	if (input_redirect_position(command))
-		return (redirect_input(command));
-	return (EXIT_SUCCESS);
+	return (redirect_input(command));
 }

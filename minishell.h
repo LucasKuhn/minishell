@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 13:36:50 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/07 18:00:19 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/08 18:43:25 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,13 @@
 
 # define TRUE 1
 # define FALSE 0
+# define SUCCESS 1
+# define FAILED 0
 # define PATH_MAX	4096
 # define LLONG_MAX 9223372036854775807
 
+# define NO_REDIRECT -1
 # define REDIRECT_FAILURE -1
-# define NO_REDIRECT 0
 
 # include "allowed_libs.h"
 # include "errors.h"
@@ -42,7 +44,7 @@ char		*prompt_input(t_env *minienv);
 // syntax
 int			has_unclosed_quotes(char *str);
 
-// tratativas 
+// tratativas
 void		handle_expansions(char **input, t_env *minienv, int exit_status);
 void		expand_variables(char **input, t_env *minienv);
 void		expand_exit_status(char **input, int exit_status);
@@ -56,11 +58,11 @@ char		**split_args(char *command);
 // signals
 void		define_main_signals(void);
 void		define_execute_signals(int child_pid);
+int			is_quit(int exit_status);
+void		print_quit();
 
 // utils
 int			str_equal(const char *str1, const char *str2);
-char		*ft_strsjoin(int n, char *str1, ...);
-void		strs_cat(char *base, char *str1, char *str2, char *str3);
 int			is_quote(char c);
 int			is_empty(char *str);
 int			contains_pipe(char *str);

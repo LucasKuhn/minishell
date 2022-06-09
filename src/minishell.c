@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 14:44:34 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/07 18:30:38 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/08 14:00:59 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	minishell(t_env *minienv)
 			exit_status = execute_multiple_commands(commands, &minienv);
 			free_array(commands);
 		}
-		// free(input);
+		free(input);
 	}
 	return (exit_status);
 }

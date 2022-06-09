@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.c                                         :+:      :+:    :+:   */
+/*   execute_buitin.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/11 15:23:16 by sguilher          #+#    #+#             */
-/*   Updated: 2022/06/07 15:28:50 by lalex-ku         ###   ########.fr       */
+/*   Created: 2022/06/08 17:26:29 by sguilher          #+#    #+#             */
+/*   Updated: 2022/06/08 17:27:14 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	execute_forked_builtin(char **args, t_env **minienv, char **commands)
 		exit_status = execute_builtin(args, minienv);
 		free_array(args);
 		free_minienv(minienv);
-		clear_history();
+		rl_clear_history();
 		exit(exit_status);
 	}
 	else
@@ -58,25 +58,4 @@ int	execute_builtin(char **args, t_env **minienv)
 		return (builtin_exit(args, minienv));
 	else
 		return (EXIT_FAILURE);
-}
-
-int	is_builtin(char *command)
-{
-	if (!command)
-		return (0);
-	if (str_equal(command, "echo"))
-		return (1);
-	if (str_equal(command, "cd"))
-		return (1);
-	if (str_equal(command, "pwd"))
-		return (1);
-	if (str_equal(command, "export"))
-		return (1);
-	if (str_equal(command, "unset"))
-		return (1);
-	if (str_equal(command, "env"))
-		return (1);
-	if (str_equal(command, "exit"))
-		return (1);
-	return (0);
 }

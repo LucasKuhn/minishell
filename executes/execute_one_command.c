@@ -3,26 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   execute_one_command.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 18:38:18 by sguilher          #+#    #+#             */
-/*   Updated: 2022/06/07 18:44:05 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/08 17:00:06 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	handle_input_redirect(char *command, int *original_fd_in) // melhorar o nome da função
+int	has_input_redirect(char *command)
 {
-	int	has_input_redirect;
+	return (input_redirect_position(command) != NULL);
+}
 
-	has_input_redirect = input_redirect_position(command) != NULL;
-	if (has_input_redirect)
+int	handle_input_redirect(char *command, int *original_fd_in)
+{
+	*original_fd_in = dup(STDIN_FILENO);
+	if (redirect_input(command) == FAILED)
 	{
-		*original_fd_in = dup(STDIN_FILENO);
-		return(redirect_input(command));
+		redirect_fd(*original_fd_in, STDIN_FILENO);
+		return (FAILED);
 	}
-	return (EXIT_SUCCESS);
+	return (SUCCESS);
+}
+
+static int	handle_redirects(char *command, int *original_fd_in)
+{
+	*original_fd_in = NO_REDIRECT;
+	if (has_input_redirect(command))
+	{
+		if (!handle_input_redirect(command,original_fd_in))
+			return (FAILED);
+	}
+	// TODO: handle output -> original_fds[1] = dup(STDOUT_FILENO);
+	return (SUCCESS);
 }
 
 static void	restore_std_fds(int original_fd_in)//, int original_out_fd)
@@ -39,26 +54,19 @@ int	execute_one_command(char *command, t_env **minienv)
 	int		exit_status;
 	int		original_fds[2];
 
-	original_fds[0] = NO_REDIRECT;
-	if (handle_input_redirect(command, &original_fds[0]) == EXIT_FAILURE)
-	{
-		dup2(original_fds[0], STDIN_FILENO);
+	if (!handle_redirects(command, &original_fds[0]))
 		return (EXIT_FAILURE);
-	}
-	// TODO: handle output -> original_fds[1] = dup(STDOUT_FILENO);
 	args = split_args(command);
-	free(command);
 	if (is_builtin(args[0]))
 		exit_status = execute_builtin(args, minienv);
 	else
 	{
-		child_pid = execute_command(args, *minienv);
+		child_pid = execute_external(args, *minienv);
 		exit_status = wait_for_child(child_pid);
+		if (is_quit(exit_status))
+			print_quit();
 	}
-	if (exit_status == (INTERRUPT + SIGQUIT))
-		ft_putstr_fd("Quit\n", STDOUT_FILENO);
 	free_array(args);
 	restore_std_fds(original_fds[0]);
-	close_extra_fds();
 	return (exit_status);
 }
