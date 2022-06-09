@@ -6,7 +6,7 @@
 /*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 13:29:31 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/09 16:11:45 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/09 17:03:51 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,39 +18,29 @@ static void save_original_fds(int original_fds[2])
 	original_fds[1] = dup(STDOUT_FILENO);
 }
 
-int	arr_len(char **arr)
+static int handle_input_redirect(char *command, char *next_command, int original_fd_in, int *child_pid)
 {
-	int	len;
-
-	len = 0;
-	while (*arr)
+	if (redirect_input(command) == FAILED)
 	{
-		len++;
-		arr++;
+		*child_pid = REDIRECT_FAILURE;
+		if (next_command == NULL)
+			redirect_fd(original_fd_in, STDIN_FILENO);
+		else
+			close(STDOUT_FILENO); // para fechar o pipe de escrita
+		close(STDIN_FILENO); // para fechar o pipe de leitura
+		return (FAILED);
 	}
-	return (len);
+	return (SUCCESS);
 }
 
-void	handle_pipe(int original_fd_out, char *current_command, char **commands)
+static int handle_redirects(char *command, char *next_command, int original_fds[2], int *child_pid)
 {
-	int			is_first_command;
-	int			has_next_command;
-	char		*last_command;
-	static int	fds_pipe[2];
-	
-	last_command = commands[arr_len(commands) - 1];
-	is_first_command = (current_command == commands[0]);
-	has_next_command = (current_command != last_command);
-	if (!is_first_command)
-		redirect_fd(fds_pipe[IN], STDIN_FILENO);
-	if (has_next_command)
+	if (has_input_redirect(command))
 	{
-		if (pipe(fds_pipe) == -1)
-			print_perror_msg("pipe", current_command);
-		redirect_fd(fds_pipe[OUT], STDOUT_FILENO);
+		if (!handle_input_redirect(command, next_command, original_fds[IN], child_pid))
+			return (FAILED);
 	}
-	else
-		redirect_fd(original_fd_out, STDOUT_FILENO);
+	return (SUCCESS);
 }
 
 int	execute_multiple_commands(char **commands, t_env **minienv)
@@ -59,7 +49,6 @@ int	execute_multiple_commands(char **commands, t_env **minienv)
 	int		original_fds[2];
 	int		exit_status;
 	int		children_pid[1024]; // TODO: podia ser uma lista linkada
-	int		has_input_redirect;
 	int		i;
 
 	save_original_fds(original_fds);
@@ -67,23 +56,12 @@ int	execute_multiple_commands(char **commands, t_env **minienv)
 	while (commands[i])
 	{
 		handle_pipe(original_fds[1], commands[i], commands);
-		has_input_redirect = input_redirect_position(commands[i]) != NULL;
-		if (has_input_redirect)
+		if (!handle_redirects(commands[i], commands[i + 1], original_fds, &children_pid[i]))
 		{
-			if (redirect_input(commands[i]) == FAILED)
-			{
-				children_pid[i] = REDIRECT_FAILURE;
-				if (commands[i + 1] == NULL)
-				{
-					redirect_fd(original_fds[0], STDIN_FILENO);
-					return (EXIT_FAILURE);
-				}
-				else
-					close(STDOUT_FILENO); // para fechar o pipe de escrita
-				close(STDIN_FILENO); // para fechar o pipe de leitura
-				i++;
-				continue;
-			}
+			if (commands[i + 1] == NULL)
+				return (EXIT_FAILURE);
+			i++;
+			continue;
 		}
 		args = split_args(commands[i]);
 		if (is_builtin(args[0]))

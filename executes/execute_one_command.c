@@ -6,18 +6,13 @@
 /*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 18:38:18 by sguilher          #+#    #+#             */
-/*   Updated: 2022/06/09 14:21:57 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/09 17:03:38 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	has_input_redirect(char *command)
-{
-	return (input_redirect_position(command) != NULL);
-}
-
-int	handle_input_redirect(char *command, int *original_fd_in)
+int handle_input_redirect(char *command, int *original_fd_in)
 {
 	*original_fd_in = dup(STDIN_FILENO);
 	if (redirect_input(command) == FAILED)

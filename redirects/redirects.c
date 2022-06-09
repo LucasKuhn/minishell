@@ -6,34 +6,15 @@
 /*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 17:55:26 by sguilher          #+#    #+#             */
-/*   Updated: 2022/06/09 15:46:58 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/09 16:26:07 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// echo hi | echo hi
-// cat <"./tests/test_files/infile_big" | echo hi
-void	prepare_io(int fd_stdout, int is_first_command,
-		int has_next_command)
+int	has_input_redirect(char *command)
 {
-	int			fd_in;
-	int			fd_out;
-	static int	fds_pipe[2];
-
-	fd_in = STDIN_FILENO;
-	if (!is_first_command)
-		fd_in = fds_pipe[0];
-	if (has_next_command)
-	{
-		if (pipe(fds_pipe) == -1)
-			perror("minishell : ");
-		printf("fds_pipe[IN] = %i, fds_pipe[OUT] = %i\n", fds_pipe[IN], fds_pipe[OUT]);
-		fd_out = fds_pipe[1];
-	}
-	else
-		fd_out = fd_stdout;
-	redirect_fds(fd_in, fd_out);
+	return (input_redirect_position(command) != NULL);
 }
 
 void	redirect_fd(int fd_to_redirect, int fd_location)
