@@ -103,3 +103,5 @@ ls | ❌
 
 // TODO: Adicionar um novo PATH e tentar executar um programa naquele path
 // ex: Adicionar o minishell no path, dar um cd, e tentar executar minishell
+
+export UNO=1 DOS-2 TRES=3

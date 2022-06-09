@@ -6,7 +6,7 @@
 /*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 15:41:13 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/09 17:02:35 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/09 19:38:45 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@
 // executes
 int		execute_one_command(char *command, t_env	**minienv);
 int		execute_multiple_commands(char **commands, t_env **minienv);
+
+// multiple commands utils 
+int		*init_children_pid(char **commands);
+void	clean_after_execute(int *children_pid);
 
 // execute builtin
 int		execute_forked_builtin(char **args, t_env **minienv, char **commands);
@@ -42,6 +46,6 @@ void	close_extra_fds(void);
 int		has_input_redirect(char *command);
 
 // pipes 
-void	handle_pipe(int original_fd_out, char *current_command, char **commands);
+void	handle_pipe(int original_out, char *current_command, char **commands);
 
 #endif

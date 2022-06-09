@@ -6,7 +6,7 @@
 /*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 13:36:50 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/09 18:06:57 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/09 19:37:03 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int			is_quote(char c);
 int			is_empty(char *str);
 int			contains_pipe(char *str);
 void		free_array(char **arr);
+int			arr_len(char **arr);	
 long long	ft_atoll(const char *str);
 
 #endif

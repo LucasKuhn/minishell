@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-int handle_input_redirect(char *command, int *original_fd_in)
+int	handle_input_redirect(char *command, int *original_fd_in)
 {
 	*original_fd_in = dup(STDIN_FILENO);
 	if (redirect_input(command) == FAILED)
@@ -28,14 +28,14 @@ static int	handle_redirects(char *command, int *original_fd_in)
 	*original_fd_in = NO_REDIRECT;
 	if (has_input_redirect(command))
 	{
-		if (!handle_input_redirect(command,original_fd_in))
+		if (!handle_input_redirect(command, original_fd_in))
 			return (FAILED);
 	}
 	// TODO: handle output -> original_fds[1] = dup(STDOUT_FILENO);
 	return (SUCCESS);
 }
 
-static void	restore_std_fds(int original_fd_in)//, int original_out_fd)
+static void	restore_std_fds(int original_fd_in) //, int original_out_fd)
 {
 	if (original_fd_in != NO_REDIRECT)
 		redirect_fd(original_fd_in, STDIN_FILENO);
