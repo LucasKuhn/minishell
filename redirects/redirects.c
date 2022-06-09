@@ -6,7 +6,7 @@
 /*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 17:55:26 by sguilher          #+#    #+#             */
-/*   Updated: 2022/06/02 18:18:35 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/09 15:46:58 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	prepare_io(int fd_stdout, int is_first_command,
 	{
 		if (pipe(fds_pipe) == -1)
 			perror("minishell : ");
+		printf("fds_pipe[IN] = %i, fds_pipe[OUT] = %i\n", fds_pipe[IN], fds_pipe[OUT]);
 		fd_out = fds_pipe[1];
 	}
 	else

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   str_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 13:28:39 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/08 18:14:26 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/09 15:30:05 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,18 @@ int	contains_pipe(char *str)
 {
 	while (*str)
 	{
+		if (*str == '\'')
+		{
+			str++;
+			while (*str != '\'')
+				str++;
+		}
+		if (*str == '"')
+		{
+			str++;
+			while (*str != '"')
+				str++;
+		}
 		if (*str == '|')
 			return (1);
 		str++;

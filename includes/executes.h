@@ -6,12 +6,15 @@
 /*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 15:41:13 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/09 14:33:04 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/09 15:15:19 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXECUTES_H
 # define EXECUTES_H
+
+# define IN 0
+# define OUT 1
 
 // executes
 int		execute_one_command(char *command, t_env	**minienv);

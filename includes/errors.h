@@ -6,7 +6,7 @@
 /*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 15:13:45 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/09 13:56:48 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/09 15:15:29 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # define NOT_EXECUTABLE 126
 # define OUT_OF_RANGE 255
 # define BUILTIN_MISUSE 2
+# define FORK_ERROR -1
 # define CMD_NOT_FOUND_MSG	"command not found"
 # define NOT_EXECUTABLE_MSG "Is a directory"
 
