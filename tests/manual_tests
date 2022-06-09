@@ -77,8 +77,8 @@ grep oi | ls # testar dando depois:
 
 ./tests/test_files/loop # finalizar com:
 #- Ctrl+C ✅
-#- Ctrl+\ ❌  --> workspaces: ^\Quit\n
-#- Ctrl+D -> não faz nada ✅
+#- Ctrl+\ ✅  -> workspaces: ^\Quit\n
+#- Ctrl+D ✅  -> não faz nada
 
 ./tests/test_files/loop.out | ls
 # finalizar com:

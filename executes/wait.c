@@ -6,7 +6,7 @@
 /*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 18:20:51 by sguilher          #+#    #+#             */
-/*   Updated: 2022/06/09 17:04:02 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/09 19:04:21 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,7 @@ int	wait_for_children(int children_pid[1024])
 	while (children_pid[i] != 0)
 	{
 		is_last_child = children_pid[i+ 1] == 0;
-		if (children_pid[i] != REDIRECT_FAILURE)
-			exit_status = wait_for_child(children_pid[i], is_last_child);
+		exit_status = wait_for_child(children_pid[i], is_last_child);
 		i++;
 	}
 	return (exit_status);

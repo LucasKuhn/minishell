@@ -6,7 +6,7 @@
 /*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 13:36:50 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/09 14:37:14 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/09 18:06:57 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@
 # define LLONG_MAX 9223372036854775807
 
 # define NO_REDIRECT -1
-# define REDIRECT_FAILURE -1
 
 # include "allowed_libs.h"
 # include "errors.h"
