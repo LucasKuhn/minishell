@@ -6,7 +6,7 @@
 /*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:39:20 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/09 15:13:48 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/09 22:22:42 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,26 +39,18 @@ static void	handle_execve_errors(char **args, char *path)
 int	execute_external(char **args, t_env *minienv)
 {
 	char	*path;
-	int		child_pid;
 	char	*command;
 
 	command = args[0];
-	child_pid = fork();
-	define_execute_signals(child_pid);
-	if (child_pid == -1)
-		print_perror_msg("fork", command);
-	else if (child_pid == 0)
-	{
-		close_extra_fds();
-		if (is_empty(command))
-			exit (EXIT_SUCCESS);
-		if (is_folder(command))
-			exit_with_error(command, NOT_EXECUTABLE_MSG, NOT_EXECUTABLE);
-		path = get_path(command, minienv);
-		if (path == NULL)
-			exit_with_error(command, CMD_NOT_FOUND_MSG, CMD_NOT_FOUND);
-		if (execve(path, args, minienv_to_envp(minienv)) == -1)
-			handle_execve_errors(args, path);
-	}
-	return (child_pid);
+	close_extra_fds();
+	if (is_empty(command))
+		exit (EXIT_SUCCESS);
+	if (is_folder(command))
+		exit_with_error(command, NOT_EXECUTABLE_MSG, NOT_EXECUTABLE);
+	path = get_path(command, minienv);
+	if (path == NULL)
+		exit_with_error(command, CMD_NOT_FOUND_MSG, CMD_NOT_FOUND);
+	if (execve(path, args, minienv_to_envp(minienv)) == -1)
+		handle_execve_errors(args, path);
+	exit(EXIT_SUCCESS);
 }
