@@ -6,7 +6,7 @@
 /*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 13:29:31 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/10 14:28:50 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/10 14:38:13 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,18 +39,16 @@ static void	handle_redirects(char *command, char *next_command,
 		handle_input_redirect(command, next_command, original_fds[IN]);
 }
 
-static int	execute_command(char *command, char **all_commands, t_env **minienv)
+static void	execute_forked_command(char *command, char **all_commands, t_env **minienv)
 {
 	char	**args;
-	int		child_pid;
 
+	close_extra_fds();
 	args = split_args(command);
 	if (is_builtin(args[0]))
-		child_pid = execute_forked_builtin(args, minienv, all_commands);
+		execute_forked_builtin(args, minienv, all_commands);
 	else
-		child_pid = execute_external(args, *minienv);
-	free_array(args);
-	return (child_pid);
+		execute_external(args, *minienv);
 }
 
 int	execute_multiple_commands(char **commands, t_env **minienv)
@@ -73,7 +71,7 @@ int	execute_multiple_commands(char **commands, t_env **minienv)
 		else if (children_pid[i] == 0)
 		{
 			handle_redirects(commands[i], commands[1], original_fds);
-			execute_command(commands[i], commands, minienv);
+			execute_forked_command(commands[i], commands, minienv);
 		}
 		i++;
 	}
