@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 15:15:25 by sguilher          #+#    #+#             */
-/*   Updated: 2022/06/10 15:53:30 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/10 18:23:44 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ char	*redirect_file_name(char *redirect_str)
 	char	*remaining_cmd;
 
 	name_start = 1;
+	if (redirect_str[name_start] == '>')
+		move_one_forward(&redirect_str[name_start]);
 	while (redirect_str[name_start] == ' ' || redirect_str[name_start] == '\t')
 		name_start++;
 	name_end = get_name_end(&redirect_str[name_start]);
