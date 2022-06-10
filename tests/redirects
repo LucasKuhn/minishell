@@ -43,3 +43,10 @@ echo hi >./tests/test_files/invalid_permission >./tests/outfiles/outfile01 | ech
 echo hi | echo bye >./tests/test_files/invalid_permission
 echo hi | >./tests/outfiles/outfile01 echo bye >./tests/test_files/invalid_permission
 echo hi | echo bye >./tests/test_files/invalid_permission >./tests/outfiles/outfile01
+cat <"./tests/test_files/infile" >./tests/test_files/invalid_permission
+cat >./tests/test_files/invalid_permission <"./tests/test_files/infile"
+cat <missing >./tests/outfiles/outfile01
+cat >./tests/outfiles/outfile01 <missing
+cat <missing >./tests/test_files/invalid_permission
+cat >./tests/test_files/invalid_permission <missing
+cat >./tests/outfiles/outfile01 <missing >./tests/test_files/invalid_permission

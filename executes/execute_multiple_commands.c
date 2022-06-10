@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 13:29:31 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/10 17:24:03 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/10 18:10:25 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,23 @@ static void	save_original_fds(int original_fds[2])
 
 static void	handle_redirects(char *command, char **commands, t_env **minienv)
 {
-	if (redirect_input(command) == FAILED)
-		quit_child(commands, minienv);
-	if (redirect_output(command) == FAILED)
-		quit_child(commands, minienv);
+	char	redirect;
+
+	redirect = next_redirect(command);
+	while (redirect)
+	{
+		if (redirect == '<')
+		{
+			if (redirect_input(command) == FAILED)
+				quit_child(commands, minienv);
+		}
+		if (redirect == '>')
+		{
+			if (redirect_output(command) == FAILED)
+				quit_child(commands, minienv);
+		}
+		redirect = next_redirect(command);
+	}
 }
 
 static void	execute_forked_command(char *command, char **commands,

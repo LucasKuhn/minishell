@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   output_redirect.c                                  :+:      :+:    :+:   */
+/*   redirect_output.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 15:12:54 by sguilher          #+#    #+#             */
-/*   Updated: 2022/06/10 15:21:22 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/10 17:50:26 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,5 @@ int	redirect_output(char *command)
 	else
 		redirect_fd(fd, STDOUT_FILENO);
 	free(file_name);
-	return (redirect_output(command));
+	return (SUCCESS);
 }

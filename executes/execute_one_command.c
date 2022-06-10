@@ -6,29 +6,27 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 18:38:18 by sguilher          #+#    #+#             */
-/*   Updated: 2022/06/10 16:27:51 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/10 18:08:42 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	handle_input_redirect(char *command, int *original_fd_in)
+int	handle_input_redirect(char *command, int original_fd_in)
 {
-	*original_fd_in = dup(STDIN_FILENO);
 	if (redirect_input(command) == FAILED)
 	{
-		redirect_fd(*original_fd_in, STDIN_FILENO);
+		redirect_fd(original_fd_in, STDIN_FILENO);
 		return (FAILED);
 	}
 	return (SUCCESS);
 }
 
-int	handle_output_redirect(char *command, int *original_fd_out)
+int	handle_output_redirect(char *command, int original_fd_out)
 {
-	*original_fd_out = dup(STDOUT_FILENO);
 	if (redirect_output(command) == FAILED)
 	{
-		redirect_fd(*original_fd_out, STDOUT_FILENO);
+		redirect_fd(original_fd_out, STDOUT_FILENO);
 		return (FAILED);
 	}
 	return (SUCCESS);
@@ -36,17 +34,28 @@ int	handle_output_redirect(char *command, int *original_fd_out)
 
 static int	handle_redirects(char *command, int original_fds[2])
 {
+	char	redirect;
+
 	original_fds[IN] = NO_REDIRECT;
 	original_fds[OUT] = NO_REDIRECT;
-	if (has_input_redirect(command))
+	redirect = next_redirect(command);
+	while (redirect)
 	{
-		if (!handle_input_redirect(command, &original_fds[IN]))
-			return (FAILED);
-	}
-	if (has_output_redirect(command))
-	{
-		if (!handle_output_redirect(command, &original_fds[OUT]))
-			return (FAILED);
+		if (redirect == '<')
+		{
+			if (original_fds[IN] == NO_REDIRECT)
+				original_fds[IN] = dup(STDIN_FILENO);
+			if (!handle_input_redirect(command, original_fds[IN]))
+				return (FAILED);
+		}
+		if (redirect == '>')
+		{
+			if (original_fds[OUT] == NO_REDIRECT)
+				original_fds[OUT] = dup(STDOUT_FILENO);
+			if (!handle_output_redirect(command, original_fds[OUT]))
+				return (FAILED);
+		}
+		redirect = next_redirect(command);
 	}
 	return (SUCCESS);
 }
@@ -83,7 +92,10 @@ int	execute_one_command(char *command, t_env **minienv)
 	int		original_fds[2];
 
 	if (!handle_redirects(command, &original_fds[0]))
+	{
+		restore_original_fds(original_fds);
 		return (EXIT_FAILURE);
+	}
 	args = split_args(command);
 	if (is_builtin(args[0]))
 		exit_status = execute_builtin(args, minienv);

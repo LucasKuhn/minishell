@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 17:55:26 by sguilher          #+#    #+#             */
-/*   Updated: 2022/06/10 15:23:04 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/10 17:47:37 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,29 @@ char	*redirect_position(char *str, char redirect_char)
 		str++;
 	}
 	return (NULL);
+}
+
+char	next_redirect(char *str)
+{
+	while (*str)
+	{
+		if (*str == '\'')
+		{
+			str++;
+			while (*str != '\'')
+				str++;
+		}
+		if (*str == '"')
+		{
+			str++;
+			while (*str != '"')
+				str++;
+		}
+		if (*str == '<' || *str == '>')
+			return (*str);
+		str++;
+	}
+	return (0);
 }
 
 int	has_input_redirect(char *command)

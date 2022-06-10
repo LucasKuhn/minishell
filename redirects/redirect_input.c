@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 18:28:18 by sguilher          #+#    #+#             */
-/*   Updated: 2022/06/10 15:22:46 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/10 17:50:05 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,5 @@ int	redirect_input(char *command)
 	else
 		redirect_fd(fd, STDIN_FILENO);
 	free(file_name);
-	return (redirect_input(command));
+	return (SUCCESS);
 }
