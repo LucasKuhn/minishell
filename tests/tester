@@ -1,10 +1,10 @@
 #!/bin/bash
 
 test_lists=(
-	"builtins"
-	"pipes"
+	#"builtins"
+	#"pipes"
 	"redirects"
-	"extras"
+	#"extras"
 	# "bonus"
 )
 

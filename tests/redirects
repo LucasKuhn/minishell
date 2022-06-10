@@ -22,3 +22,13 @@ cat <missing | cat
 cat <missing | echo oi
 cat <missing | cat <"./tests/test_files/infile"
 echo <123 <456 hi | echo 42
+ls >./tests/test_files/outfile01
+ls >         ./tests/test_files/outfile01
+echo hi >         ./tests/test_files/outfile01 bye
+ls >./tests/test_files/outfile01 >./tests/test_files/outfile02
+ls >./tests/test_files/outfile01 >./tests/test_files/invalid_permission
+ls >"./tests/test_files/outfile with spaces"
+ls >"./tests/test_files/outfile""1""2""3""4""5"
+ls >"./tests/test_files/outfile01" >./tests/test_files/invalid_permission >"./tests/test_files/outfile02"
+ls >./tests/test_files/invalid_permission >"./tests/test_files/outfile01" >./tests/test_files/invalid_permission
+cat <"./tests/test_files/infile" >"./tests/test_files/outfile01"

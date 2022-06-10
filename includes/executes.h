@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executes.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 15:41:13 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/09 19:38:45 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/10 15:23:23 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 int		execute_one_command(char *command, t_env	**minienv);
 int		execute_multiple_commands(char **commands, t_env **minienv);
 
-// multiple commands utils 
+// multiple commands utils
 int		*init_children_pid(char **commands);
 void	clean_after_execute(int *children_pid);
 
@@ -40,12 +40,15 @@ int		wait_for_children(int children_pid[1024]);
 void	redirect_fd(int fd_to_redirect, int fd_location);
 void	redirect_fds(int fd_in, int fd_out);
 int		redirect_input(char *command);
-char	*input_redirect_position(char *str);
+int		redirect_output(char *command);
+char	*redirect_position(char *str, char redirect_char);
 void	close_all_fds(void);
 void	close_extra_fds(void);
 int		has_input_redirect(char *command);
+int		has_output_redirect(char *command);
+char	*redirect_file_name(char *redirect_str);
 
-// pipes 
+// pipes
 void	handle_pipe(int original_out, char *current_command, char **commands);
 
 #endif
