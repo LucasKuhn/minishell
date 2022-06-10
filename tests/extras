@@ -1,2 +1,13 @@
 
 $PWD
+$EMPTY
+$EMPTY echo hi
+./tests/test_files/invalid_permission
+invalid_command
+./b.out
+b.out
+"aa"
+./obj
+minishell.h
+oi
+ls

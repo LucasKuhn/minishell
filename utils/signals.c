@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 14:18:39 by sguilher          #+#    #+#             */
-/*   Updated: 2022/06/08 16:29:29 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/09 14:37:20 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,4 @@ void	define_execute_signals(int child_pid)
 		sa.sa_handler = SIG_IGN;
 	sigaction(SIGINT, &sa, NULL);
 	sigaction(SIGQUIT, &sa, NULL);
-}
-
-int	is_quit(int exit_status)
-{
-	return (exit_status == (INTERRUPT + SIGQUIT));
-}
-
-void	print_quit()
-{
-	ft_putstr_fd("Quit\n", STDOUT_FILENO);
 }

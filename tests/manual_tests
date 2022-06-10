@@ -77,8 +77,20 @@ grep oi | ls # testar dando depois:
 
 ./tests/test_files/loop # finalizar com:
 #- Ctrl+C ✅
-#- Ctrl+\ ❌  --> workspaces: ^\Quit\n
-#- Ctrl+D -> não faz nada ✅
+#- Ctrl+\ ✅  -> workspaces: ^\Quit\n
+#- Ctrl+D ✅  -> não faz nada
+
+./tests/test_files/loop.out | ls
+# finalizar com:
+#- Ctrl+C ✅
+#- Ctrl+\ ✅
+#- Ctrl+D ✅
+
+ls | ./tests/test_files/loop.out
+# finalizar com:
+#- Ctrl+C ✅
+#- Ctrl+\ ✅
+#- Ctrl+D ✅
 
 chmod 000 ./tests/test_files/invalid_permission
 cat ./tests/test_files/invalid_permission ✅
@@ -91,3 +103,5 @@ ls | ❌
 
 // TODO: Adicionar um novo PATH e tentar executar um programa naquele path
 // ex: Adicionar o minishell no path, dar um cd, e tentar executar minishell
+
+export UNO=1 DOS-2 TRES=3

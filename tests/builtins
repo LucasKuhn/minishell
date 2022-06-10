@@ -27,7 +27,6 @@ export HELLO=123
 export A-
 export HELLO=123 A
 export HELLO="123 A-"
-export UNO=1 DOS=2 TRES=3
 export hello world
 export HELLO-=123
 unset
@@ -46,12 +45,4 @@ exit 9223372036854775808
 exit -9223372036854775807
 exit -9223372036854775808
 exit -9223372036854775809
-./tests/test_files/invalid_permission
-invalid_command
-./b.out
-b.out
-"aa"
-./obj
-minishell.h
-oi
-ls
+

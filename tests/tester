@@ -4,7 +4,7 @@ test_lists=(
 	"builtins"
 	"pipes"
 	"redirects"
-	# "extras"
+	"extras"
 	# "bonus"
 )
 
@@ -73,6 +73,7 @@ for testfile in ${test_lists[*]}; do
 	done < tests/$testfile
 done
 
+chmod 666 ./tests/test_files/invalid_permission
 
 printf $PURPLE
 printf $BOLD
@@ -87,5 +88,3 @@ else
 	echo "😭 😭 😭"
 	exit 1
 fi
-
-chmod 666 ./tests/test_files/invalid_permission

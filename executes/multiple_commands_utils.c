@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redirects.c                                        :+:      :+:    :+:   */
+/*   multiple_commands_utils.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/13 17:55:26 by sguilher          #+#    #+#             */
-/*   Updated: 2022/06/09 16:26:07 by lalex-ku         ###   ########.fr       */
+/*   Created: 2022/06/09 19:35:21 by lalex-ku          #+#    #+#             */
+/*   Updated: 2022/06/09 19:35:33 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	has_input_redirect(char *command)
+int	*init_children_pid(char **commands)
 {
-	return (input_redirect_position(command) != NULL);
+	int		*children_pid;
+	size_t	size;
+
+	size = sizeof(int) * (arr_len(commands) + 1);
+	children_pid = malloc(size);
+	if (!children_pid)
+		return (NULL);
+	ft_bzero(children_pid, size);
+	return (children_pid);
 }
 
-void	redirect_fd(int fd_to_redirect, int fd_location)
+void	clean_after_execute(int *children_pid)
 {
-	dup2(fd_to_redirect, fd_location);
-	close(fd_to_redirect);
-}
-
-void	redirect_fds(int fd_in, int fd_out)
-{
-	if (fd_in != STDIN_FILENO)
-		redirect_fd(fd_in, STDIN_FILENO);
-	if (fd_out != STDOUT_FILENO)
-		redirect_fd(fd_out, STDOUT_FILENO);
+	close_extra_fds();
+	free(children_pid);
 }
