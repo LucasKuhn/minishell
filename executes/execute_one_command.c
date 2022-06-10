@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 18:38:18 by sguilher          #+#    #+#             */
-/*   Updated: 2022/06/10 15:27:37 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/10 16:27:51 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static int	handle_redirects(char *command, int original_fds[2])
 	return (SUCCESS);
 }
 
-static void	restore_std_fds(int original_fds[2])
+static void	restore_original_fds(int original_fds[2])
 {
 	if (original_fds[IN] != NO_REDIRECT)
 		redirect_fd(original_fds[IN], STDIN_FILENO);
@@ -90,6 +90,6 @@ int	execute_one_command(char *command, t_env **minienv)
 	else
 		exit_status = execute_forked_external(args, *minienv);
 	free_array(args);
-	restore_std_fds(original_fds);
+	restore_original_fds(original_fds);
 	return (exit_status);
 }

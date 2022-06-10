@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 15:41:13 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/10 15:23:23 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/10 17:24:25 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int		execute_multiple_commands(char **commands, t_env **minienv);
 // multiple commands utils
 int		*init_children_pid(char **commands);
 void	clean_after_execute(int *children_pid);
+void	quit_child(char **commands, t_env **minienv);
 
 // execute builtin
 int		execute_forked_builtin(char **args, t_env **minienv, char **commands);
