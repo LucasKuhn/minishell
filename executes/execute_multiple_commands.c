@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_multiple_commands.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 13:29:31 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/10 14:38:13 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/10 18:10:25 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,37 +18,44 @@ static void	save_original_fds(int original_fds[2])
 	original_fds[1] = dup(STDOUT_FILENO);
 }
 
-static void	handle_input_redirect(char *command, char *next_command,
-		int original_fd_in)
+static void	handle_redirects(char *command, char **commands, t_env **minienv)
 {
-	if (redirect_input(command) == FAILED)
+	char	redirect;
+
+	redirect = next_redirect(command);
+	while (redirect)
 	{
-		if (next_command == NULL)
-			redirect_fd(original_fd_in, STDIN_FILENO);
-		else
-			close(STDOUT_FILENO);
-		close(STDIN_FILENO);
-		exit (EXIT_FAILURE);
+		if (redirect == '<')
+		{
+			if (redirect_input(command) == FAILED)
+				quit_child(commands, minienv);
+		}
+		if (redirect == '>')
+		{
+			if (redirect_output(command) == FAILED)
+				quit_child(commands, minienv);
+		}
+		redirect = next_redirect(command);
 	}
 }
 
-static void	handle_redirects(char *command, char *next_command,
-		int original_fds[2])
-{
-	if (has_input_redirect(command))
-		handle_input_redirect(command, next_command, original_fds[IN]);
-}
-
-static void	execute_forked_command(char *command, char **all_commands, t_env **minienv)
+static void	execute_forked_command(char *command, char **commands,
+	t_env **minienv)
 {
 	char	**args;
 
 	close_extra_fds();
 	args = split_args(command);
 	if (is_builtin(args[0]))
-		execute_forked_builtin(args, minienv, all_commands);
+		execute_forked_builtin(args, minienv, commands);
 	else
 		execute_external(args, *minienv);
+}
+
+static void	restore_original_fds(int original_fds[2])
+{
+	redirect_fd(original_fds[IN], STDIN_FILENO);
+	redirect_fd(original_fds[OUT], STDOUT_FILENO);
 }
 
 int	execute_multiple_commands(char **commands, t_env **minienv)
@@ -70,12 +77,12 @@ int	execute_multiple_commands(char **commands, t_env **minienv)
 			print_perror_msg("fork", commands[i]);
 		else if (children_pid[i] == 0)
 		{
-			handle_redirects(commands[i], commands[1], original_fds);
+			handle_redirects(commands[i], commands, minienv);
 			execute_forked_command(commands[i], commands, minienv);
 		}
 		i++;
 	}
-	redirect_fd(original_fds[IN], STDIN_FILENO);
+	restore_original_fds(original_fds);
 	exit_status = wait_for_children(children_pid);
 	return (exit_status);
 }

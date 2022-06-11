@@ -3,43 +3,69 @@
 /*                                                        :::      ::::::::   */
 /*   execute_one_command.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 18:38:18 by sguilher          #+#    #+#             */
-/*   Updated: 2022/06/10 14:23:46 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/10 18:08:42 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	handle_input_redirect(char *command, int *original_fd_in)
+int	handle_input_redirect(char *command, int original_fd_in)
 {
-	*original_fd_in = dup(STDIN_FILENO);
 	if (redirect_input(command) == FAILED)
 	{
-		redirect_fd(*original_fd_in, STDIN_FILENO);
+		redirect_fd(original_fd_in, STDIN_FILENO);
 		return (FAILED);
 	}
 	return (SUCCESS);
 }
 
-static int	handle_redirects(char *command, int *original_fd_in)
+int	handle_output_redirect(char *command, int original_fd_out)
 {
-	*original_fd_in = NO_REDIRECT;
-	if (has_input_redirect(command))
+	if (redirect_output(command) == FAILED)
 	{
-		if (!handle_input_redirect(command, original_fd_in))
-			return (FAILED);
+		redirect_fd(original_fd_out, STDOUT_FILENO);
+		return (FAILED);
 	}
-	// TODO: handle output -> original_fds[1] = dup(STDOUT_FILENO);
 	return (SUCCESS);
 }
 
-static void	restore_std_fds(int original_fd_in) //, int original_out_fd)
+static int	handle_redirects(char *command, int original_fds[2])
 {
-	if (original_fd_in != NO_REDIRECT)
-		redirect_fd(original_fd_in, STDIN_FILENO);
-	// TODO: restore output -> redirect_fd(original_fds[1], STDOUT_FILENO);
+	char	redirect;
+
+	original_fds[IN] = NO_REDIRECT;
+	original_fds[OUT] = NO_REDIRECT;
+	redirect = next_redirect(command);
+	while (redirect)
+	{
+		if (redirect == '<')
+		{
+			if (original_fds[IN] == NO_REDIRECT)
+				original_fds[IN] = dup(STDIN_FILENO);
+			if (!handle_input_redirect(command, original_fds[IN]))
+				return (FAILED);
+		}
+		if (redirect == '>')
+		{
+			if (original_fds[OUT] == NO_REDIRECT)
+				original_fds[OUT] = dup(STDOUT_FILENO);
+			if (!handle_output_redirect(command, original_fds[OUT]))
+				return (FAILED);
+		}
+		redirect = next_redirect(command);
+	}
+	return (SUCCESS);
+}
+
+static void	restore_original_fds(int original_fds[2])
+{
+	if (original_fds[IN] != NO_REDIRECT)
+		redirect_fd(original_fds[IN], STDIN_FILENO);
+	if (original_fds[OUT] != NO_REDIRECT)
+		redirect_fd(original_fds[OUT], STDOUT_FILENO);
 }
 
 int	execute_forked_external(char **args, t_env *minienv)
@@ -66,13 +92,16 @@ int	execute_one_command(char *command, t_env **minienv)
 	int		original_fds[2];
 
 	if (!handle_redirects(command, &original_fds[0]))
+	{
+		restore_original_fds(original_fds);
 		return (EXIT_FAILURE);
+	}
 	args = split_args(command);
 	if (is_builtin(args[0]))
 		exit_status = execute_builtin(args, minienv);
 	else
 		exit_status = execute_forked_external(args, *minienv);
 	free_array(args);
-	restore_std_fds(original_fds[0]);
+	restore_original_fds(original_fds);
 	return (exit_status);
 }

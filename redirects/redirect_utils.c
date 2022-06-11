@@ -1,20 +1,71 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redirects.c                                        :+:      :+:    :+:   */
+/*   redirect_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 17:55:26 by sguilher          #+#    #+#             */
-/*   Updated: 2022/06/09 16:26:07 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/10 17:47:37 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+char	*redirect_position(char *str, char redirect_char)
+{
+	while (*str)
+	{
+		if (*str == '\'')
+		{
+			str++;
+			while (*str != '\'')
+				str++;
+		}
+		if (*str == '"')
+		{
+			str++;
+			while (*str != '"')
+				str++;
+		}
+		if (*str == redirect_char)
+			return (str);
+		str++;
+	}
+	return (NULL);
+}
+
+char	next_redirect(char *str)
+{
+	while (*str)
+	{
+		if (*str == '\'')
+		{
+			str++;
+			while (*str != '\'')
+				str++;
+		}
+		if (*str == '"')
+		{
+			str++;
+			while (*str != '"')
+				str++;
+		}
+		if (*str == '<' || *str == '>')
+			return (*str);
+		str++;
+	}
+	return (0);
+}
+
 int	has_input_redirect(char *command)
 {
-	return (input_redirect_position(command) != NULL);
+	return (redirect_position(command, '<') != NULL);
+}
+
+int	has_output_redirect(char *command)
+{
+	return (redirect_position(command, '>') != NULL);
 }
 
 void	redirect_fd(int fd_to_redirect, int fd_location)
