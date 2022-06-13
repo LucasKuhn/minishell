@@ -71,3 +71,6 @@ echo hi >>./tests/test_files/invalid_permission | echo bye
 echo hi >>./tests/test_files/invalid_permission >./tests/outfiles/outfile01 | echo bye
 echo hi | echo bye >>./tests/test_files/invalid_permission
 echo hi | echo >>./tests/outfiles/outfile01 bye >./tests/test_files/invalid_permission
+echo bonjour >>./tests/outfiles/outfile01 | echo bonjour >>./tests/outfiles/outfile01
+cat <minishell.h>outfile
+cat <minishell.h|ls

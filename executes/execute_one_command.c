@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_one_command.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 18:38:18 by sguilher          #+#    #+#             */
-/*   Updated: 2022/06/10 18:08:42 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/13 15:57:23 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	handle_input_redirect(char *command, int original_fd_in)
 {
-	if (redirect_input(command) == FAILED)
+	if (redirect_input(command, original_fd_in) == FAILED)
 	{
 		redirect_fd(original_fd_in, STDIN_FILENO);
 		return (FAILED);

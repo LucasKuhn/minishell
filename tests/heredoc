@@ -1,0 +1,13 @@
+cat <<HEREDOC
+oi
+HEREDOC 
+
+cat <<HERE <<DOC 
+oi 
+HERE 
+time 
+DOC
+
+cat <<HERE | ls 
+oi 
+HERE 

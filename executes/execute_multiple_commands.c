@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_multiple_commands.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 13:29:31 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/10 18:10:25 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/13 16:18:57 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	save_original_fds(int original_fds[2])
 	original_fds[1] = dup(STDOUT_FILENO);
 }
 
-static void	handle_redirects(char *command, char **commands, t_env **minienv)
+static void	handle_redirects(char *command, char **commands, int original_fd_in, t_env **minienv)
 {
 	char	redirect;
 
@@ -27,7 +27,7 @@ static void	handle_redirects(char *command, char **commands, t_env **minienv)
 	{
 		if (redirect == '<')
 		{
-			if (redirect_input(command) == FAILED)
+			if (redirect_input(command, original_fd_in) == FAILED)
 				quit_child(commands, minienv);
 		}
 		if (redirect == '>')
@@ -77,7 +77,7 @@ int	execute_multiple_commands(char **commands, t_env **minienv)
 			print_perror_msg("fork", commands[i]);
 		else if (children_pid[i] == 0)
 		{
-			handle_redirects(commands[i], commands, minienv);
+			handle_redirects(commands[i], commands, original_fds[IN], minienv);
 			execute_forked_command(commands[i], commands, minienv);
 		}
 		i++;

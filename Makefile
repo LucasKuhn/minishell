@@ -12,7 +12,7 @@ EXECUTES =	execute_one_command.c execute_multiple_commands.c wait.c \
 			execute_external.c execute_builtin.c split_args.c get_path.c \
 			multiple_commands_utils.c pipes.c
 REDIRECTS =	redirect_utils.c redirect_input.c redirect_output.c \
-			redirect_filename.c
+			redirect_filename.c redirect_heredoc.c
 UTILS =		error.c quote_checker.c signals.c str_utils.c \
 			ft_atoll.c free_array.c arr_len.c file_descriptors.c
 EXPANDS	= 	handle_expansions.c expand_variables.c expand_exit_status.c \
