@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 17:55:26 by sguilher          #+#    #+#             */
-/*   Updated: 2022/06/10 17:47:37 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/14 15:41:39 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char	next_redirect(char *str)
 			while (*str != '"')
 				str++;
 		}
-		if (*str == '<' || *str == '>')
+		if (*str == '<' || *str == '>' || *str < 0)
 			return (*str);
 		str++;
 	}

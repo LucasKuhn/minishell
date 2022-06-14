@@ -3,26 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   redirect_filename.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 15:15:25 by sguilher          #+#    #+#             */
-/*   Updated: 2022/06/13 15:44:14 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/14 16:52:58 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static int is_name_delimeter(char c)
-{
-	if (c == ' ' || c == '>' || c == '<' || c == '|' || c == '\t')
-		return(1);
-	return(0);
-}
-
-static void	move_one_forward(char *str)
-{
-	ft_memmove(str, str + 1, ft_strlen(str + 1) + 1);
-}
 
 static int	get_name_end(char *name)
 {

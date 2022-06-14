@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 13:36:50 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/09 19:37:03 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/14 16:53:28 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,9 @@ char		*prompt_input(t_env *minienv);
 // syntax
 int			has_unclosed_quotes(char *str);
 
+// heredoc_prompt
+void		heredoc_prompt(char *input);
+
 // tratativas
 void		handle_expansions(char **input, t_env *minienv, int exit_status);
 void		expand_variables(char **input, t_env *minienv);
@@ -62,9 +65,11 @@ void		define_execute_signals(int child_pid);
 int			str_equal(const char *str1, const char *str2);
 int			is_quote(char c);
 int			is_empty(char *str);
-int			contains_pipe(char *str);
+int			is_name_delimeter(char c);
+int			has_pipe(char *str);
 void		free_array(char **arr);
-int			arr_len(char **arr);	
+int			arr_len(char **arr);
 long long	ft_atoll(const char *str);
+void		move_one_forward(char *str);
 
 #endif
