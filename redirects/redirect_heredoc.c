@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 17:09:56 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/14 16:56:18 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/14 17:48:23 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ static char	*tmp_filename(int heredoc_number)
 	return (ft_strdup(filename));
 }
 
-void redirect_heredoc(char *command, int heredoc_number)
+void	redirect_heredoc(char *command, int heredoc_number)
 {
 	char	*filename;
 	int		tmp_file_fd;
 	char	*heredoc_position;
 
-	filename = tmp_filename(heredoc_number * -1);
+	filename = tmp_filename(heredoc_number);
 	tmp_file_fd = open(filename, O_RDONLY);
 	if (tmp_file_fd == -1)
 	{

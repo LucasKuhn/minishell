@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 18:28:18 by sguilher          #+#    #+#             */
-/*   Updated: 2022/06/14 16:05:31 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/14 17:07:57 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int	redirect_input(char *command)
 	char	*input_redirect;
 	char	*file_name;
 	int		fd;
-
 
 	input_redirect = redirect_position(command, '<');
 	if (!input_redirect)

@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 15:41:13 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/14 16:05:39 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/14 17:40:18 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,6 @@ char	*redirect_position(char *str, char redirect_char);
 char	next_redirect(char *str);
 void	close_all_fds(void);
 void	close_extra_fds(void);
-int		has_input_redirect(char *command);
-int		has_output_redirect(char *command);
 char	*redirect_file_name(char *redirect_str);
 void	redirect_heredoc(char *command, int heredoc_number);
 

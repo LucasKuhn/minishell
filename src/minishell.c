@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 14:44:34 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/14 16:11:31 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/14 19:14:54 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,10 @@ int	minishell(t_env *minienv)
 	{
 		define_main_signals();
 		input = prompt_input(minienv);
-		if (is_empty(input) || has_unclosed_quotes(input))
+		if (is_empty(input) || has_unclosed_quotes(input) || !handle_heredoc(input, &exit_status))
 			continue ;
 		// TODO: check syntax before splitting
-		heredoc_prompt(input);
-		handle_expansions(&input, minienv, exit_status);
+		handle_expansions(&input, minienv, exit_status); /// tem que ser antes do heredoc??
 		if (!has_pipe(input))
 			exit_status = execute_one_command(input, &minienv);
 		else

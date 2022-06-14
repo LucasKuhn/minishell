@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 16:46:10 by sguilher          #+#    #+#             */
-/*   Updated: 2022/06/14 16:56:01 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/14 19:23:03 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ char	*get_heredoc_name(char *input, int heredoc_number)
 	char	*name;
 	char	*remaining_cmd;
 
-	*input = heredoc_number * (-1);
+	*input = heredoc_number;
 	input++;
 	move_one_forward(input);
 	name_start = 0;
@@ -95,7 +95,25 @@ char	*get_heredoc_name(char *input, int heredoc_number)
 	return (name);
 }
 
-void	heredoc_prompt(char *input)
+void	define_heredoc_signals(int child_pid)
+{
+	struct sigaction	sa_sigint;
+	struct sigaction	sa_sigquit;
+
+	sa_sigint.sa_flags = 0;
+	sigemptyset(&sa_sigint.sa_mask);
+	if (child_pid == 0)
+		sa_sigint.sa_handler = SIG_DFL;
+	else
+		sa_sigint.sa_handler = SIG_IGN;
+	sigaction(SIGINT, &sa_sigint, NULL);
+	sa_sigquit.sa_flags = 0;
+	sigemptyset(&sa_sigquit.sa_mask);
+	sa_sigquit.sa_handler = SIG_IGN;
+	sigaction(SIGQUIT, &sa_sigquit, NULL);
+}
+
+int	handle_heredoc(char *input, int *exit_status)
 {
 	char	*heredoc_position;
 	char	*delimiter;
@@ -103,24 +121,45 @@ void	heredoc_prompt(char *input)
 	char	*filename;
 	int		tmp_file_fd;
 	static int	heredoc_number;
+	int		child_pid;
 
 	heredoc_position = get_heredoc_position(input);
 	if (!heredoc_position)
-		return ;
+		return (SUCCESS);
 	if (!heredoc_number)
-		heredoc_number = 1;
-	heredoc_number++;
+		heredoc_number = -1;
+	heredoc_number--;
 	delimiter = get_heredoc_name(heredoc_position, heredoc_number);
 	filename = tmp_filename(heredoc_number);
 	tmp_file_fd = open(filename, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	free(filename);
-	line_read = readline("> ");
-	while (!str_equal(line_read, delimiter))
+	child_pid = fork();
+	define_heredoc_signals(child_pid);
+	if (child_pid == -1)
+		print_perror_msg("fork - heredoc_prompt", delimiter);
+	else if (child_pid == 0)
 	{
-		ft_putstr_fd(line_read, tmp_file_fd);
-		ft_putchar_fd('\n', tmp_file_fd);
 		line_read = readline("> ");
+		while (line_read && !str_equal(line_read, delimiter))
+		{
+			ft_putstr_fd(line_read, tmp_file_fd);
+			ft_putchar_fd('\n', tmp_file_fd);
+			free(line_read);
+			line_read = readline("> ");
+		}
+		if (!line_read)
+			print_error_msg("warning: here-document delimited by end-of-file. Wanted", delimiter);
+		free(line_read);
+		close(tmp_file_fd);
+		exit(EXIT_SUCCESS);
 	}
-	close(tmp_file_fd);
-	heredoc_prompt(input);
+	else
+	{
+		close(tmp_file_fd);
+		*exit_status = wait_for_child(child_pid, TRUE);
+		if (*exit_status != EXIT_SUCCESS)
+			return (FAILED);
+	}
+	define_main_signals();
+	return (handle_heredoc(input, exit_status));
 }
