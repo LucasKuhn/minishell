@@ -3,14 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   redirect_filename.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 15:15:25 by sguilher          #+#    #+#             */
-/*   Updated: 2022/06/10 18:23:44 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/13 15:44:14 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static int is_name_delimeter(char c)
+{
+	if (c == ' ' || c == '>' || c == '<' || c == '|' || c == '\t')
+		return(1);
+	return(0);
+}
 
 static void	move_one_forward(char *str)
 {
@@ -22,7 +29,7 @@ static int	get_name_end(char *name)
 	int	name_end;
 
 	name_end = 0;
-	while (name[name_end] && name[name_end] != ' ')
+	while (name[name_end] && !is_name_delimeter(name[name_end]))
 	{
 		if (name[name_end] == '\'')
 		{
@@ -38,7 +45,7 @@ static int	get_name_end(char *name)
 				name_end++;
 			move_one_forward(&name[name_end]);
 		}
-		else if (name[name_end] && name[name_end] != ' ')
+		else if (name[name_end] && !is_name_delimeter(name[name_end]))
 			name_end++;
 	}
 	return (name_end);
@@ -52,7 +59,7 @@ char	*redirect_file_name(char *redirect_str)
 	char	*remaining_cmd;
 
 	name_start = 1;
-	if (redirect_str[name_start] == '>')
+	if (redirect_str[name_start] == '>' || redirect_str[name_start] == '<')
 		move_one_forward(&redirect_str[name_start]);
 	while (redirect_str[name_start] == ' ' || redirect_str[name_start] == '\t')
 		name_start++;

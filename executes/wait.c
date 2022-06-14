@@ -6,7 +6,7 @@
 /*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 18:20:51 by sguilher          #+#    #+#             */
-/*   Updated: 2022/06/09 22:53:56 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/13 17:00:16 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	wait_for_child(int child_pid, int is_last_child)
 	if (child_pid == FORK_ERROR)
 		return (EXIT_FAILURE);
 	if (waitpid(child_pid, &status, 0) == -1)
-		exit_with_perror("waitpid", ft_itoa(child_pid), EXIT_FAILURE);
+		print_perror_msg("waitpid", ft_itoa(child_pid));
 	if (WIFSIGNALED(status))
 		return (handle_signal_interrupt(status, is_last_child));
 	if (WIFEXITED(status))

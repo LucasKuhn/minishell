@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   redirect_output.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 15:12:54 by sguilher          #+#    #+#             */
-/*   Updated: 2022/06/10 18:23:58 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/13 17:09:21 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-
 
 int	redirect_output(char *command)
 {
