@@ -3,32 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   str_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/25 13:28:39 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/09 15:30:05 by lalex-ku         ###   ########.fr       */
+/*   Created: 2022/06/14 16:50:20 by sguilher          #+#    #+#             */
+/*   Updated: 2022/06/14 16:53:07 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	is_empty(char *str)
-{
-	if (!str)
-		return (1);
-	while (*str)
-	{
-		if (*str != ' ')
-			return (0);
-		str++;
-	}
-	return (1);
-}
-
-int	is_quote(char c)
-{
-	return (c == '\'' || c == '"');
-}
 
 int	str_equal(const char *str1, const char *str2)
 {
@@ -42,25 +24,7 @@ int	str_equal(const char *str1, const char *str2)
 	return (ft_strncmp(str1, str2, size) == 0);
 }
 
-int	contains_pipe(char *str)
+void	move_one_forward(char *str)
 {
-	while (*str)
-	{
-		if (*str == '\'')
-		{
-			str++;
-			while (*str != '\'')
-				str++;
-		}
-		if (*str == '"')
-		{
-			str++;
-			while (*str != '"')
-				str++;
-		}
-		if (*str == '|')
-			return (1);
-		str++;
-	}
-	return (0);
+	ft_memmove(str, str + 1, ft_strlen(str + 1) + 1);
 }

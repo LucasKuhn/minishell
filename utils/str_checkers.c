@@ -1,41 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redirect_utils.c                                   :+:      :+:    :+:   */
+/*   str_checkers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/13 17:55:26 by sguilher          #+#    #+#             */
-/*   Updated: 2022/06/14 17:40:06 by sguilher         ###   ########.fr       */
+/*   Created: 2022/05/25 13:28:39 by lalex-ku          #+#    #+#             */
+/*   Updated: 2022/06/14 16:58:00 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*redirect_position(char *str, char redirect_char)
+int	is_empty(char *str)
 {
+	if (!str)
+		return (1);
 	while (*str)
 	{
-		if (*str == '\'')
-		{
-			str++;
-			while (*str != '\'')
-				str++;
-		}
-		if (*str == '"')
-		{
-			str++;
-			while (*str != '"')
-				str++;
-		}
-		if (*str == redirect_char)
-			return (str);
+		if (*str != ' ')
+			return (0);
 		str++;
 	}
-	return (NULL);
+	return (1);
 }
 
-char	next_redirect(char *str)
+int	is_quote(char c)
+{
+	return (c == '\'' || c == '"');
+}
+
+int	has_pipe(char *str)
 {
 	while (*str)
 	{
@@ -51,23 +46,16 @@ char	next_redirect(char *str)
 			while (*str != '"')
 				str++;
 		}
-		if (*str == '<' || *str == '>' || *str < 0)
-			return (*str);
+		if (*str == '|')
+			return (1);
 		str++;
 	}
 	return (0);
 }
 
-void	redirect_fd(int fd_to_redirect, int fd_location)
+int is_name_delimeter(char c)
 {
-	dup2(fd_to_redirect, fd_location);
-	close(fd_to_redirect);
-}
-
-void	redirect_fds(int fd_in, int fd_out)
-{
-	if (fd_in != STDIN_FILENO)
-		redirect_fd(fd_in, STDIN_FILENO);
-	if (fd_out != STDOUT_FILENO)
-		redirect_fd(fd_out, STDOUT_FILENO);
+	if (c == ' ' || c == '>' || c == '<' || c == '|' || c == '\t')
+		return(1);
+	return(0);
 }

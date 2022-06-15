@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_one_command.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 18:38:18 by sguilher          #+#    #+#             */
-/*   Updated: 2022/06/13 15:57:23 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/14 16:22:28 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	handle_input_redirect(char *command, int original_fd_in)
 {
-	if (redirect_input(command, original_fd_in) == FAILED)
+	if (redirect_input(command) == FAILED)
 	{
 		redirect_fd(original_fd_in, STDIN_FILENO);
 		return (FAILED);
@@ -54,6 +54,12 @@ static int	handle_redirects(char *command, int original_fds[2])
 				original_fds[OUT] = dup(STDOUT_FILENO);
 			if (!handle_output_redirect(command, original_fds[OUT]))
 				return (FAILED);
+		}
+		if (redirect < 0)
+		{
+			if (original_fds[IN] == NO_REDIRECT)
+				original_fds[IN] = dup(STDIN_FILENO);
+			redirect_heredoc(command, redirect);
 		}
 		redirect = next_redirect(command);
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executes.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 15:41:13 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/13 17:12:48 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/14 17:40:18 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,14 @@ int		wait_for_children(int children_pid[1024]);
 // redirects
 void	redirect_fd(int fd_to_redirect, int fd_location);
 void	redirect_fds(int fd_in, int fd_out);
-int		redirect_input(char *command, int original_fd_in);
+int		redirect_input(char *command);
 int		redirect_output(char *command);
 char	*redirect_position(char *str, char redirect_char);
 char	next_redirect(char *str);
 void	close_all_fds(void);
 void	close_extra_fds(void);
-int		has_input_redirect(char *command);
-int		has_output_redirect(char *command);
 char	*redirect_file_name(char *redirect_str);
-int		redirect_heredoc(char *heredoc_delimeter, int original_fd_in);
+void	redirect_heredoc(char *command, int heredoc_number);
 
 // pipes
 void	handle_pipe(int original_out, char *current_command, char **commands);
