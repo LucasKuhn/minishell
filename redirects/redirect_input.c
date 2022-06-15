@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect_input.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 18:28:18 by sguilher          #+#    #+#             */
-/*   Updated: 2022/06/14 17:07:57 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/15 14:50:35 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	redirect_input(char *command)
 	input_redirect = redirect_position(command, '<');
 	if (!input_redirect)
 		return (SUCCESS);
-	file_name = redirect_file_name(input_redirect);
+	file_name = get_label_name(input_redirect);
 	fd = open(file_name, O_RDONLY, FD_CLOEXEC);
 	if (fd == -1)
 	{

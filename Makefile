@@ -4,7 +4,7 @@ LDLIBS	=	-lreadline -lft
 LDFLAGS	+= 	-L./42-libraries/libft
 OBJ_DIR	=	obj
 OBJS	=	$(SRCS:%.c=$(OBJ_DIR)/%.o)
-SRCS	=	main.c minishell.c prompt.c split_commands.c heredoc_prompt.c\
+SRCS	=	main.c minishell.c prompt.c split_commands.c handle_heredoc.c\
 			$(MINIENV) $(BUILTINS) $(EXECUTES) $(REDIRECTS) $(UTILS) $(EXPANDS)
 MINIENV =	minienv.c minienv_utils.c minienv_str_utils.c free_minienv.c
 BUILTINS =	builtins_utils.c echo.c cd.c pwd.c export.c unset.c env.c exit.c
@@ -12,9 +12,10 @@ EXECUTES =	execute_one_command.c execute_multiple_commands.c wait.c \
 			execute_external.c execute_builtin.c split_args.c get_path.c \
 			multiple_commands_utils.c pipes.c
 REDIRECTS =	redirect_utils.c redirect_input.c redirect_output.c \
-			redirect_filename.c redirect_heredoc.c
+			redirect_heredoc.c
 UTILS =		error.c quote_checker.c signals.c str_utils.c str_checkers.c \
-			ft_atoll.c free_array.c arr_len.c file_descriptors.c
+			ft_atoll.c free_array.c arr_len.c file_descriptors.c \
+			get_label_name.c
 EXPANDS	= 	handle_expansions.c expand_variables.c expand_exit_status.c \
 			variables_utils.c
 LIBFT_A	=	./42-libraries/libft/libft.a
