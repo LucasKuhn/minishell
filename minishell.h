@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 13:36:50 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/14 19:21:58 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/15 14:18:31 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char		*prompt_input(t_env *minienv);
 int			has_unclosed_quotes(char *str);
 
 // heredoc_prompt
-int		handle_heredoc(char *input, int *exit_status);
+int		handle_heredoc(char *input, int *exit_status, t_env *minienv);
 
 // tratativas
 void		handle_expansions(char **input, t_env *minienv, int exit_status);
@@ -60,6 +60,7 @@ char		**split_args(char *command);
 // signals
 void		define_main_signals(void);
 void		define_execute_signals(int child_pid);
+void		define_heredoc_signals(int child_pid);
 
 // utils
 int			str_equal(const char *str1, const char *str2);

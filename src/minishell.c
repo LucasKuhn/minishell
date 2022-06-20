@@ -3,14 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 14:44:34 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/14 19:14:54 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/15 15:41:05 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	input_failed(char *input, int *exit_status, t_env *minienv)
+{
+	if (is_empty(input))
+		return (TRUE);
+	if (has_unclosed_quotes(input))
+		return (TRUE);
+	if (handle_heredoc(input, exit_status, minienv) == FAILED)
+		return (TRUE);
+	// TODO: check syntax before splitting
+	return (FALSE);
+}
 
 int	minishell(t_env *minienv)
 {
@@ -23,10 +35,9 @@ int	minishell(t_env *minienv)
 	{
 		define_main_signals();
 		input = prompt_input(minienv);
-		if (is_empty(input) || has_unclosed_quotes(input) || !handle_heredoc(input, &exit_status))
+		if (input_failed(input, &exit_status, minienv))
 			continue ;
-		// TODO: check syntax before splitting
-		handle_expansions(&input, minienv, exit_status); /// tem que ser antes do heredoc??
+		handle_expansions(&input, minienv, exit_status);
 		if (!has_pipe(input))
 			exit_status = execute_one_command(input, &minienv);
 		else

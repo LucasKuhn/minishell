@@ -11,3 +11,18 @@ DOC
 cat <<HERE | ls 
 oi 
 HERE 
+
+cat <<HERE
+$USER
+oi
+HERE
+
+cat <minishell.h <<HERE <missing | ls
+HERE
+
+cat <minishell.h <<HERE | cat
+HERE
+
+cat <minishell.h <<HERE <missing <<DOC | echo oi
+HERE
+DOC

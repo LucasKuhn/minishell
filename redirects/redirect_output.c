@@ -6,7 +6,7 @@
 /*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 15:12:54 by sguilher          #+#    #+#             */
-/*   Updated: 2022/06/13 17:09:21 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/15 14:50:42 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	redirect_output(char *command)
 		open_flags = O_WRONLY | O_CREAT | O_APPEND;
 	else
 		open_flags = O_WRONLY | O_CREAT | O_TRUNC;
-	file_name = redirect_file_name(output_redirect);
+	file_name = get_label_name(output_redirect);
 	fd = open(file_name, open_flags, 0644);
 	if (fd == -1)
 	{

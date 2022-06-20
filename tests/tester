@@ -42,7 +42,7 @@ for testfile in ${test_lists[*]}; do
 
 		rm -rf ./tests/outfiles/*
 		rm -rf ./tests/mini_outfiles/*
-		MINI_OUTPUT=$(echo "$teste" | ./minishell 2> /dev/null | sed -r "s:\x1B\[[0-9;]*[mK]::g" | grep -v "$PROMPT" | grep -v ^exit$ )
+		MINI_OUTPUT=$(echo -e "$teste" | ./minishell 2> /dev/null | sed -r "s:\x1B\[[0-9;]*[mK]::g" | grep -v "$PROMPT" | grep -v ^exit$ )
 		MINI_OUTFILES=$(cp ./tests/outfiles/* ./tests/mini_outfiles &>/dev/null)
 		MINI_EXIT_CODE=$(echo -e "./minishell\n$teste\necho \$?\nexit\n" | ./minishell 2> /dev/null | sed -r "s:\x1B\[[0-9;]*[mK]::g" | grep -v "$PROMPT" | grep -v ^exit$ | tail -n 1)
 		MINI_ERROR_MSG=$(echo "$teste" | ./minishell 2>&1 > /dev/null | grep -o '[^:]*$' )

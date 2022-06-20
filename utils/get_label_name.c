@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redirect_filename.c                                :+:      :+:    :+:   */
+/*   get_label_name.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 15:15:25 by sguilher          #+#    #+#             */
-/*   Updated: 2022/06/14 16:52:58 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/15 14:54:40 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,15 @@ static int	get_name_end(char *name)
 	return (name_end);
 }
 
-char	*redirect_file_name(char *redirect_str)
+char	*get_label_name(char *redirect_str)
 {
 	int		name_start;
 	int		name_end;
 	char	*name;
 	char	*remaining_cmd;
 
-	name_start = 1;
+	name_start = 0;
+	move_one_forward(redirect_str);
 	if (redirect_str[name_start] == '>' || redirect_str[name_start] == '<')
 		move_one_forward(&redirect_str[name_start]);
 	while (redirect_str[name_start] == ' ' || redirect_str[name_start] == '\t')
