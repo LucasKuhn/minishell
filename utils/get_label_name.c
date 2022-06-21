@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_label_name.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 15:15:25 by sguilher          #+#    #+#             */
-/*   Updated: 2022/06/15 14:54:40 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/20 14:05:52 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	*get_label_name(char *redirect_str)
 
 	name_start = 0;
 	move_one_forward(redirect_str);
-	if (redirect_str[name_start] == '>' || redirect_str[name_start] == '<')
+	if (redirect_str[name_start] == '>')
 		move_one_forward(&redirect_str[name_start]);
 	while (redirect_str[name_start] == ' ' || redirect_str[name_start] == '\t')
 		name_start++;

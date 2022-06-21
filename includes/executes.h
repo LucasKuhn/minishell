@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executes.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 15:41:13 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/15 14:49:25 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/21 15:02:29 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ void	redirect_fd(int fd_to_redirect, int fd_location);
 void	redirect_fds(int fd_in, int fd_out);
 int		redirect_input(char *command);
 int		redirect_output(char *command);
-char	*redirect_position(char *str, char redirect_char);
-char	next_redirect(char *str);
+char	*get_redirect_position(char *str, char redirect_char);
+char	get_next_redirect(char *str);
 void	close_all_fds(void);
 void	close_extra_fds(void);
 char	*get_label_name(char *redirect_str);

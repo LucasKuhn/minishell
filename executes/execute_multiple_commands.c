@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 13:29:31 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/14 17:43:27 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/21 15:01:49 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	handle_redirects(char *command, char **commands, t_env **minienv)
 {
 	char	redirect;
 
-	redirect = next_redirect(command);
+	redirect = get_next_redirect(command);
 	while (redirect)
 	{
 		if (redirect == '<')
@@ -37,7 +37,7 @@ static void	handle_redirects(char *command, char **commands, t_env **minienv)
 		}
 		if (redirect < 0)
 			redirect_heredoc(command, redirect);
-		redirect = next_redirect(command);
+		redirect = get_next_redirect(command);
 	}
 }
 
