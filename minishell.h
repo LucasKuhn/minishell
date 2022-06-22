@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 13:36:50 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/15 14:18:31 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/22 12:47:32 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,14 @@ int			minishell(t_env	*minienv);
 char		*prompt_input(t_env *minienv);
 
 // syntax
+int			has_input_error(char *input, int *exit_status, t_env *minienv);
 int			has_unclosed_quotes(char *str);
+int			is_invalid_syntax(char *input);
+int			is_invalid_token(char c);
+int			syntax_error(char *token);
 
 // heredoc_prompt
-int		handle_heredoc(char *input, int *exit_status, t_env *minienv);
+int			handle_heredoc(char *input, int *exit_status, t_env *minienv);
 
 // tratativas
 void		handle_expansions(char **input, t_env *minienv, int exit_status);
@@ -72,5 +76,6 @@ void		free_array(char **arr);
 int			arr_len(char **arr);
 long long	ft_atoll(const char *str);
 void		move_one_forward(char *str);
+char		*get_token_position(char *str, char *token);
 
 #endif

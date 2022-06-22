@@ -1,16 +1,16 @@
 cat <<HEREDOC
 oi
-HEREDOC 
+HEREDOC
 
-cat <<HERE <<DOC 
-oi 
-HERE 
-time 
+cat <<HERE <<DOC
+oi
+HERE
+time
 DOC
 
-cat <<HERE | ls 
-oi 
-HERE 
+cat <<HERE | ls
+oi
+HERE
 
 cat <<HERE
 $USER
@@ -26,3 +26,10 @@ HERE
 cat <minishell.h <<HERE <missing <<DOC | echo oi
 HERE
 DOC
+
+cat << $ ✅
+oi
+$
+
+<< echo oi ✅
+echo

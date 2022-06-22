@@ -4,6 +4,7 @@ test_lists=(
 	"builtins"
 	"pipes"
 	"redirects"
+	"syntax"
 	"extras"
 	# "bonus"
 )
@@ -52,7 +53,7 @@ for testfile in ${test_lists[*]}; do
 		BASH_OUTPUT=$(bash -c "$teste" 2> /dev/null)
 		BASH_EXIT_CODE=$(echo $?)
 		BASH_OUTFILES=$(cp ./tests/outfiles/* ./tests/bash_outfiles &>/dev/null)
-		BASH_ERROR_MSG=$(bash -c "$teste" 2>&1 > /dev/null | grep -o '[^:]*$' )
+		BASH_ERROR_MSG=$(bash -c "$teste" 2>&1 > /dev/null | grep -o '[^:]*$' | head -n1)
 
 		OUTFILES_DIFF=$(diff --brief ./tests/mini_outfiles ./tests/bash_outfiles)
 
@@ -67,10 +68,10 @@ for testfile in ${test_lists[*]}; do
 			printf ❌
 		fi
 		printf "$GREY $teste \n$END"
-		
+
 		if [ "$OUTFILES_DIFF" ]; then
 			echo "$OUTFILES_DIFF"
-			echo mini outfiles: 
+			echo mini outfiles:
 			cat ./tests/mini_outfiles/*
 			echo bash outfiles:
 			cat ./tests/bash_outfiles/*

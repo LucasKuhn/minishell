@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 18:38:18 by sguilher          #+#    #+#             */
-/*   Updated: 2022/06/14 16:22:28 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/21 15:01:49 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int	handle_redirects(char *command, int original_fds[2])
 
 	original_fds[IN] = NO_REDIRECT;
 	original_fds[OUT] = NO_REDIRECT;
-	redirect = next_redirect(command);
+	redirect = get_next_redirect(command);
 	while (redirect)
 	{
 		if (redirect == '<')
@@ -61,7 +61,7 @@ static int	handle_redirects(char *command, int original_fds[2])
 				original_fds[IN] = dup(STDIN_FILENO);
 			redirect_heredoc(command, redirect);
 		}
-		redirect = next_redirect(command);
+		redirect = get_next_redirect(command);
 	}
 	return (SUCCESS);
 }

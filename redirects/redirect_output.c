@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect_output.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 15:12:54 by sguilher          #+#    #+#             */
-/*   Updated: 2022/06/15 14:50:42 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/21 15:02:29 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	redirect_output(char *command)
 	int		fd;
 	int		open_flags;
 
-	output_redirect = redirect_position(command, '>');
+	output_redirect = get_redirect_position(command, '>');
 	if (!output_redirect)
 		return (SUCCESS);
 	if (output_redirect[1] == '>')

@@ -5,7 +5,10 @@ LDFLAGS	+= 	-L./42-libraries/libft
 OBJ_DIR	=	obj
 OBJS	=	$(SRCS:%.c=$(OBJ_DIR)/%.o)
 SRCS	=	main.c minishell.c prompt.c split_commands.c handle_heredoc.c\
-			$(MINIENV) $(BUILTINS) $(EXECUTES) $(REDIRECTS) $(UTILS) $(EXPANDS)
+			input_error.c\
+			$(MINIENV) $(BUILTINS) $(EXECUTES) $(REDIRECTS) $(UTILS)\
+			$(EXPANDS) $(SYNTAX)
+SYNTAX	=	syntax.c syntax_utils.c
 MINIENV =	minienv.c minienv_utils.c minienv_str_utils.c free_minienv.c
 BUILTINS =	builtins_utils.c echo.c cd.c pwd.c export.c unset.c env.c exit.c
 EXECUTES =	execute_one_command.c execute_multiple_commands.c wait.c \
@@ -20,7 +23,8 @@ EXPANDS	= 	handle_expansions.c expand_variables.c expand_exit_status.c \
 			variables_utils.c
 LIBFT_A	=	./42-libraries/libft/libft.a
 HEADER	=	minishell.h allowed_libs.h builtins.h errors.h executes.h minienv.h
-VPATH	=	builtins minienv utils executes src redirects includes expansions
+VPATH	=	builtins minienv utils executes src redirects includes expansions \
+			syntax
 INCLUDE	=	-I ./ -I ./includes
 
 all: $(NAME)

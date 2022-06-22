@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 17:09:56 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/14 17:48:23 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/21 15:02:29 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,6 @@ void	redirect_heredoc(char *command, int heredoc_number)
 	}
 	free(filename);
 	redirect_fd(tmp_file_fd, STDIN_FILENO);
-	heredoc_position = redirect_position(command, heredoc_number);
+	heredoc_position = get_redirect_position(command, heredoc_number);
 	move_one_forward(heredoc_position);
 }

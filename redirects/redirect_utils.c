@@ -6,13 +6,13 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 17:55:26 by sguilher          #+#    #+#             */
-/*   Updated: 2022/06/14 17:40:06 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/21 15:02:29 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*redirect_position(char *str, char redirect_char)
+char	*get_redirect_position(char *str, char redirect_char)
 {
 	while (*str)
 	{
@@ -35,7 +35,7 @@ char	*redirect_position(char *str, char redirect_char)
 	return (NULL);
 }
 
-char	next_redirect(char *str)
+char	get_next_redirect(char *str)
 {
 	while (*str)
 	{

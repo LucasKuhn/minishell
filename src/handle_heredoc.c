@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_heredoc.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 16:46:10 by sguilher          #+#    #+#             */
-/*   Updated: 2022/06/15 15:26:51 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/20 13:58:17 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,10 +88,10 @@ int	exec_heredoc(char *delimiter, int heredoc_number, int *exit_status,
 	else
 	{
 		*exit_status = wait_for_child(child_pid, TRUE);
+		define_main_signals();
 		if (*exit_status != EXIT_SUCCESS)
 			return (FAILED);
 	}
-	define_main_signals();
 	return (SUCCESS);
 }
 

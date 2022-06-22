@@ -107,3 +107,26 @@ ls | ❌
 export UNO=1 DOS-2 TRES=3
 
 echo hi <missing | echo bye >./tests/test_files/invalid_permission
+
+# não precisa ser igual ao bash
+<<<
+<<<<
+> '
+> * --> dando segfault
+>> * --> dando segfault
+< * --> dando segfault
+<< * ✅
+
+cat <<HERE '
+# comportamento a escolha de como decidiu lidar com aspas abertas
+
+> ?
+
+echo oi | invalid_command | ls
+
+# não vemos como problema a ordem de check de erro de sintaxe
+echo oi |    |  < >>
+echo oi |  < >>   |  |
+
+
+echo oi |    |
