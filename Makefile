@@ -59,4 +59,4 @@ leak: all
 	--show-leak-kinds=all --track-fds=yes --trace-children=yes ./$(NAME)
 
 test: all
-	make test --directory=./minishell_tester $(NUMBER)
+	cd minishell_tester && ./tester $(NUMBER)
