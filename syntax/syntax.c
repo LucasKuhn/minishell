@@ -3,23 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   syntax.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 15:42:57 by sguilher          #+#    #+#             */
-/*   Updated: 2022/06/21 16:10:34 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/22 14:45:21 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	unexpected_token(char *input)
+int	starts_with_pipe(char *input)
 {
-	if (input[0] == '<' && input[1] == '<')
-		return(syntax_error("<<"));
-	else if (input[0] == '>' && input[1] == '>')
-		return(syntax_error(">>"));
-	input[1] = '\0';
-	return(syntax_error(input));
+	if (input[0] == '|')
+		return(syntax_error("|"));
+	return (FALSE);
 }
 
 int	redirect_without_label(char *input)
@@ -45,11 +42,19 @@ int	redirect_without_label(char *input)
 	return (redirect_without_label(redirect_position));
 }
 
-int	starts_with_pipe(char *input)
+int	has_empty_pipe(char *input)
 {
-	if (input[0] == '|')
+	char *next_pipe;
+	
+	next_pipe = get_next_pipe(input);
+	if (!next_pipe)
+		return (FALSE);
+	next_pipe++;
+	while (*next_pipe == ' ' || *next_pipe == '\t')
+		next_pipe++;
+	if (*next_pipe == '|')
 		return(syntax_error("|"));
-	return (FALSE);
+	return (has_empty_pipe(next_pipe));
 }
 
 int	is_invalid_syntax(char *input)
@@ -58,6 +63,8 @@ int	is_invalid_syntax(char *input)
 		return (TRUE);
 	// algo + | + nada --> bash espera input... será que precisamos? "Implement pipes" -> não seria erro de sintaxe
 	if (redirect_without_label(input))
+		return (TRUE);
+	if (has_empty_pipe(input))
 		return (TRUE);
 	return (FALSE);
 }

@@ -9,7 +9,9 @@
 <
 <<
 echo hi <
-cat <| ls
-echo oi | >
-echo oi | > >>
-echo oi | < |
+cat     <| ls
+echo hi | >
+echo hi | > >>
+echo hi | < |
+echo hi |   |
+echo hi |  "|"

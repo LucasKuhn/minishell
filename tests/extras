@@ -5,7 +5,7 @@ $EMPTY echo hi
 ./tests/test_files/invalid_permission
 ./missing.out
 missing.out
-"aa"
+"aaa"
 ./obj
 minishell.h
 $
