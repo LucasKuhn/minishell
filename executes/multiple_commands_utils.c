@@ -37,5 +37,5 @@ void	quit_child(char **commands, t_env **minienv)
 	free_minienv(minienv);
 	free_array(commands);
 	close_all_fds();
-	exit (EXIT_FAILURE);
+	exit(EXIT_FAILURE);
 }

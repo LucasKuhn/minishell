@@ -53,9 +53,9 @@ int	has_pipe(char *str)
 	return (0);
 }
 
-int is_name_delimeter(char c)
+int	is_name_delimeter(char c)
 {
 	if (c == ' ' || c == '>' || c == '<' || c == '|' || c == '\t')
-		return(1);
-	return(0);
+		return (1);
+	return (0);
 }

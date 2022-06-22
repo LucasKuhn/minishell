@@ -11,3 +11,6 @@ minishell
 *.out
 
 vgcore.*
+
+# valgrind suppressions
+local.supp

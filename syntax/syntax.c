@@ -6,7 +6,7 @@
 /*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 15:42:57 by sguilher          #+#    #+#             */
-/*   Updated: 2022/06/22 14:45:21 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/22 16:03:10 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	starts_with_pipe(char *input)
 {
 	if (input[0] == '|')
-		return(syntax_error("|"));
+		return (syntax_error("|"));
 	return (FALSE);
 }
 
@@ -36,16 +36,16 @@ int	redirect_without_label(char *input)
 	while (*redirect_position == ' ' || *redirect_position == '\t')
 		redirect_position++;
 	if (*redirect_position == '\0')
-		return(syntax_error("newline"));
+		return (syntax_error("newline"));
 	if (is_invalid_token(*redirect_position))
-		return(unexpected_token(redirect_position));
+		return (unexpected_token(redirect_position));
 	return (redirect_without_label(redirect_position));
 }
 
 int	has_empty_pipe(char *input)
 {
-	char *next_pipe;
-	
+	char	*next_pipe;
+
 	next_pipe = get_next_pipe(input);
 	if (!next_pipe)
 		return (FALSE);
@@ -53,7 +53,7 @@ int	has_empty_pipe(char *input)
 	while (*next_pipe == ' ' || *next_pipe == '\t')
 		next_pipe++;
 	if (*next_pipe == '|')
-		return(syntax_error("|"));
+		return (syntax_error("|"));
 	return (has_empty_pipe(next_pipe));
 }
 
@@ -61,7 +61,6 @@ int	is_invalid_syntax(char *input)
 {
 	if (starts_with_pipe(input))
 		return (TRUE);
-	// algo + | + nada --> bash espera input... será que precisamos? "Implement pipes" -> não seria erro de sintaxe
 	if (redirect_without_label(input))
 		return (TRUE);
 	if (has_empty_pipe(input))

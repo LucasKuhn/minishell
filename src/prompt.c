@@ -6,7 +6,7 @@
 /*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 13:29:21 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/15 15:41:45 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/22 15:12:51 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,30 @@ char	*get_prompt_str(t_env *minienv)
 	ft_strlcat(prompt, MAG, PATH_MAX);
 	ft_strlcat(prompt, directory, PATH_MAX);
 	ft_strlcat(prompt, CRESET, PATH_MAX);
-	ft_strlcat(prompt, " > ", PATH_MAX);
+	ft_strlcat(prompt, " 👉 ", PATH_MAX);
 	return (prompt);
 }
+
+// void handle_incomplete_input(char **input_pointer)
+// {
+// 	char last_char;
+// 	char *input;
+// 	char *extra_input;
+// 	char *new_input;
+
+// 	input = *input_pointer;
+// 	last_char = input[ft_strlen(input) - 1];
+// 	while(last_char == '|')
+// 	{
+// 		extra_input = readline(" > ");
+// 		new_input = ft_strjoin(input, extra_input);
+// 		free(input);
+// 		free(extra_input);
+// 		*input_pointer = new_input;
+// 		input = *input_pointer;
+// 		last_char = input[ft_strlen(input) - 1];
+// 	}
+// }
 
 char	*prompt_input(t_env *minienv)
 {
@@ -45,5 +66,5 @@ char	*prompt_input(t_env *minienv)
 		builtin_exit(NULL, &minienv);
 	if (input && *input)
 		add_history(input);
-	return (ft_strdup(input));
+	return (input);
 }

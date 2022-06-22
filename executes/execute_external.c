@@ -43,7 +43,7 @@ int	execute_external(char **args, t_env *minienv)
 
 	command = args[0];
 	if (is_empty(command))
-		exit (EXIT_SUCCESS);
+		exit(EXIT_SUCCESS);
 	if (is_folder(command))
 		exit_with_error(command, NOT_EXECUTABLE_MSG, NOT_EXECUTABLE);
 	path = get_path(command, minienv);
