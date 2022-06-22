@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   allowed_libs.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 13:54:09 by sguilher          #+#    #+#             */
-/*   Updated: 2022/06/08 13:54:45 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/22 15:46:09 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ALLOWED_LIBS_H
 # define ALLOWED_LIBS_H
 
-# include "42-libraries/libft/libft.h" // libft
+# include "libft/libft.h" // libft
 # include <readline/readline.h> // readline
 # include <readline/history.h> // history
 # include <stdlib.h> // getenv

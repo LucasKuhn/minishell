@@ -3,34 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   execute_one_command.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 18:38:18 by sguilher          #+#    #+#             */
-/*   Updated: 2022/06/21 15:01:49 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/22 16:05:59 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	handle_input_redirect(char *command, int original_fd_in)
-{
-	if (redirect_input(command) == FAILED)
-	{
-		redirect_fd(original_fd_in, STDIN_FILENO);
-		return (FAILED);
-	}
-	return (SUCCESS);
-}
-
-int	handle_output_redirect(char *command, int original_fd_out)
-{
-	if (redirect_output(command) == FAILED)
-	{
-		redirect_fd(original_fd_out, STDOUT_FILENO);
-		return (FAILED);
-	}
-	return (SUCCESS);
-}
 
 static int	handle_redirects(char *command, int original_fds[2])
 {
@@ -43,22 +23,17 @@ static int	handle_redirects(char *command, int original_fds[2])
 	{
 		if (redirect == '<')
 		{
-			if (original_fds[IN] == NO_REDIRECT)
-				original_fds[IN] = dup(STDIN_FILENO);
-			if (!handle_input_redirect(command, original_fds[IN]))
+			if (!handle_input_redirect(command, original_fds))
 				return (FAILED);
 		}
 		if (redirect == '>')
 		{
-			if (original_fds[OUT] == NO_REDIRECT)
-				original_fds[OUT] = dup(STDOUT_FILENO);
-			if (!handle_output_redirect(command, original_fds[OUT]))
+			if (!handle_output_redirect(command, original_fds))
 				return (FAILED);
 		}
 		if (redirect < 0)
 		{
-			if (original_fds[IN] == NO_REDIRECT)
-				original_fds[IN] = dup(STDIN_FILENO);
+			save_original_fd_in(original_fds);
 			redirect_heredoc(command, redirect);
 		}
 		redirect = get_next_redirect(command);
@@ -88,7 +63,7 @@ int	execute_forked_external(char **args, t_env *minienv)
 		execute_external(args, minienv);
 	else
 		return (wait_for_child(child_pid, TRUE));
-	exit (EXIT_FAILURE);
+	exit(EXIT_FAILURE);
 }
 
 int	execute_one_command(char *command, t_env **minienv)

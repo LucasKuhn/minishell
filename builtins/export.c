@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_export.c                                   :+:      :+:    :+:   */
+/*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 14:04:06 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/07 15:28:26 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/22 15:29:17 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,24 +38,27 @@ int	builtin_export(char **args, t_env **minienv)
 {
 	char	*key_pair;
 	char	*varname;
+	int		exit_status;
 
-	key_pair = args[1];
-	if (!key_pair)
+	args++;
+	exit_status = EXIT_SUCCESS;
+	if (!*args)
 		return (declare_env(*minienv));
-	varname = name_only(key_pair);
-	if (!is_valid_varname(varname))
+	while (*args)
 	{
-		print_varname_error_msg("export", varname);
-		free(varname);
-		return (EXIT_FAILURE);
+		key_pair = *args;
+		varname = name_only(key_pair);
+		if (!is_valid_varname(varname))
+		{
+			print_varname_error_msg("export", varname);
+			free(varname);
+			exit_status = EXIT_FAILURE;
+		}
+		else if (minienv_node(varname, *minienv))
+			minienv_update(varname, value_only(key_pair), *minienv);
+		else
+			list_append(key_pair, minienv);
+		args++;
 	}
-	if (minienv_node(varname, *minienv))
-		minienv_update(varname, value_only(key_pair), *minienv);
-	else
-		list_append(key_pair, minienv);
-	return (EXIT_SUCCESS);
+	return (exit_status);
 }
-// TODO: implementar multiplos exports
-// export UM=1 DOIS-2 TRES=3
-// mesmo dando erro no segundo, cria as duas outras variáveis
-// exit code = 1

@@ -1,4 +1,0 @@
-[submodule "42-libraries"]
-	path = 42-libraries
-	url = https://github.com/sgkhusal/42-libraries.git
-	ignore = untracked

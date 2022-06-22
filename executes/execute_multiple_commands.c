@@ -42,7 +42,7 @@ static void	handle_redirects(char *command, char **commands, t_env **minienv)
 }
 
 static void	execute_forked_command(char *command, char **commands,
-	t_env **minienv)
+		t_env **minienv)
 {
 	char	**args;
 

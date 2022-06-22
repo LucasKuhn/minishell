@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executes.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 15:41:13 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/21 15:02:29 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/22 16:07:35 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,12 @@
 // executes
 int		execute_one_command(char *command, t_env	**minienv);
 int		execute_multiple_commands(char **commands, t_env **minienv);
+
+// one command utils
+void	save_original_fd_in(int original_fds[2]);
+void	save_original_fd_out(int original_fds[2]);
+int		handle_input_redirect(char *command, int original_fds[2]);
+int		handle_output_redirect(char *command, int original_fds[2]);
 
 // multiple commands utils
 int		*init_children_pid(char **commands);
