@@ -6,7 +6,7 @@
 /*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 18:15:41 by sguilher          #+#    #+#             */
-/*   Updated: 2022/06/22 17:00:00 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/22 17:33:08 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	is_on_current_dir(char *command, t_env *minienv)
 {
 	char	*pwd;
 	char	current_path[PATH_MAX];
-	
+
 	pwd = minienv_value("PWD", minienv);
 	create_path(current_path, pwd, "/", command);
 	return (access(current_path, F_OK) == 0);
