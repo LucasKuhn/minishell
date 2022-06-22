@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 13:36:50 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/21 16:02:34 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/22 12:47:32 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ char		*prompt_input(t_env *minienv);
 int			has_input_error(char *input, int *exit_status, t_env *minienv);
 int			has_unclosed_quotes(char *str);
 int			is_invalid_syntax(char *input);
+int			is_invalid_token(char c);
+int			syntax_error(char *token);
 
 // heredoc_prompt
 int			handle_heredoc(char *input, int *exit_status, t_env *minienv);
