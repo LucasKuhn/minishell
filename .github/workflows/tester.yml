@@ -11,6 +11,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    - name: update bash
+      run: brew install bash
     - name: Make
       run: make
     - name: Clone tester
