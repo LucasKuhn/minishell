@@ -7,14 +7,14 @@ on:
 jobs:
   build:
 
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v3
     - name: Make
       run: make
     - name: update bash
-      run: brew install bash
+      run: apt-get install --only-upgrade bash
     - name: Clone tester
       run: git clone https://github.com/LucasKuhn/minishell_tester.git
     - name: Run tests
