@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 14:02:34 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/13 17:07:04 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/23 16:35:54 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ static void	check_args_error(char **args)
 	exit_status = args[1];
 	if (!fits_in_long_long(exit_status))
 	{
-		printf("TAMO AQUI\n");
 		free_array(args);
 		exit_with_error("exit", "numeric argument required", BUILTIN_MISUSE);
 	}
@@ -66,11 +65,12 @@ int	builtin_exit(char **args, t_env **minienv)
 {
 	int	exit_status;
 
-	// rl_clear_history();
+	rl_clear_history();
 	free_minienv(minienv);
 	ft_putstr_fd("exit\n", STDOUT_FILENO);
 	check_args_error(args);
 	close_all_fds();
 	exit_status = ft_atoll(args[1]);
+	free_array(args);
 	exit(exit_status);
 }

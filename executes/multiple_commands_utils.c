@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   multiple_commands_utils.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 19:35:21 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/11 18:18:14 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/23 14:37:43 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	clean_after_execute(int *children_pid)
 
 void	quit_child(char **commands, t_env **minienv)
 {
-	// rl_clear_history();
+	rl_clear_history();
 	free_minienv(minienv);
 	free_array(commands);
 	close_all_fds();

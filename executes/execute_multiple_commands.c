@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 13:29:31 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/21 15:01:49 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/23 18:21:52 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,9 @@ static void	execute_forked_command(char *command, char **commands,
 
 	close_extra_fds();
 	args = split_args(command);
+	free_array(commands);
 	if (is_builtin(args[0]))
-		execute_forked_builtin(args, minienv, commands);
+		execute_forked_builtin(args, minienv);
 	else
 		execute_external(args, *minienv);
 }
@@ -64,7 +65,6 @@ int	execute_multiple_commands(char **commands, t_env **minienv)
 {
 	int	original_fds[2];
 	int	*children_pid;
-	int	exit_status;
 	int	i;
 
 	save_original_fds(original_fds);
@@ -79,12 +79,12 @@ int	execute_multiple_commands(char **commands, t_env **minienv)
 			print_perror_msg("fork", commands[i]);
 		else if (children_pid[i] == 0)
 		{
+			free(children_pid);
 			handle_redirects(commands[i], commands, minienv);
 			execute_forked_command(commands[i], commands, minienv);
 		}
 		i++;
 	}
 	restore_original_fds(original_fds);
-	exit_status = wait_for_children(children_pid);
-	return (exit_status);
+	return (wait_for_children(children_pid));
 }

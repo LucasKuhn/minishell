@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_exit_status.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 15:21:57 by coder             #+#    #+#             */
-/*   Updated: 2022/06/07 17:53:42 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/23 15:03:21 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,23 @@
 
 static char	*find_exit_status_position(char *input)
 {
-	while (*input)
+	while (input && *input)
 	{
 		if (*input == '\'')
 		{
 			input++;
 			while (*input && *input != '\'')
 				input++;
+		}
+		if (*input == '\"')
+		{
+			input++;
+			while (*input && *input != '\"')
+			{
+				if (*input == '$' && input[1] == '?')
+					return (input);
+				input++;
+			}
 		}
 		if (*input == '$' && input[1] == '?')
 			return (input);
