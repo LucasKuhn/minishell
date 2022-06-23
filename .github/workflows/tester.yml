@@ -14,6 +14,6 @@ jobs:
     - name: Make
       run: make
     - name: Clone tester
-      run: git@github.com:LucasKuhn/minishell_tester.git
+      run: git clone git@github.com:LucasKuhn/minishell_tester.git
     - name: Run tests
       run: make test
