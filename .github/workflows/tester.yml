@@ -18,4 +18,4 @@ jobs:
     - name: Clone tester
       run: git clone https://github.com/LucasKuhn/minishell_tester.git
     - name: Run tests
-      run: make test
+      run: cd minishell_tester && ./tester
