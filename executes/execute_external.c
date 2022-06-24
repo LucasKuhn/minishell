@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:39:20 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/23 18:38:29 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/24 11:32:54 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	is_folder(char *command)
 	return (S_ISDIR(statbuf.st_mode));
 }
 
-static void	handle_execve_errors(char **args, char *path, t_env *minienv)
+static void	handle_execve_errors(char **args, char *path, char **envp)
 {
 	int	error;
 
@@ -32,7 +32,7 @@ static void	handle_execve_errors(char **args, char *path, t_env *minienv)
 	else if (access(path, X_OK) != 0)
 		error = NOT_EXECUTABLE;
 	free_array(args);
-	free_minienv(&minienv);
+	free_array(envp);
 	free(path);
 	exit(error);
 }
@@ -54,6 +54,7 @@ int	execute_external(char **args, t_env *minienv)
 {
 	char	*path;
 	char	*command;
+	char	**envp;
 
 	command = args[0];
 	if (is_empty(command))
@@ -65,7 +66,9 @@ int	execute_external(char **args, t_env *minienv)
 		external_exit(args, minienv, CMD_NOT_FOUND);
 	rl_clear_history();
 	close_extra_fds();
-	if (execve(path, args, minienv_to_envp(minienv)) == -1)
-		handle_execve_errors(args, path, minienv);
+	envp = minienv_to_envp(minienv);
+	free_minienv(&minienv);
+	if (execve(path, args, envp) == -1)
+		handle_execve_errors(args, path, envp);
 	exit(EXIT_SUCCESS);
 }
