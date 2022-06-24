@@ -11,7 +11,16 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: make
+    - name: Make
       run: make
-    - name: Tester
-      run: ./tests/tester
+    - name: Clone tester
+      run: git clone https://github.com/LucasKuhn/minishell_tester.git
+    - name: Test builtins
+      run: cd minishell_tester && ./tester builtins
+    - name: Test pipes
+      run: cd minishell_tester && ./tester pipes
+    - name: Test redirects
+      run: cd minishell_tester && ./tester redirects
+    - name: Test extras
+      run: cd minishell_tester && ./tester extras
+
