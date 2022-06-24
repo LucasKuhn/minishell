@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 13:29:21 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/23 14:31:53 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/24 19:32:45 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,11 @@ char	*get_prompt_str(t_env *minienv)
 	static char	prompt[PATH_MAX];
 
 	user = minienv_value("USER", minienv);
+	if (!user)
+		user = "UNKNOWN";
 	cwd = minienv_value("PWD", minienv);
+	if (!cwd)
+		cwd = "/UNKNOWN";
 	directory = ft_strrchr(cwd, '/') + 1;
 	if (ft_strncmp(cwd, "/", 2) == 0)
 		directory = "ROOT";

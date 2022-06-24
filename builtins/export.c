@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 14:04:06 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/23 15:18:40 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/24 19:30:43 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ int	builtin_export(char **args, t_env **minienv)
 	{
 		key_pair = *args;
 		varname = name_only(key_pair);
-		if (!is_valid_varname(varname))
+		if (!is_valid_varname(varname) || str_equal(key_pair, "="))
 		{
-			print_varname_error_msg("export", varname);
+			print_varname_error_msg("export", key_pair);
 			exit_status = EXIT_FAILURE;
 		}
 		else if (minienv_node(varname, *minienv))
