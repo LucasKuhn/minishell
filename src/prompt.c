@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 13:29:21 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/22 15:12:51 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/23 14:31:53 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,27 +35,6 @@ char	*get_prompt_str(t_env *minienv)
 	ft_strlcat(prompt, " 👉 ", PATH_MAX);
 	return (prompt);
 }
-
-// void handle_incomplete_input(char **input_pointer)
-// {
-// 	char last_char;
-// 	char *input;
-// 	char *extra_input;
-// 	char *new_input;
-
-// 	input = *input_pointer;
-// 	last_char = input[ft_strlen(input) - 1];
-// 	while(last_char == '|')
-// 	{
-// 		extra_input = readline(" > ");
-// 		new_input = ft_strjoin(input, extra_input);
-// 		free(input);
-// 		free(extra_input);
-// 		*input_pointer = new_input;
-// 		input = *input_pointer;
-// 		last_char = input[ft_strlen(input) - 1];
-// 	}
-// }
 
 char	*prompt_input(t_env *minienv)
 {

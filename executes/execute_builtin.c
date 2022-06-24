@@ -3,24 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   execute_builtin.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 17:26:29 by sguilher          #+#    #+#             */
-/*   Updated: 2022/06/11 18:18:14 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/23 18:19:14 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	execute_forked_builtin(char **args, t_env **minienv, char **commands)
+int	execute_forked_builtin(char **args, t_env **minienv)
 {
 	int	exit_status;
 
-	free_array(commands);
 	exit_status = execute_builtin(args, minienv);
 	free_array(args);
 	free_minienv(minienv);
-	// rl_clear_history();
+	rl_clear_history();
 	exit(exit_status);
 }
 

@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 16:46:10 by sguilher          #+#    #+#             */
-/*   Updated: 2022/06/20 13:58:17 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/24 16:16:27 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ void	read_heredoc(int *exit_status, t_env *minienv, char *delimiter,
 		print_error_msg("warning: heredoc delimited by EOF. Wanted", delimiter);
 	free(line_read);
 	close(tmp_file_fd);
+	free(delimiter);
+	free_minienv(&minienv);
 	exit(EXIT_SUCCESS);
 }
 
@@ -110,6 +112,10 @@ int	handle_heredoc(char *input, int *exit_status, t_env *minienv)
 	heredoc_position++;
 	delimiter = get_label_name(heredoc_position);
 	if (!exec_heredoc(delimiter, heredoc_number, exit_status, minienv))
+	{
+		free(delimiter);
 		return (FAILED);
+	}
+	free(delimiter);
 	return (handle_heredoc(input, exit_status, minienv));
 }

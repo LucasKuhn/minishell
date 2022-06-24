@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minienv.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 13:28:53 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/05 14:24:03 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/24 15:08:40 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 t_env	*init_minienv(char **envp)
 {
 	t_env	*list;
+	char	*home;
 	int		i;
 
 	list = NULL;
@@ -26,6 +27,9 @@ t_env	*init_minienv(char **envp)
 	}
 	if (!minienv_node("OLDPWD", list))
 		list_append("OLDPWD", &list);
+	home = ft_strjoin("__HOME=", minienv_value("HOME", list));
+	list_append(home, &list);
+	free(home);
 	return (list);
 }
 

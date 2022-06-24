@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 16:56:25 by sguilher          #+#    #+#             */
-/*   Updated: 2022/06/09 13:56:24 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/23 14:39:53 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	exit_with_error(char *command, char *msg, int error)
 {
 	print_error_msg(command, msg);
 	close_all_fds();
+	rl_clear_history();
 	exit(error);
 }
 
@@ -40,6 +41,7 @@ void	exit_with_perror(char *command, char *perror_msg, int error)
 {
 	print_perror_msg(command, perror_msg);
 	close_all_fds();
+	rl_clear_history();
 	exit(error);
 }
 

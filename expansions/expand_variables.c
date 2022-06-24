@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_variables.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 16:29:20 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/07 17:50:59 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/23 18:11:06 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,16 @@ static char	*find_var_position(char *input)
 			input++;
 			while (*input && *input != '\'')
 				input++;
+		}
+		if (*input == '\"')
+		{
+			input++;
+			while (*input && *input != '\"')
+			{
+				if (*input == '$' && is_varname(input[1]))
+					return (input);
+				input++;
+			}
 		}
 		if (*input == '$' && is_varname(input[1]))
 			return (input);

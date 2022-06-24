@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 14:44:34 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/21 15:49:05 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/24 14:16:15 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	minishell(t_env *minienv)
 	{
 		define_main_signals();
 		input = prompt_input(minienv);
-		if (is_empty(input) || has_input_error(input, &exit_status, minienv))
+		if (has_input_error(input, &exit_status, minienv))
 			continue ;
 		handle_expansions(&input, minienv, exit_status);
 		if (!has_pipe(input))
@@ -31,10 +31,10 @@ int	minishell(t_env *minienv)
 		else
 		{
 			commands = split_commands(input);
+			free(input);
 			exit_status = execute_multiple_commands(commands, &minienv);
 			free_array(commands);
 		}
-		free(input);
 	}
 	return (exit_status);
 }

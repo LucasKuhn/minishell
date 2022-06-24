@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_one_command.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 18:38:18 by sguilher          #+#    #+#             */
-/*   Updated: 2022/06/22 16:05:59 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/24 10:36:46 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,11 @@ int	execute_one_command(char *command, t_env **minienv)
 	if (!handle_redirects(command, &original_fds[0]))
 	{
 		restore_original_fds(original_fds);
+		free(command);
 		return (EXIT_FAILURE);
 	}
 	args = split_args(command);
+	free(command);
 	if (is_builtin(args[0]))
 		exit_status = execute_builtin(args, minienv);
 	else

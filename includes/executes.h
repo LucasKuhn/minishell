@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executes.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 15:41:13 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/22 16:07:35 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/23 18:20:00 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	clean_after_execute(int *children_pid);
 void	quit_child(char **commands, t_env **minienv);
 
 // execute builtin
-int		execute_forked_builtin(char **args, t_env **minienv, char **commands);
+int		execute_forked_builtin(char **args, t_env **minienv);
 int		execute_builtin(char **args, t_env **minienv);
 
 // execute external

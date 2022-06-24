@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 14:03:41 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/05 20:14:15 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/24 15:00:50 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	cd(char **args, t_env *minienv)
 	if (args[1] && !str_equal(args[1], "~"))
 		path = args[1];
 	else
-		path = minienv_value("HOME", minienv);
+		path = minienv_value("__HOME", minienv);
 	if (chdir(path) != 0)
 	{
 		print_perror_msg("cd", args[1]);
