@@ -73,6 +73,7 @@ void	read_heredoc(int *exit_status, t_env *minienv, char *delimiter,
 	close(tmp_file_fd);
 	free(delimiter);
 	free_minienv(&minienv);
+	rl_clear_history();
 	exit(EXIT_SUCCESS);
 }
 
