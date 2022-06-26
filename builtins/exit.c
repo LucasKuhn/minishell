@@ -6,7 +6,7 @@
 /*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 14:02:34 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/24 20:26:44 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/26 20:06:26 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	fits_in_long_long(char *str)
 	if (ft_strncmp(str, "-9223372036854775808", 21) == 0)
 		return (1);
 	out = 0;
-	if (*str == '-')
+	if (*str == '-' || *str == '+')
 		str++;
 	while (*str)
 	{
