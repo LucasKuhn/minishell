@@ -21,7 +21,7 @@ UTILS =		error.c quote_checker.c signals.c str_utils.c str_checkers.c \
 			get_label_name.c
 EXPANDS	= 	handle_expansions.c expand_variables.c expand_exit_status.c \
 			variables_utils.c
-LIBFT_A	=	./42-libraries/libft/libft.a
+LIBFT_A	=	./libft/libft.a
 HEADER	=	minishell.h allowed_libs.h builtins.h errors.h executes.h minienv.h
 VPATH	=	builtins minienv utils executes src redirects includes expansions \
 			syntax
