@@ -25,9 +25,7 @@ int	cd(char **args, t_env *minienv)
 	char	*oldpwd;
 	char	cwd[PATH_MAX];
 
-	if (!args[1])
-		return (EXIT_SUCCESS);
-	if (args[2])
+	if (args[1] && args[2])
 		return (cd_error());
 	if (args[1] && !str_equal(args[1], "~"))
 		path = args[1];
