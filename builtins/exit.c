@@ -6,7 +6,7 @@
 /*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 14:02:34 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/26 19:52:20 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/26 20:06:26 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	builtin_exit(char **args, t_env **minienv)
 {
 	int	exit_status;
 
-	// rl_clear_history();
+	rl_clear_history();
 	free_minienv(minienv);
 	ft_putstr_fd("exit\n", STDOUT_FILENO);
 	check_args_error(args);
