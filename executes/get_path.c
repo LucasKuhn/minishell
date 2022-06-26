@@ -29,16 +29,6 @@ static int	is_path(char *command)
 	return (FALSE);
 }
 
-static int	is_on_current_dir(char *command)
-{
-	char	current_path[PATH_MAX];
-	char	cwd[PATH_MAX];
-
-	getcwd(cwd, PATH_MAX);
-	create_path(current_path, cwd, "/", command);
-	return (access(current_path, F_OK) == 0);
-}
-
 static char	*local_path(char *command, t_env *minienv)
 {
 	char	full_path[PATH_MAX];
@@ -73,7 +63,5 @@ char	*get_path(char *command, t_env *minienv)
 		paths++;
 	}
 	free_array(paths_start);
-	if (is_on_current_dir(command))
-		return (local_path(command, minienv));
 	return (NULL);
 }
