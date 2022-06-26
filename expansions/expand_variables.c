@@ -44,8 +44,12 @@ static void	update_input(char **input, char *var_value, char *second_part)
 	char	*first_part;
 	char	*updated_input;
 
-	if (!var_value)
-		first_part = ft_strjoin(*input, "");
+	if (!*input[0] && !var_value)
+		first_part = ft_strdup("");
+	else if (!*input[0] && var_value)
+		first_part = ft_strdup(var_value);
+	else if (!var_value)
+		first_part = ft_strdup(*input);
 	else
 		first_part = ft_strjoin(*input, var_value);
 	updated_input = ft_strjoin(first_part, second_part);
