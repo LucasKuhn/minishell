@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_external.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:39:20 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/24 11:32:54 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/24 20:26:44 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,11 @@ void	external_exit(char **args, t_env *minienv, int exit_status)
 	exit(exit_status);
 }
 
+static int	minienv_has_path(t_env *minienv)
+{
+	return (minienv_value("PATH", minienv) != NULL);
+}
+
 int	execute_external(char **args, t_env *minienv)
 {
 	char	*path;
@@ -62,8 +67,10 @@ int	execute_external(char **args, t_env *minienv)
 	if (is_folder(command))
 		external_exit(args, minienv, NOT_EXECUTABLE);
 	path = get_path(command, minienv);
-	if (path == NULL)
+	if (path == NULL && minienv_has_path(minienv))
 		external_exit(args, minienv, CMD_NOT_FOUND);
+	else if (path == NULL)
+		path = ft_strdup(command);
 	rl_clear_history();
 	close_extra_fds();
 	envp = minienv_to_envp(minienv);

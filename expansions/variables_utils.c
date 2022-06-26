@@ -6,7 +6,7 @@
 /*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:19:08 by coder             #+#    #+#             */
-/*   Updated: 2022/06/07 16:31:26 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/24 19:34:28 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,13 @@ int	is_varname(char c)
 
 int	is_valid_varname(char *name)
 {
+	if (!ft_isalpha(*name))
+		return (FALSE);
 	while (*name)
 	{
 		if (!is_varname(*name))
-			return (0);
+			return (FALSE);
 		name++;
 	}
-	return (1);
+	return (TRUE);
 }
