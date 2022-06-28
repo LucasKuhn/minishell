@@ -20,7 +20,7 @@ UTILS =		error.c quote_checker.c signals.c str_utils.c str_checkers.c \
 			ft_atoll.c free_array.c arr_len.c file_descriptors.c \
 			get_label_name.c
 EXPANDS	= 	handle_expansions.c expand_variables.c expand_exit_status.c \
-			variables_utils.c
+			variables_utils.c expand_wildcards.c
 LIBFT_A	=	./libft/libft.a
 HEADER	=	minishell.h allowed_libs.h builtins.h errors.h executes.h minienv.h
 VPATH	=	builtins minienv utils executes src redirects includes expansions \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 13:36:50 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/22 14:46:00 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/27 20:21:20 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int			handle_heredoc(char *input, int *exit_status, t_env *minienv);
 void		handle_expansions(char **input, t_env *minienv, int exit_status);
 void		expand_variables(char **input, t_env *minienv);
 void		expand_exit_status(char **input, int exit_status);
+void		expand_wildcards(char **input, t_env *minienv);
 
 // command table
 char		**split_commands(char *input);

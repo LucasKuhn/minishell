@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 16:46:10 by sguilher          #+#    #+#             */
-/*   Updated: 2022/06/24 16:16:27 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/27 16:31:03 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ void	read_heredoc(int *exit_status, t_env *minienv, char *delimiter,
 	line_read = readline("> ");
 	while (line_read && !str_equal(line_read, delimiter))
 	{
-		handle_expansions(&line_read, minienv, *exit_status);
+		expand_exit_status(&line_read, *exit_status);
+		expand_variables(&line_read, minienv);
 		ft_putstr_fd(line_read, tmp_file_fd);
 		ft_putchar_fd('\n', tmp_file_fd);
 		free(line_read);
