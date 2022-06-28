@@ -1,19 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_expansions.c                                :+:      :+:    :+:   */
+/*   minishell_bonus.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/25 14:51:24 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/28 13:08:09 by lalex-ku         ###   ########.fr       */
+/*   Created: 2022/06/28 18:38:23 by lalex-ku          #+#    #+#             */
+/*   Updated: 2022/06/28 18:51:35 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef MINISHELL_BONUS_H
+# define MINISHELL_BONUS_H
 
-void	handle_expansions(char **input, t_env *minienv, int exit_status)
-{
-	expand_exit_status(input, exit_status);
-	expand_variables(input, minienv);
-}
+# include "minishell.h"
+
+// Wildcard
+void		expand_wildcards(char *search, char **input, t_env *minienv);
+char		*get_wildcard_value(char *wildcard_label, t_env *minienv);
+
+#endif

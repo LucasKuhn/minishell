@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 18:15:41 by sguilher          #+#    #+#             */
-/*   Updated: 2022/06/26 23:15:21 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/28 13:49:17 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,21 +22,13 @@ static void	create_path(char base[], char *part1, char *part2, char *part3)
 
 static int	is_path(char *command)
 {
-	if (command[0] == '/')
-		return (TRUE);
-	if (command[0] == '.' && command[1] == '/')
+	if (*command == '.')
+		command++;
+	if (*command == '.')
+		command++;
+	if (*command == '/')
 		return (TRUE);
 	return (FALSE);
-}
-
-static int	is_on_current_dir(char *command)
-{
-	char	current_path[PATH_MAX];
-	char	cwd[PATH_MAX];
-
-	getcwd(cwd, PATH_MAX);
-	create_path(current_path, cwd, "/", command);
-	return (access(current_path, F_OK) == 0);
 }
 
 static char	*local_path(char *command, t_env *minienv)
@@ -73,7 +65,5 @@ char	*get_path(char *command, t_env *minienv)
 		paths++;
 	}
 	free_array(paths_start);
-	if (is_on_current_dir(command))
-		return (local_path(command, minienv));
 	return (NULL);
 }
