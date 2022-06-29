@@ -8,6 +8,7 @@ obj
 
 #exec
 minishell
+minishell_bonus
 *.out
 
 vgcore.*

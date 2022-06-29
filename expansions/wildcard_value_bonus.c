@@ -80,6 +80,7 @@ char	*get_wildcard_value(char *wildcard_label, char **input, t_env *minienv)
 	waitpid(child_pid, NULL, 0);
 	ft_bzero(wildcard_value, sizeof(wildcard_value));
 	read(pipe_fds[0], wildcard_value, sizeof(wildcard_value));
+	close(pipe_fds[0]);
 	remove_new_lines(wildcard_value);
 	return (ft_strdup(wildcard_value));
 }
