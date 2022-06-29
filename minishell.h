@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 13:36:50 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/27 20:21:20 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/06/28 18:39:11 by lalex-ku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ int			handle_heredoc(char *input, int *exit_status, t_env *minienv);
 void		handle_expansions(char **input, t_env *minienv, int exit_status);
 void		expand_variables(char **input, t_env *minienv);
 void		expand_exit_status(char **input, int exit_status);
-void		expand_wildcards(char **input, t_env *minienv);
 
 // command table
 char		**split_commands(char *input);
@@ -80,5 +79,6 @@ int			arr_len(char **arr);
 long long	ft_atoll(const char *str);
 void		move_one_forward(char *str);
 char		*get_token_position(char *str, char *token);
+int			skip_quotes(char *str);
 
 #endif
