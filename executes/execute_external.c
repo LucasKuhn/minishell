@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_external.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:39:20 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/28 18:51:00 by lalex-ku         ###   ########.fr       */
+/*   Updated: 2022/06/29 19:00:41 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,16 @@ static int	is_folder(char *command)
 
 	if (stat(command, &statbuf) != 0)
 		return (0);
-	return (S_ISDIR(statbuf.st_mode));
+	if (S_ISDIR(statbuf.st_mode))
+	{
+		if (*command == '.')
+			command++;
+		if (*command == '.')
+			command++;
+		if (*command == '/')
+			return (TRUE);
+	}
+	return (FALSE);
 }
 
 static void	handle_execve_errors(char **args, char *path, char **envp)
