@@ -47,7 +47,7 @@ clean:
 	@echo "removed obj folder"
 
 fclean: clean
-	@rm -rf $(NAME)
+	@rm -rf $(NAME) $(NAME_BONUS)
 	@echo "removed executable"
 
 re: fclean all
