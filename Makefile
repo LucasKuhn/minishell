@@ -26,6 +26,9 @@ HEADER	=	minishell.h allowed_libs.h builtins.h errors.h executes.h minienv.h
 VPATH	=	builtins minienv utils executes src redirects includes expansions \
 			syntax
 INCLUDE	=	-I ./ -I ./includes
+ifeq ($(shell uname),Darwin) # Include homebrew readline for macOS
+	INCLUDE += -I /opt/homebrew/opt/readline/include
+endif
 
 # Bonus
 NAME_BONUS = minishell_bonus
